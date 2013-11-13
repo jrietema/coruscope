@@ -19,17 +19,14 @@ body#coruscope
     height: 100%
     #content
       margin-top: 41px
-    .center-column
-      position: relative
-      min-height: 100%
-      background-color: $lt_bg
-      padding-top: 5px
-      .center-column-content
-        padding: 25px
-    .right-column
-      .right-column-content
-        padding: 25px 10px
-        position: fixed
+      padding-top: 4px
+      > div
+        background-color: $lt_bg
+        .column-content
+          padding: 0 20px
+      .center-column
+        position: relative
+        min-height: 100%
   
   // -- Navigation ----------------------------------------------------------
   .navbar
@@ -186,6 +183,7 @@ body#coruscope
     background: $dark_2nd
     bottom: 0px
     left: -50%
+    z-index: 120
     width: 50%
     padding: 5px 10px
     font-size: 10px

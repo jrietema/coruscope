@@ -5,12 +5,14 @@
   .row-fluid.body-wrapper
     .span12
     = render :partial => 'layouts/admin/cms/topnav'
-    #content.row-fluid
-      .left-column.span4
-      .center-column.span8
+    #content
+      .row-fluid
         = render :partial => 'layouts/admin/cms/nav'
-        = render :partial => 'layouts/admin/cms/center'
-
-        = render :partial => 'layouts/admin/cms/footer'
+      .row-fluid
+        .left-column.span4
+          = render :partial => 'layouts/admin/cms/treenav'
+        .center-column.span8
+          = render :partial => 'layouts/admin/cms/center'
+          = render :partial => 'layouts/admin/cms/footer'
   
   = render :partial => 'layouts/admin/cms/footer_js'
