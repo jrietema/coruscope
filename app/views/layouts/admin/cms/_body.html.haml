@@ -1,0 +1,16 @@
+%body#coruscope{:class => "c-#{params[:controller].slugify} a-#{params[:action].slugify} container-fluid"}
+
+  = render 'admin/cms/partials/body_before'
+
+  .row-fluid.body-wrapper
+    .span12
+    = render :partial => 'layouts/admin/cms/topnav'
+    #content.row-fluid
+      .left-column.span4
+      .center-column.span8
+        = render :partial => 'layouts/admin/cms/nav'
+        = render :partial => 'layouts/admin/cms/center'
+
+        = render :partial => 'layouts/admin/cms/footer'
+  
+  = render :partial => 'layouts/admin/cms/footer_js'
