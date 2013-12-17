@@ -6,12 +6,12 @@ set :branch, 'master'
 set :deploy_to, '/opt/rails/coruscope'
 set :scm, :git
 
-# set :format, :pretty
+set :format, :pretty
 # set :log_level, :debug
 # set :pty, true
 
-# set :linked_files, %w{config/database.yml}
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, %w{config/database.yml log/production.log}
+set :linked_dirs, %w{bin log tmp/pids tmp/sockets public/assets}
 
 set :bundle_gemfile, -> { release_path.join('Gemfile') }
 set :bundle_dir, -> { shared_path.join('bundle') }
@@ -19,7 +19,6 @@ set :bundle_dir, -> { shared_path.join('bundle') }
 SSHKit.config.command_map[:rake]  = "bundle exec rake"
 SSHKit.config.command_map[:rails] = "bundle exec rails"
 
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :keep_releases, 5
 
 namespace :deploy do
