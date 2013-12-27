@@ -10,7 +10,7 @@ set :format, :pretty
 # set :log_level, :debug
 # set :pty, true
 
-set :linked_files, %w{config/database.yml log/production.log}
+set :linked_files, %w{config/database.yml config/initializers/secret_token.rb log/production.log}
 set :linked_dirs, %w{bin log tmp/pids tmp/sockets public/assets}
 
 set :bundle_gemfile, -> { release_path.join('Gemfile') }
