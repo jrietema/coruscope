@@ -10,4 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require tree.jquery
+//= require jquery.cookie
+//= require jquery.fancytree
+//= require jquery.fancytree.dnd
+//  require jquery.fancytree.persist
