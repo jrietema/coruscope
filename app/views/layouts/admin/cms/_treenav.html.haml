@@ -10,16 +10,17 @@
   extensions: [
   'dnd' // , 'persist'
   ],
-  source: [
-  { title: '#{t('admin.cms.base.sites')}', href: '#{admin_cms_sites_path}' },
-  { title: '#{@site.label} actions', key: 'actions', folder: true, children:
-  [
-  { title: '#{t('admin.cms.base.layouts')}', href: '#{admin_cms_site_layouts_path(@site)}'},
-  { title: '#{t('admin.cms.base.pages')}', href: '#{admin_cms_site_pages_path(@site)}'},
-  { title: '#{t('admin.cms.base.snippets')}', href: '#{admin_cms_site_snippets_path(@site)}'},
-  { title: '#{t('admin.cms.base.files')}', href: '#{admin_cms_site_files_path(@site)}'}
-  ]
-  }],
+  source: { url: '#{admin_cms_site_pages_url(site_id: @site.id, format: :json)}'},
+  //[
+  //{ title: '#{t('admin.cms.base.sites')}', href: '#{admin_cms_sites_path}' },
+  //{ title: '#{@site.label} actions', key: 'actions', folder: true, children:
+  //[
+  //{ title: '#{t('admin.cms.base.layouts')}', href: '#{admin_cms_site_layouts_path(@site)}'},
+  //{ title: '#{t('admin.cms.base.pages')}', href: '#{admin_cms_site_pages_path(@site)}'},
+  //{ title: '#{t('admin.cms.base.snippets')}', href: '#{admin_cms_site_snippets_path(@site)}'},
+  //{ title: '#{t('admin.cms.base.files')}', href: '#{admin_cms_site_files_path(@site)}'}
+  //]
+  //}],
   // persist: {
   // mode: "hide"
   // },
@@ -61,8 +62,10 @@
   var node = data.node;
   // Use href attribute to load the content
   if( node.data.href ){
-  // Open target
-  window.open(node.data.href, node.data.target || '_self');
+  // Open target via AJAX and update dynamic-content
+  $.get(node.data.href, function(data) {
+  $('#dynamic-content').html(data);
+  });
   }
   }
   });
