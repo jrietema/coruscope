@@ -14,3 +14,4 @@
 //= require jquery.fancytree
 //= require jquery.fancytree.dnd
 //  require jquery.fancytree.persist
+//= require coruscope-cms

@@ -10,9 +10,10 @@ module ApplicationHelper
   end
 
   def fancytree_pages_hash(pages, branch_id=nil)
+    item_model = pages[branch_id].first.class.name.underscore.split('/').last unless pages[branch_id].empty?
     pages[branch_id].map do |page|
       child_pages = pages[page.id] || []
-      page_hash = { title: page.label, key: page.id, href: edit_admin_cms_site_page_path(site_id: @site.id, id: page.id, format: :js) }
+      page_hash = { title: page.label, key: page.id, href: method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: @site.id, id: page.id, format: :js}) }
       unless child_pages.empty?
         page_hash.merge!({ folder: true, children: fancytree_pages_hash(pages, page.id)})
       end

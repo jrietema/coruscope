@@ -1,23 +1,26 @@
 = render '/admin/cms/partials/navigation_before'
 
 %ul.nav.nav-tabs
-  = active_link_to admin_cms_sites_path, :active => ['admin/cms/sites'], :wrap_tag => :li do
+  = active_link_to '#sites-tree', :active => ['admin/cms/sites'], :wrap_tag => :li do
     %i.icon-globe
     = t('admin.cms.base.sites')
 
   - if @site && !@site.new_record?
-    = active_link_to admin_cms_site_layouts_path(@site), :wrap_tag => :li do
+    = active_link_to '#layouts-tree', :wrap_tag => :li do
       %i.icon-th
       = t('admin.cms.base.layouts')
-    = active_link_to admin_cms_site_pages_path(@site), :wrap_tag => :li do
+    = active_link_to '#pages-tree', :wrap_tag => :li do
       %i.icon-file
       = t('admin.cms.base.pages')
-    = active_link_to admin_cms_site_snippets_path(@site), :wrap_tag => :li do
+    = active_link_to @site.snippets.empty? ? new_admin_cms_site_snippet_path(site_id: @site.id) : '#snippets-tree', :wrap_tag => :li do
       %i.icon-share
       = t('admin.cms.base.snippets')
-    = active_link_to admin_cms_site_files_path(@site), :wrap_tag => :li do
+    = active_link_to @site.files.empty? ? new_admin_cms_site_file_path(site_id: @site.id) : '#files-tree', :wrap_tag => :li do
       %i.icon-picture
       = t('admin.cms.base.files')
+  != javascript_tag do
+    $('.nav-tabs li a').each(function(i){if($(this).attr('href').match(/^#/)){$(this).attr('data-toggle', 'tab');}});
+
 
   = cms_hook :navigation
 
