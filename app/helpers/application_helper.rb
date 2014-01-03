@@ -20,4 +20,18 @@ module ApplicationHelper
       page_hash
     end
   end
+
+  def content_for_ajax(name, content = nil, options = {}, &block)
+    if block_given?
+      options = content if content
+      content = capture(&block)
+    end
+    if request.xhr? && (content || block_given?)
+      # Render a javascript_tag for jquery update of target or name
+      javascript_tag "$('##{options[:target] || name}').html('#{escape_javascript(content)}')"
+    else
+      content_for(name, content, options)
+      nil
+    end
+  end
 end
