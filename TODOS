@@ -1,0 +1,4 @@
+- update the navbar 'new' link to current model type after AJAX requests
+- enable CodeMirror as an optional HTML editor for textareas
+- ajaxify layouts, snippets and files
+- use category browsing for snippets and files
