@@ -6,13 +6,13 @@ $dark_2nd: #393859
 $emphasis: #0A4040
 $lt_bg: #FEFEFE
 $lt_bg_2nd: #F5E2D7 // #F2E8DC
-$decoration: #A67063
+$decoration: #c8562a // #A67063
 
 html, body#comfy
   height: 100%
   
 body#coruscope
-  background-color: $lt_bg_2nd
+  background: $lt_bg_2nd url(/images/page_bg.png) top left repeat-x
   
   // -- Containers ----------------------------------------------------------
   .body-wrapper
@@ -20,6 +20,7 @@ body#coruscope
     #content
       margin-top: 41px
       padding-top: 4px
+      background-color: $lt_bg
       > div
         background-color: $lt_bg
         .column-content
