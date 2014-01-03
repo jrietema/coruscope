@@ -4,6 +4,8 @@
   #layouts-tree.tab-pane
   #snippets-tree.tab-pane
   #files-tree.tab-pane
+  #meta_pane.tab-pane
+    = yield :meta_pane
 
 != javascript_tag do
   enableFancytree('#sites-tree', '#{admin_cms_sites_url(format: :json)}');
@@ -17,5 +19,8 @@
 - unless Cms::File.where(site_id: @site.id).empty?
   != javascript_tag do
     enableFancytree('#files-tree', '#{admin_cms_site_files_url(site_id: @site.id, format: :json)}');
+
+.content-actions
+  = yield :right_column
 
 

@@ -18,6 +18,9 @@
     = active_link_to @site.files.empty? ? new_admin_cms_site_file_path(site_id: @site.id) : '#files-tree', :wrap_tag => :li do
       %i.icon-picture
       = t('admin.cms.base.files')
+    = active_link_to '#meta_pane', :wrap_tag => :li do
+      %i.icon-tags
+      = t('admin.cms.base.meta')
   != javascript_tag do
     $('.nav-tabs li a').each(function(i){if($(this).attr('href').match(/^#/)){$(this).attr('data-toggle', 'tab');}});
 
