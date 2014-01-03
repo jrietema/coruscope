@@ -1,4 +1,5 @@
 - update the navbar 'new' link to current model type after AJAX requests
 - enable CodeMirror as an optional HTML editor for textareas
-- ajaxify layouts, snippets and files
+- ajaxify snippets and files
 - use category browsing for snippets and files
+- use HTML in tree node labels to add actions/buttons, not the activate method itself
