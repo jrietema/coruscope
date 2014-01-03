@@ -6,8 +6,14 @@
     .span12
     = render :partial => 'layouts/admin/cms/topnav'
     #content
-      .row-fluid
+      #content_header.row-fluid
         = render :partial => 'layouts/admin/cms/nav'
+        #content_messages
+          - flash.each do |type, message|
+            .alert{:class => "alert-#{type}"}
+              %button.close{:type => 'button', :class => "close", :data => {:dismiss => 'alert'}} &times;
+              = message
+          = yield :content_messages
       .row-fluid
         .left-column.span4
           = render :partial => 'layouts/admin/cms/treenav'
