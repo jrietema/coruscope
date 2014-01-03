@@ -6,7 +6,7 @@
 = form.text_field :label, :data => {:slugify => @page.new_record?}
 
 = content_for_ajax :meta_pane do
-  = comfy_form_for @page, :as => :page, :url => {:action => :update}, :html => {:multipart => true} do |metaform|
+  = comfy_form_for @page, as: :page, url: {action: :update}, html: {multipart: true}, type: :vertical do |metaform|
     - unless @site.pages.count == 0 || @site.pages.root == @page
       = metaform.text_field :slug, :data => {:slug => true}
       - unless @page.new_record?
@@ -26,12 +26,19 @@
         %input{:type => 'checkbox'}
         = ::Cms::Page.human_attribute_name(:is_published)
       %button.btn.btn-small.btn-primary.pull-right
+        = t('.update')
 
 = render 'admin/cms/partials/page_form_inner', :object => form
 
 = render :partial => 'admin/cms/categories/form', :object => form
 
 = render :partial => 'form_blocks'
+
+= if request.xhr?
+  != javascript_tag do
+    CMS.wysiwyg();
+    CMS.codemirror();
+
 
 = form.check_box :is_published, :label => t('.is_published')
 

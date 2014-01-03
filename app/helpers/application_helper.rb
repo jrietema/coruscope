@@ -34,4 +34,11 @@ module ApplicationHelper
       nil
     end
   end
+
+  # Override the
+  def comfy_form_for(record, options = {}, &proc)
+    options[:builder] = ComfortableMexicanSofa::FormBuilder
+    options[:type] ||= :horizontal
+    formatted_form_for(record, options, &proc)
+  end
 end
