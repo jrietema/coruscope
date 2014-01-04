@@ -3,3 +3,4 @@
 - ajaxify snippets and files
 - use category browsing for snippets and files
 - use HTML in tree node labels to add actions/buttons, not the activate method itself
+- improve layout of all devise forms to utilize bootstrap and enable i18n
