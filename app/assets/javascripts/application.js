@@ -12,6 +12,3 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require gumby/libs/modernizr-2.6.2.min
-//= require gumby/libs/gumby
-//= require_tree .

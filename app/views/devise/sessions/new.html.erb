@@ -1,32 +1,14 @@
-<div class="row">
-    <div class="push_two four columns">
-      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-          <fieldset>
-              <legend>Coruscope Sign in</legend>
-              <ul>
-                <li class="field">
-                  <%= f.label :email, :class => 'inline' %>
-                  <%= f.email_field :email, :autofocus => true, :class => 'input', :placeholder => 'E-Mail' %>
-                </li>
-                <li class="field">
-                  <%= f.label :password, :class => 'inline' %>
-                  <%= f.password_field :password, :class => 'input', :placeholder => 'Password' %>
-                </li>
-                <% if devise_mapping.rememberable? -%>
-                <li class="field">
-                  <%= gumby_checkbox f, :remember_me, 'Remember me' %>
-                </li>
-                <% end %>
-                <li class="field">
-                  <%= f.submit "Sign in" %>
-                </li>
-              </ul>
-          </fieldset>
-      <% end %>
-    </div>
-    <div class="four columns">
-      </br></br></br></br></br></br></br></br></br>
-      <% if devise_mapping.rememberable? %></br><% end %>
-      <%= render "devise/shared/links" %>
-    </div>
-</div>
+<%= formatted_form_for(resource, as: resource_name, url: session_path(resource_name), type: :vertical) do |f| %>
+    <h2>Coruscope Sign in</h2>
+    <%= f.email_field :email, :autofocus => true, :class => 'input', :placeholder => 'E-Mail' %>
+    <%= f.password_field :password, :class => 'input', :placeholder => 'Password' %>
+    <% if devise_mapping.rememberable? -%>
+      <%= f.check_box :remember_me, :label => 'Remember me' %>
+    <% end %>
+    <%= f.submit "Sign in" %>
+<% end %>
+<% content_for :right_column do %>
+</br></br></br></br></br></br></br></br></br>
+<% if devise_mapping.rememberable? %></br><% end %>
+<%= render "devise/shared/links" %>
+<% end %>
