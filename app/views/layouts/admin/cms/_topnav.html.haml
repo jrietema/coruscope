@@ -3,7 +3,7 @@
     %a.brand Coruscope
     %ul.nav
       %li.divider-vertical
-      - if @site && !@site.new_record
+      - if @site && !@site.new_record?
         = active_link_to admin_cms_site_layouts_path(@site), :wrap_tag => :li do
           %i.icon-plus
           = t('admin.cms.base.new')
