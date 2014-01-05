@@ -3,9 +3,10 @@
     %a.brand Coruscope
     %ul.nav
       %li.divider-vertical
-      = active_link_to admin_cms_site_layouts_path(@site), :wrap_tag => :li do
-        %i.icon-plus
-        = t('admin.cms.base.new')
+      - if @site && !@site.new_record
+        = active_link_to admin_cms_site_layouts_path(@site), :wrap_tag => :li do
+          %i.icon-plus
+          = t('admin.cms.base.new')
       = active_link_to destroy_user_session_path(current_user), :wrap_tag => :li do
         = t('admin.cms.base.logout')
       %li
