@@ -7,10 +7,11 @@
   #meta_pane.tab-pane
     = yield :meta_pane
 
-!= javascript_tag do
-  enableFancytree('#sites-tree', '#{admin_cms_sites_url(format: :json)}');
-  enableFancytree('#pages-tree', '#{admin_cms_site_pages_url(site_id: @site.id, format: :json)}');
-  enableFancytree('#layouts-tree', '#{admin_cms_site_layouts_url(site_id: @site.id, format: :json)}');
+- if @site && !@site.new_record?
+  != javascript_tag do
+    enableFancytree('#sites-tree', '#{admin_cms_sites_url(format: :json)}');
+    enableFancytree('#pages-tree', '#{admin_cms_site_pages_url(site_id: @site.id, format: :json)}');
+    enableFancytree('#layouts-tree', '#{admin_cms_site_layouts_url(site_id: @site.id, format: :json)}');
 
 - unless Cms::Snippet.where(site_id: @site.id).empty?
   != javascript_tag do
