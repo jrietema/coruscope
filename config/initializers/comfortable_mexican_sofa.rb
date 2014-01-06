@@ -25,7 +25,7 @@ ComfortableMexicanSofa.configure do |config|
   # http://rdoc.info/gems/paperclip/2.3.8/Paperclip/Storage/S3, and for
   # filesystem see: http://rdoc.info/gems/paperclip/2.3.8/Paperclip/Storage/Filesystem
   # If you are using S3 and HTTPS, pass :s3_protocol => '' to have URLs that use the protocol of the page
-  #   config.upload_file_options = {:url => '/system/:class/:id/:attachment/:style/:filename'}
+  # config.upload_file_options = {:url => '/assets/:site_identifier/:class/:id/:attachment/:style/:filename'}
 
   # Sofa allows you to setup entire site from files. Database is updated with each
   # request (if necessary). Please note that database entries are destroyed if there's
@@ -50,7 +50,7 @@ ComfortableMexicanSofa.configure do |config|
   # Content for Layouts, Pages and Snippets has a revision history. You can revert
   # a previous version using this system. You can control how many revisions per
   # object you want to keep. Set it to 0 if you wish to turn this feature off.
-  #   config.revisions_limit = 25
+  config.revisions_limit = 20
 
   # Locale definitions. If you want to define your own locale merge
   # {:locale => 'Locale Title'} with this.
@@ -58,7 +58,7 @@ ComfortableMexicanSofa.configure do |config|
 
   # Admin interface will respect the locale of the site being managed. However you can
   # force it to English by setting this to `:en`
-  #   config.admin_locale = nil
+  config.admin_locale = :de
   
   # If you want to keep your CMS tables in a location other than the default database
   # add a database_config. For example, setting it to 'cms' will look for a cms_#{Rails.env}
