@@ -6,7 +6,7 @@
 = form.text_field :label, :data => {:slugify => @layout.new_record?}
 
 = content_for_ajax :meta_pane do
-  = comfy_form_for @layout, as: :layout, url: {action: :update}, type: :vertical do |metaform|
+  = comfy_form_for @layout, as: :layout, url: {action: @layout.new_record? ? :create : :update}, type: :vertical do |metaform|
     = form.text_field :identifier, :data => {:slug => true}
     - if (options = Cms::Layout.options_for_select(@site, @layout)).present?
       = form.select :parent_id, [["---- #{t('.select_parent_layout')} ----", nil]] + options
