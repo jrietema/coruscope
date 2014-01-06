@@ -1,6 +1,9 @@
 .navbar.navbar-fixed-top.navbar-inverse
   .navbar-inner
-    %a.brand Coruscope
+    %a.brand
+      Coruscope
+      %span.site-identity
+        = (@site.nil? || @site.new_record?) ? '' : @site.path
     %ul.nav
       %li.divider-vertical
       - if @site && !@site.new_record?
