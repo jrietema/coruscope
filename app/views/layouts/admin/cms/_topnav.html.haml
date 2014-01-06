@@ -4,10 +4,10 @@
     %ul.nav
       %li.divider-vertical
       - if @site && !@site.new_record?
-        = active_link_to admin_cms_site_layouts_path(@site), :wrap_tag => :li do
+        = active_link_to new_admin_cms_site_page_path(@site), :id => :new_item_link, :wrap_tag => :li do
           %i.icon-plus
           = t('admin.cms.base.new')
-      = active_link_to destroy_user_session_path(current_user), :wrap_tag => :li do
+      = active_link_to destroy_user_session_path(current_user), :method => :delete, :wrap_tag => :li do
         = t('admin.cms.base.logout')
       %li
         = link_to current_user.email, '#', :tooltip => 'Profil'

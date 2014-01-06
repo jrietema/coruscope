@@ -41,4 +41,11 @@ module ApplicationHelper
     options[:type] ||= :horizontal
     formatted_form_for(record, options, &proc)
   end
+
+  def click_action_for(dom_id, model, action)
+    if %w(site layout page snippet file).include?(model.to_s) && %w(new update destroy).include?(action.to_s)
+      action_url = eval([action.to_s, 'admin_cms_site', (model.to_s == 'site' ? nil : model.to_s), 'path'].compact.join('_'))
+    end
+    "$('##{dom_id}').attr('href','#{action_url}');"
+  end
 end

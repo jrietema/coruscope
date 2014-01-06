@@ -1,5 +1,12 @@
 Coruscope::Application.routes.draw do
-  devise_for :users
+
+  devise_for :users,
+             :path => 'admin'
+
+  devise_scope :admin do
+    get "sign_in", :to => "admin/sessions#new"
+    get "sign_out", :to => "admin/sessions#destroy"
+  end
 
   comfy_route :cms_admin, :path => '/admin'
   comfy_route :cms, :path => '/', :sitemap => false
