@@ -4,15 +4,15 @@
 = render 'admin/cms/partials/layout_form_before', :object => form
 
 = form.text_field :label, :data => {:slugify => @layout.new_record?}
-= form.text_field :identifier, :data => {:slug => true}
 
 = content_for_ajax :meta_pane do
   = comfy_form_for @layout, as: :layout, url: {action: @layout.new_record? ? :create : :update}, type: :vertical do |metaform|
+    = metaform.text_field :identifier, :data => {:slug => true}
     - if (options = Cms::Layout.options_for_select(@site, @layout)).present?
-      = form.select :parent_id, [["---- #{t('.select_parent_layout')} ----", nil]] + options
+      = metaform.select :parent_id, [["---- #{t('.select_parent_layout')} ----", nil]] + options
 
     - if (options = Cms::Layout.app_layouts_for_select).present?
-      = form.select :app_layout, [["---- #{t('.select_app_layout')} ----", nil]] + options
+      = metaform.select :app_layout, [["---- #{t('.select_app_layout')} ----", nil]] + options
 
 = form.text_area :content, :data => {'cms-cm-mode' => 'text/html'}
 = form.text_area :css, :data => {'cms-cm-mode' => 'css'}
@@ -20,6 +20,7 @@
 
 - unless @site.nil? || @site.new_record?
   = hidden_field_tag 'layout[site_id]', @site.id
+  = data_copy_field_for :layout, :identifier, :slug
 
 - if request.xhr?
   != javascript_tag do

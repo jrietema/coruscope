@@ -1,5 +1,6 @@
 .page-header
   %h4= t('.title')
 
-= comfy_form_for @page, :as => :page, :url => {:action => :create}, :html => {:multipart => true}, type: :vertical do |form|
-  = render form
+%div{data: {copy: :slug}}
+  = comfy_form_for @page, :as => :page, :url => {:action => :create}, :html => {:multipart => true}, type: :vertical do |form|
+    = render form

@@ -51,4 +51,10 @@ module ApplicationHelper
     end
     "$('##{dom_id}').attr('href','#{eval(action_url)}');"
   end
+
+  # renders hidden fields with behavior to copy from the data-attribute=true field on submit
+  def data_copy_field_for(model, attribute, data_tag=nil)
+    data_tag ||= attribute
+    hidden_field_tag "#{model}[#{attribute}]", eval("@#{model}.#{attribute}"), id: "copy_#{data_tag}", data: {copy: data_tag}
+  end
 end

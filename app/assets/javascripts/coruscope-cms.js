@@ -1,5 +1,19 @@
 /* Utility Functions for JS navigation UI */
 
+$(document).ready(function(){
+    $("[data-copy] form").submit(copyFormData)
+});
+
+function copyFormData() {
+    $(this).children('[data-copy][type="hidden"]').each(function(i){
+        var copyField = $(this).attr('data-copy');
+        var copyValue = $('input[data-'+copyField+'=true]').val();
+        if(copyValue) {
+            $('#copy_' + copyField).val(copyValue);
+        }
+    });
+}
+
 function enableFancytree(selector, dataUrl) {
     $(selector).fancytree({
         minExpandLevel: 1,
