@@ -13,6 +13,9 @@
 
     - if (options = Cms::Layout.app_layouts_for_select).present?
       = metaform.select :app_layout, [["---- #{t('.select_app_layout')} ----", nil]] + options
+    - unless @layout.new_record?
+      %button.btn.btn-small.btn-primary.pull-right
+        = t('.update')
 
 = form.text_area :content, :data => {'cms-cm-mode' => 'text/html'}
 = form.text_area :css, :data => {'cms-cm-mode' => 'css'}
