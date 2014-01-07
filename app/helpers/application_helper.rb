@@ -1,6 +1,10 @@
 module ApplicationHelper
   # Help build gumby forms
 
+  def page_path(page)
+    File.join('/', page.site.path, page.slug)
+  end
+
   # checkbox with label included, Gumby-style
   def gumby_checkbox(form_builder, method, label, checked=false, value="1")
     name = "#{form_builder.object.class.name.underscore}[#{method}]"

@@ -1,0 +1,19 @@
+<div id="main_nav" class="row navbar pretty">
+    <a class="toggle" gumby-trigger="#main_nav > li" href="#"><i class="icon-menu"></i></a>
+    <ul>
+      <% @cms_site.pages.root.children.published.each do |page| %>
+        <li class="<%= (@cms_page.slug == page.slug) ? 'active' : '' %>">
+            <%= link_to page.label, page_path(page) %>
+            <% unless page.children.published.empty? %>
+            <ul class="subnav">
+              <% page.children.published.each do |subpage| %>
+                <li class="(@cms_page.slug == subpage.slug) ? 'active' : ''">
+                    <%= link_to subpage.label, page_path(subpage) %>
+                </li>
+              <% end %>
+            </ul>
+            <% end %>
+        </li>
+      <% end %>
+    </ul>
+</div>
