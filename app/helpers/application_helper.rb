@@ -2,7 +2,13 @@ module ApplicationHelper
   # Help build gumby forms
 
   def page_path(page)
-    File.join('/', page.site.path, page.slug)
+    site_path = page.site.path
+    path_elems = [page.slug.to_s]
+    while !page.parent.nil?
+      page = page.parent
+      path_elems << page.slug.to_s
+    end
+    File.join('/', site_path, path_elems.reverse.compact)
   end
 
   # checkbox with label included, Gumby-style
