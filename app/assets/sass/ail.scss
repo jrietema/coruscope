@@ -10,14 +10,26 @@ $body-font-color: #000;
 $color_head: #d2dc00;
 $color_one: #42abcb;
 $color_two: #ff9d1e;
+$color_three: #ca2162;
 $color_page_bg: #ffffff;
 $font_color_head: #17297c;
 $color_heading: #666666;
+$color_soft_margin: #c5baa6;
 
 $header_height: 85px;
 $nav_height: 40px;
 
 $semibold: 600;
+
+body, p, div {
+  color: #000;
+  font-weight: $semibold;
+}
+
+body a {
+  color: $color_one;
+  text-decoration: underline;
+}
 
 /* Header */
 header #identity {
@@ -61,6 +73,7 @@ header #identity {
     font-size: 0.75em;
     line-height: 0.9em;
     font-weight: $semibold;
+    text-decoration: none;
   }
 }
 
@@ -84,6 +97,7 @@ header #identity {
       font-size: 0.75em;
       font-weight: $semibold;
       text-shadow: none;
+      text-decoration: none;
     }
   }
   ul li a, ul li a:hover, ul li a:visited {
@@ -120,20 +134,8 @@ header #identity {
   }
 }
 
-section.slideshow {
-  position: relative;
-  border-bottom: 10px solid $color_two;
-  margin: 0 !important;
-  padding: 0 !important;
-  .bx-wrapper {
-    ul, li {
-      margin: 0;
-      padding: 0;
-    }
-    .bx-pager {
-      width: 160px; /* fixed width to allow auto margin centering */
-    }
-  }
+/* Slideshow and Picture Teasers */
+section {
   .slide-caption {
     display: block;
     position: absolute;
@@ -143,6 +145,65 @@ section.slideshow {
     padding: 0.25em 0;
     font-size: 2em;
     color: #fff;
+  }
+}
+
+section.slideshow,
+section.teaser {
+  position: relative;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-bottom: 10px solid;
+  .bx-wrapper {
+    ul, li {
+      margin: 0;
+      padding: 0;
+    }
+    .bx-pager {
+      width: 160px; /* fixed width to allow auto margin centering */
+    }
+  }
+}
+section.slideshow {
+  border-bottom-color: $color_two;
+  .slide-caption {
     background: transparent url('/images/ail/heading_bg.png') repeat top left;
   }
 }
+
+section.teaser {
+  margin: 0 !important;
+  padding: 0 !important;
+  .emphasis {
+    color: $color_soft_margin;
+    font-weight: $semibold;
+  }
+  header.row {
+    position: relative;
+    margin-bottom: -5px;
+    margin: 0 !important;
+    padding: 0 !important;
+    .slide-caption {
+      background-color: $color_soft_margin;
+    }
+  }
+  > div {
+    font-size: 0.85em;
+  }
+  .twelve {
+    text-align: center;
+  }
+  div.columns {
+    margin: 1.5em 0;
+  }
+}
+section:nth-of-type(2).teaser {
+  border-bottom-color: $color_three;
+}
+section:nth-of-type(3).teader {
+  border-bottom-color: $color_head;
+}
+section:nth-of-type(4).teaser {
+  border-bottom-color: $color_one;
+}
+
