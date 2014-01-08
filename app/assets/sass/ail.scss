@@ -1,16 +1,47 @@
 /* Definitions for AiL - Site based on Gumby */
+@charset "UTF-8";
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
 @import 'gumby/gumby';
+
+$font-family:  'Source Sans Pro', sans-serif !important;
+$body-font-color: #000;
+
+$color_head: #d2dc00;
+$color_one: #42abcb;
+$color_two: #ff9d1e;
+$color_page_bg: #ffffff;
+$font_color_head: #17297c;
+$color_heading: #666666;
 
 /* Top Menu
 *  override Gumby's way of using the height property and restricting overflows
 *  to enable a three-level navigation menu */
 #main_nav.navbar {
+  background-color: $color_one;
+  ul li a {
+    border: 0;
+  }
+  ul li a, ul li a:hover, ul li a:visited {
+    color: #fff;
+  }
+  ul li.active a, ul li a:hover,
+  .dropdown ul li.active a, .dropdown ul li a:hover,
+  ul li:hover > a, ul li.active > a
+  {
+    background-color: $color_head !important;
+  }
   .dropdown {
     overflow: visible !important;
     height: auto !important;
     display: none;
+    background-color: $color_one;
+    border: 0;
+    ul {
+      padding: 0;
+    }
     .dropdown {
       display: none;
+      background-color: $color_one;
     }
     .subnav {
       overflow: visible !important;

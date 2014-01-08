@@ -8,9 +8,8 @@
   %meta{name: :keywords, content: 'Spanischkurse,Costa Rica,Auslandspraktikum,Sprachschule'}
 
   %link{rel: 'shortcut icon', href: cms_site_asset_path(@cms_site, 'images/favicon.ico'), type: 'image/x-icon'}
-  = stylesheet_link_tag :application, :ail
+  = stylesheet_link_tag :application, cms_site_handle(@cms_site).to_sym
   = stylesheet_link_tag cms_render_css_path(@cms_site.id, @cms_layout.identifier)
-  %link{rel: 'stylesheet', href: 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600', type: 'text/css'}
   = javascript_include_tag :application, :gumby
   = javascript_include_tag cms_render_js_path(@cms_site.id, @cms_layout.identifier)
 
