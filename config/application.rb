@@ -26,6 +26,6 @@ module Coruscope
     # config.i18n.default_locale = :de
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
-    config.assets.precompile += %w{coruscope.js coruscope.css gumby.js gumby.css slider.js}
+    config.assets.precompile += %w{coruscope.js coruscope.css gumby.js gumby.css ail.css slider.js}
   end
 end

@@ -13,7 +13,7 @@ set :format, :pretty
 set :rvm_ruby_string, '2.0.0'
 
 set :linked_files, %w{config/database.yml config/initializers/secret_token.rb log/production.log}
-set :linked_dirs, %w{bin log tmp/pids tmp/sockets public/assets}
+set :linked_dirs, %w{bin log tmp/pids tmp/sockets public/assets public/images/ail}
 
 set :bundle_gemfile, -> { release_path.join('Gemfile') }
 set :bundle_dir, -> { shared_path.join('bundle') }
