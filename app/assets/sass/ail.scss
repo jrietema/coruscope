@@ -1,0 +1,25 @@
+/* Definitions for AiL - Site based on Gumby */
+@import 'gumby/gumby';
+
+/* Top Menu
+*  override Gumby's way of using the height property and restricting overflows
+*  to enable a three-level navigation menu */
+#main_nav.navbar {
+  .dropdown {
+    overflow: visible !important;
+    height: auto !important;
+    display: none;
+    .dropdown {
+      display: none;
+    }
+    .subnav {
+      overflow: visible !important;
+    }
+    ul li:hover > .dropdown {
+      display: inline-block;
+    }
+  }
+  ul li:hover > .dropdown {
+    display: block;
+  }
+}

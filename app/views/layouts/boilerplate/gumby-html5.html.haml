@@ -7,17 +7,16 @@
   %meta{name: :description, content: 'AiL - Spanischkurse, Volontariate, Praktika und High School Programme in verschiedensten Regionen Costa Ricas.'}
   %meta{name: :keywords, content: 'Spanischkurse,Costa Rica,Auslandspraktikum,Sprachschule'}
 
-  %link{rel: 'shortcut icon', href: "images/#{@cms_site.identifier}/favicon.ico", type: 'image/x-icon'}
-  = stylesheet_link_tag :gumby, :application
+  %link{rel: 'shortcut icon', href: cms_site_asset_path(@cms_site, 'images/favicon.ico'), type: 'image/x-icon'}
+  = stylesheet_link_tag :application, :ail
   = stylesheet_link_tag cms_render_css_path(@cms_site.id, @cms_layout.identifier)
   %link{rel: 'stylesheet', href: 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600', type: 'text/css'}
-  %script{src: "javascripts/modernizr-2.6.2.min.js"}
   = javascript_include_tag :application, :gumby
   = javascript_include_tag cms_render_js_path(@cms_site.id, @cms_layout.identifier)
 
   // Facebook Metadata - TODO: fill out!
   %meta{property: 'og:title', content: @cms_site.label}
-  %meta{property: 'og:image', itemprop: 'image', content: "images/#{@cms_site.identifier}/#{@cms_site.identifier}.png"}
+  %meta{property: 'og:image', itemprop: 'image', content: cms_site_asset_path(@cms_site, "images/#{cms_site_handle(@cms_site)}.png")}
   %meta{property: 'og:description', content: "AiL - Spanischkurse, Volontariate, Praktika und High School Programme in verschiedensten Regionen Costa Ricas."}
   %meta{property: 'og:url', content: "http://www.#{@cms_site.hostname}"}
   %meta{property: 'fb:admins', content: ''}
@@ -27,7 +26,7 @@
   %meta{property: 'twitter:url', content: "http://www.#{@cms_site.hostname}"}
   %meta{property: 'twitter:title', content: @cms_site.label}
   %meta{property: 'twitter:description', content: 'AiL - Spanischkurse, Volontariate, Praktika und High School Programme in verschiedensten Regionen Costa Ricas.'}
-  %meta{property: 'twitter:image', content: "images/#{@cms_site.identifier}/#{@cms_site.identifier}.png"}
+  %meta{property: 'twitter:image', content: cms_site_asset_path(@cms_site, "images/#{cms_site_handle(@cms_site)}.png")}
 
 %body
   = yield

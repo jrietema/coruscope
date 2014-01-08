@@ -11,6 +11,17 @@ module ApplicationHelper
     File.join('/', site_path, path_elems.reverse.compact)
   end
 
+  # path to static assets for cms site
+  def cms_site_asset_path(site, relpath='assets')
+    relpath = relpath.split('/')
+    prefix = relpath.shift
+    File.join('/', prefix, cms_site_handle(site), relpath.join('/'))
+  end
+
+  def cms_site_handle(site)
+    site.path.split('/').first
+  end
+
   # checkbox with label included, Gumby-style
   def gumby_checkbox(form_builder, method, label, checked=false, value="1")
     name = "#{form_builder.object.class.name.underscore}[#{method}]"
