@@ -2,6 +2,7 @@
 @charset "UTF-8";
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
 @import 'gumby/gumby';
+@import 'jquery.bxslider';
 
 $font-family:  'Source Sans Pro', sans-serif !important;
 $body-font-color: #000;
@@ -13,18 +14,82 @@ $color_page_bg: #ffffff;
 $font_color_head: #17297c;
 $color_heading: #666666;
 
+$header_height: 85px;
+$nav_height: 40px;
+
+$semibold: 600;
+
+/* Header */
+header #identity {
+  height: $header_height - 5px;
+  padding-top: 5px;
+  background-color: $color_head;
+  hgroup {
+    padding-top: 0.75em;
+    padding-left: 0.15em;
+    max-width: 400px;
+    h1 {
+      width: 100%;
+      font-size: 1.5em; /* 2.45em; */
+      color: $font_color_head;
+      /* font-weight: bold; */
+      text-shadow: 0 1px 2px #181f3c, 0 1px 0 #181f3c;
+      padding-bottom: 0;
+    }
+    h2 {
+      font-size: 0.8em; /* 1.5 em */
+      font-weight: $semibold;
+      color: #fff;
+    }
+  }
+  div * {
+    float: left;
+  }
+  #direct_access {
+    margin-top: 32px;
+    float: right;
+    li {
+      border-left: 1px solid $font_color_head;
+      padding: 0 0.33em;
+    }
+    li:nth-child(1) {
+      border-left: 0;
+    }
+  }
+  a, a:visited {
+    color: $font_color_head;
+    font-size: 0.75em;
+    line-height: 0.9em;
+    font-weight: $semibold;
+  }
+}
+
 /* Top Menu
 *  override Gumby's way of using the height property and restricting overflows
 *  to enable a three-level navigation menu */
 #main_nav.navbar {
   background-color: $color_one;
-  ul li a {
-    border: 0;
+  min-height: $nav_height;
+  margin: 0;
+  > ul {
+    margin-left: 5%;
+  }
+  ul li {
+    height: $nav_height;
+    line-height: $nav_height - 2px;
+    > a {
+      height: $nav_height;
+      line-height: $nav_height - 2px;
+      border: 0;
+      font-size: 0.75em;
+      font-weight: $semibold;
+      text-shadow: none;
+    }
   }
   ul li a, ul li a:hover, ul li a:visited {
     color: #fff;
   }
-  ul li.active a, ul li a:hover,
+  ul li.active a, ul li a:hover, ul li.current a,
   .dropdown ul li.active a, .dropdown ul li a:hover,
   ul li:hover > a, ul li.active > a
   {
@@ -52,5 +117,32 @@ $color_heading: #666666;
   }
   ul li:hover > .dropdown {
     display: block;
+  }
+}
+
+section.slideshow {
+  position: relative;
+  border-bottom: 10px solid $color_two;
+  margin: 0 !important;
+  padding: 0 !important;
+  .bx-wrapper {
+    ul, li {
+      margin: 0;
+      padding: 0;
+    }
+    .bx-pager {
+      width: 160px; /* fixed width to allow auto margin centering */
+    }
+  }
+  .slide-caption {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    padding: 0.25em 0;
+    font-size: 2em;
+    color: #fff;
+    background: transparent url('/images/ail/heading_bg.png') repeat top left;
   }
 }

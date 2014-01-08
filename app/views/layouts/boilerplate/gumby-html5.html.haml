@@ -11,6 +11,8 @@
   = stylesheet_link_tag :application, cms_site_handle(@cms_site).to_sym
   = stylesheet_link_tag cms_render_css_path(@cms_site.id, @cms_layout.identifier)
   = javascript_include_tag :application, :gumby
+  - if @cms_page == @cms_site.pages.root
+    = javascript_include_tag :slider
   = javascript_include_tag cms_render_js_path(@cms_site.id, @cms_layout.identifier)
 
   // Facebook Metadata - TODO: fill out!
