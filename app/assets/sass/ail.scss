@@ -190,20 +190,27 @@ section.teaser {
   > div {
     font-size: 0.85em;
   }
-  .twelve {
+  .twelve, .centered {
     text-align: center;
   }
   div.columns {
     margin: 1.5em 0;
   }
 }
-section:nth-of-type(2).teaser {
+section:nth-of-type(2).teaser,
+section.nth-of_type(6).teaser {
   border-bottom-color: $color_three;
 }
-section:nth-of-type(3).teader {
+section:nth-of-type(3).teaser,
+section:nth-of-type(7).teaser {
   border-bottom-color: $color_head;
 }
-section:nth-of-type(4).teaser {
+section:nth-of-type(4).teaser,
+section:nth-of-type(8).teaser {
   border-bottom-color: $color_one;
+}
+section:nth-of-type(5).teaser,
+section:nth-of-type(9).teaser {
+  border-bottom-color: $color_two;
 }
 
