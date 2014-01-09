@@ -197,6 +197,7 @@ section.teaser {
     margin: 1.5em 0;
   }
 }
+section.slideshow + section.teaser,
 section:nth-of-type(2).teaser,
 section:nth-of_type(6).teaser {
   border-bottom-color: $color_three;
@@ -214,3 +215,15 @@ section:nth-of-type(9).teaser {
   border-bottom-color: $color_two;
 }
 
+section.slideshow + section.teaser {
+  border-bottom-color: #ca2162;
+}
+
+/* Second Level Pages */
+.bereichslayout {
+  section.slideshow {
+    header {
+      margin-bottom: -7px;
+    }
+  }
+}
