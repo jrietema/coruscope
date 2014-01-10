@@ -15,9 +15,10 @@ $color_page_bg: #ffffff;
 $font_color_head: #17297c;
 $color_heading: #666666;
 $color_soft_margin: #c5baa6;
+$color_footer: #a2a2a2;
 
-$header_height: 85px;
-$nav_height: 40px;
+$header_height: 128px;
+$nav_height: 60px;
 
 $semibold: 600;
 
@@ -30,39 +31,44 @@ body a {
   color: $color_one;
   text-decoration: underline;
 }
+body a:hover {
+  color: $color_two;
+}
 
 /* Header */
 header #identity {
   height: $header_height - 5px;
-  padding-top: 5px;
+  padding: 5px 4% 0;
   background-color: $color_head;
   hgroup {
-    padding-top: 0.75em;
-    padding-left: 0.15em;
-    max-width: 400px;
+    padding-top: 1.2em;
+    padding-left: 0.75em;
+    max-width: 700px;
     h1 {
       width: 100%;
-      font-size: 1.5em; /* 2.45em; */
-      color: $font_color_head;
+      font-size: 2.45em;
+      color: $color_page_bg;
+      font-weight: $semibold;
       /* font-weight: bold; */
-      text-shadow: 0 1px 2px #181f3c, 0 1px 0 #181f3c;
+      /* text-shadow: 0 1px 2px #181f3c, 0 1px 0 #181f3c; */
       padding-bottom: 0;
     }
     h2 {
-      font-size: 0.8em; /* 1.5 em */
-      font-weight: $semibold;
+      font-size: 1.25em;
+      font-weight: bold;
       color: #fff;
+      padding-top: 0.15em;
     }
   }
   div * {
     float: left;
   }
   #direct_access {
-    margin-top: 32px;
+    margin-top: 43px;
     float: right;
     li {
       border-left: 1px solid $font_color_head;
-      padding: 0 0.33em;
+      padding: 0 0.45em;
     }
     li:nth-child(1) {
       border-left: 0;
@@ -70,10 +76,13 @@ header #identity {
   }
   a, a:visited {
     color: $font_color_head;
-    font-size: 0.75em;
-    line-height: 0.9em;
+    font-size: 1em;
+    line-height: 1.05em;
     font-weight: $semibold;
     text-decoration: none;
+  }
+  a:hover {
+    color: $color_page_bg;
   }
 }
 
@@ -82,22 +91,28 @@ header #identity {
 *  to enable a three-level navigation menu */
 #main_nav.navbar {
   background-color: $color_one;
-  min-height: $nav_height;
   margin: 0;
+  max-height: $nav_height;
+  position: relative;
   > ul {
-    margin-left: 5%;
+    position: absolute;
+    top: 0;
+    left: 3%;
+    height: $nav_height;
   }
   ul li {
     height: $nav_height;
-    line-height: $nav_height - 2px;
+    line-height: $nav_height;
+    max-width: 220px;
     > a {
       height: $nav_height;
-      line-height: $nav_height - 2px;
+      line-height: $nav_height;
       border: 0;
-      font-size: 0.75em;
+      font-size: 1em;
       font-weight: $semibold;
       text-shadow: none;
       text-decoration: none;
+      overflow: hidden;
     }
   }
   ul li a, ul li a:hover, ul li a:visited {
@@ -115,6 +130,7 @@ header #identity {
     display: none;
     background-color: $color_one;
     border: 0;
+    max-width: 220px;
     ul {
       padding: 0;
     }
@@ -142,8 +158,9 @@ section {
     bottom: 0;
     text-align: center;
     width: 100%;
-    padding: 0.25em 0;
+    padding: 0.35em 0;
     font-size: 2em;
+    font-weight: normal;
     color: #fff;
   }
 }
@@ -188,13 +205,26 @@ section.teaser {
     }
   }
   > div {
-    font-size: 0.85em;
+    font-size: 1.12em;
+    font-weight: normal;
   }
   .twelve, .centered {
     text-align: center;
   }
   div.columns {
     margin: 1.5em 0;
+  }
+  a {
+    color: $color_one;
+    font-weight: $semibold;
+  }
+  a:hover {
+    color: $font_color_head;
+  }
+  a:after {
+    font-family: "#{$icons}";
+    font-size: 0.8em;
+    content: " #{$entypo-icon-fast-forward}";
   }
 }
 section.slideshow + section.teaser,
@@ -214,9 +244,11 @@ section:nth-of-type(5).teaser,
 section:nth-of-type(9).teaser {
   border-bottom-color: $color_two;
 }
-
 section.slideshow + section.teaser {
   border-bottom-color: #ca2162;
+}
+section:last-of-type.teaser {
+  border-bottom: 0px none;
 }
 
 /* Second Level Pages */
@@ -224,6 +256,55 @@ section.slideshow + section.teaser {
   section.slideshow {
     header {
       margin-bottom: -7px;
+    }
+  }
+}
+
+body > footer {
+  background-color: $color_footer;
+  min-height: 300px;
+  padding-top: 20px;
+  color: #fff;
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+  ul.row {
+    .heading > a {
+      font-weight: bold;
+    }
+    ul {
+      padding: 0;
+      margin: 0.75em 0 0;
+    }
+    ul li {
+      display: block;
+      width: 100%;
+      a {
+        font-weight: normal;
+      }
+    }
+  }
+  .logo {
+    position: relative;
+    width: 200px;
+    height: 130px;
+    display: block;
+    padding-top: 0.5em;
+    background: transparent url('/images/ail/ail_logo_small.png') no-repeat 5px 0.5em;
+    color: #fff;
+    p {
+      padding-top: 0.35em;
+      padding-left: 88px;
+      width: 100%;
+      font-size: 0.9em;
+      line-height: 1.2em;
+      color: #fff;
+    }
+    .registered {
+      position: absolute;
+      bottom: 0;
+      left: 0;
     }
   }
 }
