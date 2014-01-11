@@ -32,8 +32,12 @@ body h3 {
   color: #000;
 }
 
-section div {
+section > div {
   font-size: 1.12em;
+  .four.columns,
+  .six.columns {
+    font-size: 0.75em;
+  }
 }
 
 body a {
@@ -248,7 +252,7 @@ section.slideshow {
 
 section.teaser {
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 0 0 20px 0 !important;
   .emphasis {
     color: $color_soft_margin;
     font-weight: $semibold;
@@ -261,12 +265,13 @@ section.teaser {
     .slide-caption {
       background-color: $color_soft_margin;
     }
+    a, a:hover {
+      color: #fff;
+    }
   }
-  > div {
-    /*
-    font-size: 1.12em;
-    font-weight: normal;
-    */
+  div.four,
+  div.six {
+    padding: 0 1em;
   }
   .twelve, .centered {
     text-align: center;
@@ -274,17 +279,19 @@ section.teaser {
   div.columns {
     margin: 1.5em 0;
   }
-  a {
-    color: $color_one;
-    font-weight: $semibold;
-  }
-  a:hover {
-    color: $font_color_head;
-  }
-  a:after {
-    font-family: "#{$icons}";
-    font-size: 0.8em;
-    content: " #{$entypo-icon-fast-forward}";
+  div {
+    a {
+      color: $color_one;
+      font-weight: $semibold;
+    }
+    a:hover {
+      color: $font_color_head;
+    }
+    a:after {
+      font-family: "#{$icons}";
+      font-size: 0.8em;
+      content: " #{$entypo-icon-fast-forward}";
+    }
   }
 }
 section.slideshow + section.teaser,
