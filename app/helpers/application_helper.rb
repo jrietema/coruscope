@@ -22,6 +22,24 @@ module ApplicationHelper
     site.path.split('/').first
   end
 
+  # this is a helper to retrieve related page's content in layouts/snippets
+  def page_content_for(slug, identifier)
+    page = @cms_site.pages.find_by_slug(identifier.to_s)
+    return '' if page.nil?
+    block = page.blocks.find_by_identifier(identifier)
+    return '' if block.nil?
+    return block.inspect
+    case block.tag
+      # This just handles very simple text content atm
+      when ComfortableMexicanSofa::Tag::PageFile
+        ''
+      when ComfortableMexicanSofa::Tag::PageFiles
+        ''
+      else
+        ComfortableMexicanSofa::Tag.sanitize_irb(block.content)
+    end
+  end
+
   # returns an array of page objects or properies of pages of hierarchical relationships
   def breadcrumbs(page, method=nil)
     crumbs = []

@@ -23,6 +23,10 @@
     resize: both;
 }
 
+#coruscope .content-actions .file-uploader {
+    display: none;
+}
+
 #dynamic-content
   .page-header {
     padding-bottom: 0;
@@ -68,12 +72,16 @@
 }
 
 form.formatted
-    .control-group
-        .control-label {
-    font-size: 85%;
-    font-weight: bold;
-    letter-spacing: 0.05em;
-    margin-bottom: 0px;
+    .control-group {
+    .control-label {
+        font-size: 85%;
+        font-weight: bold;
+        letter-spacing: 0.05em;
+        margin-bottom: 0px;
+    }
+    .files {
+        margin-top: 0.3em;
+    }
 }
 
 /* Restyle content-actions (right-hand column moved into left) */
