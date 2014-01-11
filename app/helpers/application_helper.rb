@@ -22,6 +22,16 @@ module ApplicationHelper
     site.path.split('/').first
   end
 
+  # returns an array of page objects or properies of pages of hierarchical relationships
+  def breadcrumbs(page, method=nil)
+    crumbs = []
+    while !page.nil?
+      crumbs << (method ? page.send(method) : page)
+      page = page.parent
+    end
+    crumbs
+  end
+
   # checkbox with label included, Gumby-style
   def gumby_checkbox(form_builder, method, label, checked=false, value="1")
     name = "#{form_builder.object.class.name.underscore}[#{method}]"
