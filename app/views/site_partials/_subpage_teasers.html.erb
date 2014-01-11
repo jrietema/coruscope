@@ -1,0 +1,15 @@
+<ul id="teaser-group" class="tiles three up">
+  <% @cms_page.children.each do |subpage| %>
+    <% teaser_image = cms_page_files('teaser_image', subpage)%>
+    <li class="teaser">
+      <% unless teaser_image.nil? || teaser_image.empty? %>
+      <a href="<%= page_path(subpage) %>">
+        <%= image_tag(teaser_image.first.file.url, :alt => teaser_image.first.label) %>
+        <span class="caption"><%= subpage.label %></span>
+      </a>
+      <% else %>
+      &nbsp;
+      <% end %>
+    </li>
+  <% end %>
+</ul>

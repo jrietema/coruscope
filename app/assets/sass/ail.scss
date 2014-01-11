@@ -24,7 +24,16 @@ $semibold: 600;
 
 body, p, div {
   color: #000;
-  font-weight: $semibold;
+  font-weight: normal;
+}
+body h1,
+body h2,
+body h3 {
+  color: #000;
+}
+
+section div {
+  font-size: 1.12em;
 }
 
 body a {
@@ -52,12 +61,14 @@ header #identity {
       /* font-weight: bold; */
       /* text-shadow: 0 1px 2px #181f3c, 0 1px 0 #181f3c; */
       padding-bottom: 0;
+      text-align: left;
     }
     h2 {
       font-size: 1.25em;
       font-weight: bold;
       color: #fff;
       padding-top: 0.15em;
+      text-align: left;
     }
   }
   div * {
@@ -118,9 +129,9 @@ header #identity {
   ul li a, ul li a:hover, ul li a:visited {
     color: #fff;
   }
-  ul li.active a, ul li a:hover, ul li.current a,
-  .dropdown ul li.active a, .dropdown ul li a:hover,
-  ul li:hover > a, ul li.active > a
+  ul li.active > a, ul li a:hover, ul li.current > a,
+  .dropdown ul li.active > a, .dropdown ul li a:hover,
+  ul li:hover > a
   {
     background-color: $color_head !important;
   }
@@ -133,6 +144,9 @@ header #identity {
     max-width: 220px;
     ul {
       padding: 0;
+    }
+    li.active .dropdown a {
+      background-color: $color_one;
     }
     .dropdown {
       display: none;
@@ -183,6 +197,9 @@ section.teaser {
 }
 section.slideshow {
   border-bottom-color: $color_two;
+  header {
+    background-color: $color_heading;
+  }
   .slide-caption {
     background: transparent url('/images/ail/heading_bg.png') repeat top left;
   }
@@ -205,8 +222,10 @@ section.teaser {
     }
   }
   > div {
+    /*
     font-size: 1.12em;
     font-weight: normal;
+    */
   }
   .twelve, .centered {
     text-align: center;
@@ -252,18 +271,82 @@ section:last-of-type.teaser {
 }
 
 /* Second Level Pages */
-.bereichslayout {
+.bereichslayout,
+.layout-ebene-drei {
   section.slideshow {
     header {
-      margin-bottom: -7px;
+      min-height: 300px;
+    }
+    .slide-caption {
+      bottom: 0;
     }
   }
+}
+
+section > h1,
+section > div > h1 {
+  margin: 0 auto;;
+  min-width: 320px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+  font-size: 2.25em;
+  font-weight: $semibold;
+  color: #fff;
+  background-color: $color_heading;
+}
+section.row h1,
+section.row h2,
+section.row h3 {
+  text-align: center;
+}
+section.row h1:first-child,
+section.row h2:first-child,
+section.row h3:first-child {
+  margin-top: 1.8em;
+}
+section.row h3 {
+  font-weight: $semibold;
+}
+
+/* Teaser Image-Links for Subpages */
+#teaser_group {
+  margin-bottom: 20px;
+}
+#teaser-group .teaser {
+  position: relative;
+  max-width: 30%;
+  margin-right: 3%;
+  margin-bottom: -8px;
+  a {
+    text-decoration: none;
+    span {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: block;
+      z-index: 500;
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: $semibold;
+      color: #fff;
+      line-height: 1.5em;
+      padding: 5px 0;
+      background: transparent url('/images/ail/heading_bg.png') repeat top left;
+    }
+  }
+}
+
+body section:last-child {
+  padding-bottom: 20px;
 }
 
 body > footer {
   background-color: $color_footer;
   min-height: 300px;
   padding-top: 20px;
+  margin-top: 40px;
   color: #fff;
   a {
     color: #fff;
