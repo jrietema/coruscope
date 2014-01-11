@@ -45,10 +45,15 @@ body a:hover {
 }
 
 /* Header */
+body > header {
+  position: relative;
+  background-color: $color_head;
+  height: $header_height + $nav_height - 5px;
+}
 header #identity {
+  float: left;
   height: $header_height - 5px;
   padding: 5px 4% 0;
-  background-color: $color_head;
   hgroup {
     padding-top: 1.2em;
     padding-left: 0.75em;
@@ -74,12 +79,17 @@ header #identity {
   div * {
     float: left;
   }
+}
+header {
   #direct_access {
-    margin-top: 43px;
-    float: right;
+    position: absolute;
+    top: 43px;
+    right: 2%;
+    width: 320px;
     li {
       border-left: 1px solid $font_color_head;
       padding: 0 0.45em;
+      display: inline;
     }
     li:nth-child(1) {
       border-left: 0;
@@ -100,8 +110,17 @@ header #identity {
 /* Top Menu
 *  override Gumby's way of using the height property and restricting overflows
 *  to enable a three-level navigation menu */
-#main_nav.navbar {
+#main_nav {
+  position: absolute;
+  top: $header_height;
+  left: 0;
+  height: $nav_height;
+  width: 100%;
+  max-width: none !important;
+  z-index: 500;
   background-color: $color_one;
+}
+#main_nav.navbar {
   margin: 0;
   max-height: $nav_height;
   position: relative;
@@ -110,15 +129,19 @@ header #identity {
     top: 0;
     left: 3%;
     height: $nav_height;
+    > li {
+      line-height: $nav_height;
+      > a {
+        height: $nav_height;
+      }
+    }
   }
   ul li {
-    height: $nav_height;
-    line-height: $nav_height;
+    line-height: 1.1em;
     max-width: 220px;
     > a {
-      height: $nav_height;
-      line-height: $nav_height;
-      border: 0;
+      border: none 0px;
+      border-radius: none;
       font-size: 1em;
       font-weight: $semibold;
       text-shadow: none;
@@ -139,18 +162,29 @@ header #identity {
     overflow: visible !important;
     height: auto !important;
     display: none;
-    background-color: $color_one;
-    border: 0;
+    border: none 0px;
     max-width: 220px;
+    background-color: transparent;
     ul {
       padding: 0;
+      li {
+        line-height: 1.1em;
+      }
+    }
+    li a {
+      opacity: 0.9;
+      background-color: $color_one;
+      border-radius: none;
+    }
+    li.active > a, li:hover > a {
+      opacity: 1;
     }
     li.active .dropdown a {
       background-color: $color_one;
     }
     .dropdown {
       display: none;
-      background-color: $color_one;
+      background-color: transparent;
     }
     .subnav {
       overflow: visible !important;
@@ -162,6 +196,13 @@ header #identity {
   ul li:hover > .dropdown {
     display: block;
   }
+}
+
+section.slideshow.row,
+section.teaser header.row,
+footer.row {
+  max-width: none !important;
+  width: 100% !important;
 }
 
 /* Slideshow and Picture Teasers */
@@ -293,7 +334,7 @@ section > div > h1 {
   font-size: 2.25em;
   font-weight: $semibold;
   color: #fff;
-  background-color: $color_heading;
+  background-color: $color_footer;
 }
 section.row h1,
 section.row h2,
@@ -308,18 +349,36 @@ section.row h3:first-child {
 section.row h3 {
   font-weight: $semibold;
 }
+body section:last-child {
+  padding-bottom: 40px;
+}
 
 /* Teaser Image-Links for Subpages */
 #teaser_group {
   margin-bottom: 20px;
+  padding-right: 4.2%;
+}
+#teaser-group .teaser:nth-child(2),
+#teaser-group .teaser:nth-child(5) {
+  margin-left: 2%;
+  margin-right: 2%;
 }
 #teaser-group .teaser {
   position: relative;
-  max-width: 30%;
-  margin-right: 3%;
-  margin-bottom: -8px;
+  max-width: 300px;
+  max-height: 225px;
+  width: 31.91%;
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 20px;
+  background-color: #222;
   a {
     text-decoration: none;
+    img {
+      width: 100%;
+      height: 225px;
+      display: block;
+    }
     span {
       position: absolute;
       bottom: 0;
@@ -334,6 +393,14 @@ section.row h3 {
       line-height: 1.5em;
       padding: 5px 0;
       background: transparent url('/images/ail/heading_bg.png') repeat top left;
+    }
+  }
+  a:hover {
+    img {
+      opacity: 0.8;
+    }
+    span {
+      color: $color_one;
     }
   }
 }
@@ -352,9 +419,18 @@ body > footer {
     color: #fff;
     text-decoration: none;
   }
-  ul.row {
-    .heading > a {
-      font-weight: bold;
+  ul, li {
+    max-width: 180px;
+  }
+  .row > ul {
+    width: 100%;
+    max-width: none;
+    .heading {
+      float: left;
+      margin-right: 1.5em;
+      > a {
+        font-weight: bold;
+      }
     }
     ul {
       padding: 0;
