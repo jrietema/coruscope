@@ -7,20 +7,21 @@
           <%= link_to defined?(param_2) ? content_tag(:i, '', :class => param_2) : @cms_site.pages.root.label, page_path(@cms_site.pages.root) %>
         </li>
       <% end %>
+      <% parents = breadcrumbs(@cms_page, :slug) %>
       <% @cms_site.pages.root.children.published.each do |page| %>
-        <li class="<%= (@cms_page.slug == page.slug) ? 'active' : '' %>">
+        <li class="<%= (parents.include?(page.slug)) ? 'active' : '' %>">
             <%= link_to page.label, page_path(page) %>
             <% unless page.children.published.empty? %>
             <div class="dropdown">
               <ul class="subnav">
                 <% page.children.published.each do |subpage| %>
-                    <li class="<%= (@cms_page.slug == subpage.slug) ? 'active' : '' %>">
+                    <li class="<%= (parents.include?(subpage.slug)) ? 'active' : '' %>">
                       <%= link_to subpage.label, page_path(subpage) %>
                       <% unless subpage.children.published.empty? %>
                       <div class="dropdown">
                         <ul class="subnav2">
                         <% subpage.children.published.each do |subsubpage| %>
-                        <li class="<%= (@cms_page.slug == page.slug) ? 'active' : '' %>">
+                        <li class="<%= (parents.include?(subsubpage.slug)) ? 'active' : '' %>">
                           <%= link_to subsubpage.label, page_path(subsubpage) %>
                         </li>
                         <% end %>
