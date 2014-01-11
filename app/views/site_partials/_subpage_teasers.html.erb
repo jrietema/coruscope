@@ -1,5 +1,5 @@
 <ul id="teaser-group" class="tiles three up">
-  <% @cms_page.children.each do |subpage| %>
+  <% @cms_page.children.published.each do |subpage| %>
     <% teaser_image = cms_page_files('teaser_image', subpage)%>
     <li class="teaser">
       <% unless teaser_image.nil? || teaser_image.empty? %>
