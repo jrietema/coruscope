@@ -116,7 +116,7 @@ header {
 *  to enable a three-level navigation menu */
 #main_nav {
   position: absolute;
-  top: $header_height;
+  top: $header_height - 5px;
   left: 0;
   height: $nav_height;
   width: 100%;
@@ -203,10 +203,12 @@ header {
 }
 
 section.slideshow.row,
+section.slideshow header.row,
 section.teaser header.row,
 footer.row {
   max-width: none !important;
   width: 100% !important;
+  padding: 0;
 }
 
 /* Slideshow and Picture Teasers */
@@ -323,7 +325,10 @@ section:last-of-type.teaser {
 .layout-ebene-drei {
   section.slideshow {
     header {
-      min-height: 300px;
+      min-height: 48px;
+      img {
+        margin-bottom: -7px;
+      }
     }
     .slide-caption {
       bottom: 0;
@@ -355,6 +360,7 @@ section.row h3:first-child {
 }
 section.row h3 {
   font-weight: $semibold;
+  font-size: 1.625em;
 }
 body section:last-child {
   padding-bottom: 40px;
