@@ -1,1 +1,1 @@
-<%= fancytree_pages_hash({nil => @layouts}).to_json.html_safe %>
+<%= fancytree_pages_hash(collection_to_parent_id_ordered_hash(@site.layouts)).to_json.html_safe %>

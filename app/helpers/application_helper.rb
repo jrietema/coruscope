@@ -70,6 +70,16 @@ module ApplicationHelper
     end
   end
 
+  # any collection is transformed into a hash ordered by parent_id, for building fancytrees
+  def collection_to_parent_id_ordered_hash(collection)
+    hash = {}
+    collection.inject(hash) do |hash, item|
+      hash[item.parent_id] ||= []
+      hash[item.parent_id] << item
+      hash
+    end
+  end
+
   def content_for_ajax(name, content = nil, options = {}, &block)
     if block_given?
       options = content if content
