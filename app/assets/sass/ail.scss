@@ -32,12 +32,51 @@ body h3 {
   color: #000;
 }
 
-section > div {
-  font-size: 1.12em;
+section {
+  div {
+    font-size: 1.12em;
+  }
   .four.columns,
   .six.columns {
     font-size: 0.75em;
+    padding: 0 1em;
   }
+  .eight.columns {
+    font-size: 0.75em;
+  }
+  div.columns {
+    margin: 1.5em 0;
+  }
+}
+
+section > h1,
+section > div > h1,
+.row > h1,
+section header h1 {
+  margin: 30px auto 20px;
+  min-width: 320px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+  font-size: 2.25em;
+  font-weight: $semibold;
+  color: #fff;
+  background-color: $color_footer;
+}
+.row > h1,
+.row > h2,
+.row > h3,
+section header > h1 {
+  text-align: center;
+}
+.row > h1:first-child,
+.row > h2:first-child,
+.row > h3:first-child {
+  margin-top: 1.8em;
+}
+.row h3 {
+  /* font-weight: $semibold; */
+  font-size: 1.625em;
 }
 
 body a {
@@ -47,6 +86,95 @@ body a {
 body a:hover {
   color: $color_two;
 }
+/* Links in Text Body */
+body section div {
+  a {
+    color: $color_one;
+    font-weight: $semibold;
+  }
+  a:hover {
+    color: $font_color_head;
+  }
+  a:after {
+    font-family: "#{$icons}";
+    font-size: 0.8em;
+    content: " #{$entypo-icon-fast-forward}";
+  }
+}
+
+/* Table-Colors */
+
+table thead {
+  background-color: $color_one;
+  color: #FFFFFF;
+}
+table tbody tr td:first-child {
+  background-color: #ddeff0;
+}
+table tbody tr:nth-child(even) td:first-child {
+  background-color: #c0e1eb; /* #b4d6e0; */
+}
+table tbody tr:nth-child(even) td {
+  background-color: #f1f1f1;
+}
+
+/* Content Lists */
+section.row ul {
+  margin: 0.5em 0;
+}
+section.row ul li {
+  padding-left: 1.625em;
+}
+section.row ul li:before {
+  font-family: "#{$icons}";
+  font-size: 120%;
+  margin-left: -1.25em;
+  margin-right: 0.5em;
+  color: $color_one;
+  content: " #{$entypo-icon-check}";
+}
+/* These styles do not apply to: slideshows and tiles */
+section.slideshow.row ul li:before,
+section.row ul.tiles li:before,
+section.row form ul li:before,
+section.row ul.form li:before,
+section.row ul li.field:before {
+  content: '';
+  margin: 0;
+}
+section.slideshow.row ul li,
+section.row ul.tiles li,
+section.row form ul li,
+section.row ul.form li,
+section.row ul li.field {
+  padding-left: 0;
+}
+
+/* Float all body content */
+body > header {
+  float: left;
+}
+
+/* Content-Images */
+section .column img {
+  width: 100%;
+  float: left;
+  clear: both;
+}
+section .column img.left {
+  width: 65%;
+  float: left;
+  clear: none;
+}
+section .column img.right {
+  width: 65%;
+  float: right;
+  clear: none;
+}
+section .column img.small {
+  width: 31.9%;
+}
+
 
 /* Header */
 body > header {
@@ -114,24 +242,19 @@ header {
 /* Top Menu
 *  override Gumby's way of using the height property and restricting overflows
 *  to enable a three-level navigation menu */
-#main_nav {
-  position: absolute;
-  top: $header_height - 5px;
-  left: 0;
-  height: $nav_height;
-  width: 100%;
-  max-width: none !important;
-  z-index: 500;
-  background-color: $color_one;
-}
 #main_nav.navbar {
-  margin: 0;
+  float: left;
+  clear: left;
+  margin: 0 auto;
+  width: auto;
+  max-width: none !important;
+  height: $nav_height;
   max-height: $nav_height;
   position: relative;
+  z-index: 500;
+  background-color: $color_one;
   > ul {
-    position: absolute;
-    top: 0;
-    left: 3%;
+    width: auto;
     height: $nav_height;
     > li {
       line-height: $nav_height;
@@ -251,51 +374,6 @@ section.slideshow {
     background: transparent url('/images/ail/heading_bg.png') repeat top left;
   }
 }
-
-section.teaser {
-  margin: 0 !important;
-  padding: 0 0 20px 0 !important;
-  .emphasis {
-    color: $color_soft_margin;
-    font-weight: $semibold;
-  }
-  header.row {
-    position: relative;
-    margin-bottom: -5px;
-    margin: 0 !important;
-    padding: 0 !important;
-    .slide-caption {
-      background-color: $color_soft_margin;
-    }
-    a, a:hover {
-      color: #fff;
-    }
-  }
-  div.four,
-  div.six {
-    padding: 0 1em;
-  }
-  .twelve, .centered {
-    text-align: center;
-  }
-  div.columns {
-    margin: 1.5em 0;
-  }
-  div {
-    a {
-      color: $color_one;
-      font-weight: $semibold;
-    }
-    a:hover {
-      color: $font_color_head;
-    }
-    a:after {
-      font-family: "#{$icons}";
-      font-size: 0.8em;
-      content: " #{$entypo-icon-fast-forward}";
-    }
-  }
-}
 section.slideshow + section.teaser,
 section:nth-of-type(2).teaser,
 section:nth-of_type(6).teaser {
@@ -320,6 +398,30 @@ section:last-of-type.teaser {
   border-bottom: 0px none;
 }
 
+section.teaser {
+  margin: 0 !important;
+  padding: 0 0 20px 0 !important;
+  .emphasis {
+    color: $color_soft_margin;
+    font-weight: $semibold;
+  }
+  header.row {
+    position: relative;
+    margin-bottom: -5px;
+    margin: 0 !important;
+    padding: 0 !important;
+    .slide-caption {
+      background-color: $color_soft_margin;
+    }
+    a, a:hover {
+      color: #fff;
+    }
+  }
+  .twelve, .centered {
+    text-align: center;
+  }
+}
+
 /* Second Level Pages */
 .bereichslayout,
 .layout-ebene-drei {
@@ -334,33 +436,6 @@ section:last-of-type.teaser {
       bottom: 0;
     }
   }
-}
-
-section > h1,
-section > div > h1 {
-  margin: 0 auto;;
-  min-width: 320px;
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 100%;
-  font-size: 2.25em;
-  font-weight: $semibold;
-  color: #fff;
-  background-color: $color_footer;
-}
-section.row h1,
-section.row h2,
-section.row h3 {
-  text-align: center;
-}
-section.row h1:first-child,
-section.row h2:first-child,
-section.row h3:first-child {
-  margin-top: 1.8em;
-}
-section.row h3 {
-  font-weight: $semibold;
-  font-size: 1.625em;
 }
 body section:last-child {
   padding-bottom: 40px;
@@ -383,7 +458,7 @@ body section:last-child {
   width: 31.91%;
   margin-right: 0;
   margin-left: 0;
-  margin-top: 20px;
+  margin-bottom: 20px;
   a {
     text-decoration: none;
     background-color: #222;
@@ -479,4 +554,15 @@ body > footer {
       left: 0;
     }
   }
+}
+
+/* Move the Datepicker UI 'forward' */
+body div.ui-datepicker {
+  z-index: 2000 !important;
+}
+
+/* Adjustments to form */
+li.field input + .picker {
+  position: relative;
+  top: 13px;
 }
