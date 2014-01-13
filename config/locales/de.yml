@@ -39,6 +39,12 @@ de:
         teaser_image: Teaserbild
         header_image: Headerbild
         subtitle: Subtitel
+        default: Kopf
+        about: Über
+        program: Programm
+        accommodation: Unterkunft
+        pricing: Preise
+        right_column: Rechte Spalte
       cms/file:
         file: Datei
         description: Beschreibung

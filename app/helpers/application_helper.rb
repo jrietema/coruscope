@@ -80,6 +80,21 @@ module ApplicationHelper
     end
   end
 
+  def options_for_page_select(site, from_page = nil, current_page = nil, depth = 0, exclude_self = true, spacer = ' -')
+    current_page ||= site.pages.root
+    return [] if (current_page == from_page && exclude_self) || !current_page
+    out = []
+    out << [ "#{spacer*depth}#{current_page.label}", current_page.id ] unless current_page == from_page
+    child_pages = Cms::Page.all.where(parent_id: current_page.id)
+    child_pages.each do |child|
+      opt = options_for_page_select(site, from_page, child, depth + 1, exclude_self, spacer)
+      puts "Child-page: #{child.label} - with #{child.children.size} subpages:\n#{opt}"
+      out += opt
+    end if child_pages.size.nonzero?
+    return out.compact
+  end
+
+
   def content_for_ajax(name, content = nil, options = {}, &block)
     if block_given?
       options = content if content
