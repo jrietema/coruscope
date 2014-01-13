@@ -178,10 +178,16 @@ section .column img.small {
 
 /* Header */
 body > header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   background-color: $color_head;
   height: $header_height + $nav_height - 5px;
   width: 100%;
+  z-index: 1500;
+}
+body {
+  padding-top: $header_height + $nav_height - 5px;
 }
 header #identity {
   float: left;
@@ -252,7 +258,7 @@ header {
   height: $nav_height;
   max-height: $nav_height;
   position: relative;
-  z-index: 500;
+  z-index: 1500;
   background-color: $color_one;
   > ul {
     display: inline-block;
@@ -326,6 +332,45 @@ header {
   ul li:hover > .dropdown {
     display: block;
   }
+}
+
+nav#page_nav {
+  width: 100%;
+  max-width: none;
+  float: left;
+  /* text-align: center; */
+  padding-left: 7%;
+  background-color: $color_three;
+  ul.anchors {
+    float: none;
+    vertical-align: middle;
+    width: auto;
+    margin: 0 auto;
+    display: inline-block;
+    li {
+      border-left: 1px solid #fff;
+      padding: 0 0.45em 0.15em;
+      margin: 0.75em 0;
+      display: inline;
+      float: left;
+    }
+    li:first-child {
+      border-left: 0;
+    }
+    li a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      line-height: 90%;
+    }
+    li a:hover {
+      color: $font_color_head;
+    }
+  }
+}
+.layout-standardkurse nav#page_nav,
+.kurse nav#page_nav {
+  background-color: $color_two;
 }
 
 section.slideshow,
