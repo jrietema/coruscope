@@ -181,6 +181,7 @@ body > header {
   position: relative;
   background-color: $color_head;
   height: $header_height + $nav_height - 5px;
+  width: 100%;
 }
 header #identity {
   float: left;
@@ -245,8 +246,8 @@ header {
 #main_nav.navbar {
   float: left;
   clear: left;
-  margin: 0 auto;
-  width: auto;
+  width: 100%;
+  text-align: center;
   max-width: none !important;
   height: $nav_height;
   max-height: $nav_height;
@@ -254,7 +255,9 @@ header {
   z-index: 500;
   background-color: $color_one;
   > ul {
+    display: inline-block;
     width: auto;
+    margin: 0 auto;
     height: $nav_height;
     > li {
       line-height: $nav_height;
