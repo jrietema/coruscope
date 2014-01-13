@@ -17,5 +17,9 @@ function initPageNav(list, selector, offset) {
        $(this).attr('id', 'section' + id);
        $(this).addClass('goto-section' + id);
     });
-    $('#' + navId).smint({verticalOffset: offset || 0});
+    if(idx == 0) {
+        $(navId).remove();
+    } else {
+        $('#' + navId).smint({verticalOffset: offset || 0});
+    }
 }
