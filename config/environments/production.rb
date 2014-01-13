@@ -69,7 +69,7 @@ Coruscope::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # enable mailer views to generate correct urls
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'coruscope.de' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
