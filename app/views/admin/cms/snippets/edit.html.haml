@@ -1,0 +1,8 @@
+= content_for_ajax :content_messages do
+  = link_to pluralize(@snippet.revisions.count, t('.revision')), admin_cms_site_snippet_revisions_path(@site, @snippet), :class => 'btn pull-right'
+
+- content_for :right_column do
+  = render 'admin/cms/sites/mirrors', :object => @snippet
+
+= comfy_form_for @snippet, as: :snippet, url: {action: :update}, type: :vertical  do |form|
+  = render form

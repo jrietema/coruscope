@@ -1,0 +1,6 @@
+.page-header
+  %h4= t('.title')
+
+%div{data: {copy: true}}
+  = comfy_form_for @snippet, :as => :snippet, :url => {:action => :create}, type: :vertical, data: {copy: :slug} do |form|
+    = render form
