@@ -57,7 +57,9 @@ function _initDragAndDrop(tree) {
 				var sourceNode = $.ui.fancytree.getNode(event.target);
 				if(!sourceNode){ // issue 211
 					// TODO: remove this hint, when we understand when it happens
-					return "<div>ERROR?: helper requested but sourceNode not found</div>";
+					// happens on a drag on a scroll bar that causes movement of
+					// the fancytree list - escaping this now
+					// return "<div>ERROR?: helper requested but sourceNode not found</div>";
 				}
 				return sourceNode.tree.ext.dnd._onDragEvent("helper", sourceNode, null, event, null, null);
 			},
