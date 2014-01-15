@@ -47,6 +47,14 @@ section {
   div.columns {
     margin: 1.5em 0;
   }
+  div.columns.cojoined-bottom,
+  div.columns.cojoined-both {
+    margin-bottom: 0px !important;
+  }
+  div.columns.cojoined-top,
+  div.columns.cojoined-both {
+    margin-top: 0px !important;
+  }
 }
 
 section > h1,
@@ -193,6 +201,7 @@ header #identity {
   float: left;
   height: $header_height - 5px;
   padding: 5px 4% 0;
+  overflow-y: hidden;
   hgroup {
     padding-top: 1.2em;
     padding-left: 0.75em;
@@ -335,7 +344,7 @@ header {
 }
 
 nav#page_nav {
-  $page_nav_z: 1350;
+  $page_nav_z: 1850;
   width: 100%;
   max-width: none;
   float: left;
@@ -346,8 +355,10 @@ nav#page_nav {
     vertical-align: middle;
     width: 100%;
     padding: 0 7%;
+    height: 2.563em;
+    overflow-y: hidden;
     background-color: $color_three;
-    display: inline-block;
+    display: block;
     z-index: $page_nav_z;
     li {
       border-left: 1px solid #fff;
