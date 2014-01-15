@@ -4,7 +4,7 @@ function initPageNav(list, selector, offset) {
     var idx = 0;
     var navId = $(list).parent('div, nav').attr('id');
     $(selector).each(function() {
-       var name = $(this).html().trim();
+       var name = ($(this).html().trim() || '').replace(/[\s,.;-]+.*$/,'');
        if(name == '') { return; }
        var id = idx++;
        var newLink = document.createElement('a');
