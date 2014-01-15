@@ -561,6 +561,58 @@ body section:last-child {
   padding-bottom: 20px;
 }
 
+/* layout for content */
+.row .columns .boxed {
+  li.content-item:before {
+    content: none;
+  }
+  li.content-item {
+    position: relative;
+    border: 1px solid #000;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    list-style-type: none;
+    margin: 0 0 1.5em;
+    padding: 0.33em 1.2em;
+    background-color: #f1f1f1;
+    display: block;
+    vertical-align: middle;
+    h2,h3,h4,p,ul,li {
+      float: left;
+    }
+    h2, h3, h4 {
+      font-size: 82.5%;
+      margin-top: 0;
+      margin-bottom: 0.33em;
+      font-weight: $semibold;
+      color: #000;
+    }
+    p, ul {
+      width: 62%;
+      display: block;
+      margin-top: 0;
+      clear: left;
+      font-size: 0.75em;
+    }
+    li {
+      float: left;
+      line-height: 1.25em;
+      width: auto;
+      display: inline-block;
+      width: 50%;
+      padding-right: 2%;
+    }
+    img {
+      position: absolute;
+      right: -2px;
+      top: 0;
+      height: 100%;
+    }
+  }
+}
+
+
 body > footer {
   background-color: $color_footer;
   min-height: 300px;
