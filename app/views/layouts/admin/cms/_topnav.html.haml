@@ -10,6 +10,8 @@
         = active_link_to new_admin_cms_site_page_path(@site), :id => :new_item_link, :wrap_tag => :li do
           %i.icon-plus
           = t('admin.cms.base.new')
+      %li#cms-current-context
+        = current_context_title
       = active_link_to destroy_user_session_path(current_user), :method => :delete, :wrap_tag => :li do
         = t('admin.cms.base.logout')
       %li

@@ -109,6 +109,55 @@ module ApplicationHelper
     end
   end
 
+  # Override active_link_to here to also compare local href hashes
+  # in order to get the nav tabs to work.
+  def is_active_link?(url, condition = nil)
+    # check hashes against controller name
+    active_hash = (url[/^#[_a-z]*/i] || '').sub('#','')
+    unless active_hash.blank?
+      if %(sites pages layouts snippets files).include?(controller_name)
+        if action_name == 'edit'
+          return active_hash == 'meta_pane'
+        else
+          return active_hash == controller_name
+        end
+      else
+        # pages is the default active tab
+        return active_hash == 'pages'
+      end
+    else
+      url = url_for(url).sub(/\?.*/, '') # ignore GET params
+      case condition
+      when :inclusive, nil
+        !request.fullpath.match(/^#{Regexp.escape(url).chomp('/')}(\/.*|\?.*)?$/).blank?
+      when :exclusive
+        !request.fullpath.match(/^#{Regexp.escape(url)}\/?(\?.*)?$/).blank?
+      when Regexp
+        !request.fullpath.match(condition).blank?
+      when Array
+        controllers = [*condition[0]]
+        actions = [*condition[1]]
+        (controllers.blank? || controllers.member?(params[:controller])) &&
+        (actions.blank? || actions.member?(params[:action]))
+      when TrueClass
+        true
+      when FalseClass
+        false
+      end
+    end
+  end
+
+  # Generates a visible title for the current context
+  def current_context_title(tag=:span, separator = ' | ')
+    if %(sites pages layouts snippets files).include?(controller_name)
+      instance = eval("@#{controller_name.singularize}")
+      text = [t("cms/#{controller_name.singularize}", :scope => 'activerecord.models'), (instance.nil? ? nil : instance.label)].compact.join(separator)
+      tag.nil? ? text : content_tag(tag, text)
+    else
+      ''
+    end
+  end
+
   # Override the
   def comfy_form_for(record, options = {}, &proc)
     options[:builder] = ComfortableMexicanSofa::FormBuilder
@@ -123,7 +172,7 @@ module ApplicationHelper
         action_url = action_url_method.concat "(:site_id => #{@site.id})"
       end
     end
-    "$('##{dom_id}').attr('href','#{eval(action_url)}');"
+    "$('##{dom_id}').attr('href','#{eval(action_url || action_url_method)}');"
   end
 
   # renders hidden fields with behavior to copy from the data-attribute=true field on submit

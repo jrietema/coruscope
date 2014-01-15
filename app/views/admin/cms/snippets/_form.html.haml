@@ -10,6 +10,9 @@
   = comfy_form_for @snippet, as: :snippet, url: { action: @snippet.new_record? ? :create : :update}, html: {multipart: true}, type: :vertical do |metaform|
     = metaform.text_field :identifier, :data => {:slug => true}
     = render :partial => 'admin/cms/categories/form', :object => metaform
+    - unless @snippet.new_record?
+      %button.btn.btn-small.btn-primary.pull-right
+        = t('.update')
 
 = render 'admin/cms/partials/snippet_form_after', :object => form
 
@@ -19,5 +22,6 @@
   = form.submit t(@snippet.new_record?? '.create' : '.update'), :class => 'btn btn-primary'
 
 - if request.xhr?
-  != javascript_tag do
+  :javascript
     CMS.codemirror();
+    $('#cms-current-context span').text('#{escape_javascript(current_context_title(nil))}')

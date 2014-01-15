@@ -1,10 +1,10 @@
 .tab-content.column-content
-  #sites-tree.tab-pane
-  #pages-tree.tab-pane.active
-  #layouts-tree.tab-pane
-  #snippets-tree.tab-pane
-  #files-tree.tab-pane
-  #meta_pane.tab-pane
+  #sites-tree.tab-pane{class: (controller_name == 'sites' && action_name != 'edit') ? 'active' : ''}
+  #pages-tree.tab-pane{class: (controller_name == 'pages' && action_name != 'edit') ? 'active' : ''}
+  #layouts-tree.tab-pane{class: (controller_name == 'layouts' && action_name != 'edit') ? 'active' : ''}
+  #snippets-tree.tab-pane{class: (controller_name == 'snippets' && action_name != 'edit') ? 'active' : ''}
+  #files-tree.tab-pane{class: (controller_name == 'files' && action_name != 'edit') ? 'active' : ''}
+  #meta_pane.tab-pane{class: action_name == 'edit' ? 'active' : ''}
     = yield :meta_pane
 
 - if @site && !@site.new_record?

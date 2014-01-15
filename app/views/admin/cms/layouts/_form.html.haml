@@ -26,8 +26,9 @@
   = data_copy_field_for :layout, :identifier, :slug
 
 - if request.xhr?
-  != javascript_tag do
+  :javascript
     CMS.codemirror();
+    $('#cms-current-context span').text('#{escape_javascript(current_context_title(nil))}')
 
 = render 'admin/cms/partials/layout_form_after', :object => form
 

@@ -16,6 +16,16 @@
     }
     .nav {
         width: 60%;
+        #cms-current-context {
+            margin-left: 3%;
+            margin-top: 10px;
+            span {
+                color: #fff !important;
+                background-color: #005580;
+                line-height: 0.8em;
+                padding: 5px 10px;
+            }
+        }
     }
 
 #coruscope
@@ -94,4 +104,13 @@ form.formatted
 
 .content-actions select {
     width: 100%;
+}
+
+/* Smaller Textareas */
+body#coruscope {
+    form#new_file .control-group textarea,
+    form#edit_file .control-group textarea {
+            width: 100%;
+            height: 180px;
+    }
 }
