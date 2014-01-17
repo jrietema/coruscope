@@ -106,8 +106,8 @@ module ApplicationHelper
 
   def fancytree_label_for(item)
     case item
-      when Cms::File
-        image_tag(item.file.url(:mini), class: :fullsize, alt: nil) + ' ' + item.label
+      when Cms::File # need not be an image!
+        item.is_image? ? image_tag(item.file.url(:mini), class: :fullsize, alt: nil) + ' ' + item.label : item.label
       else
         item.label
     end
