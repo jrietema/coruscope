@@ -1,8 +1,10 @@
-- update the navbar 'new' link to current model type after AJAX requests
 - enable CodeMirror as an optional HTML editor for textareas
-- ajaxify snippets and files
 - use category browsing for snippets and files
 - use HTML in tree node labels to add actions/buttons, not the activate method itself
 - improve layout of all devise forms to utilize bootstrap and enable i18n
 - restrict Cms::Layout#app_layouts_for_select to boilerplate layout path
 - move keywords and description to site attributes/columns
+- display image resolutions available in the image meta (and original resolution in central pane)
+- better asset urls for files
+- implement a version of fancytree as a select analog
+- update wysihtml5 to utilize an advanced file dialog with select options
