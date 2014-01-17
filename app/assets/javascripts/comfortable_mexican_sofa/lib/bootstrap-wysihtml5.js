@@ -72,7 +72,7 @@
                 "<div class='modal-body'>" +
                 "<div class=\"fancytree_chooser\" class='chooser_wrapper'>" +
                 "<div class='image_chooser images'></div>" +
-                "<div class=\"image_upload\">" +
+                "<div class=\"image_upload\" style=\"display: none;\">" +
                 "<h4>Upload</h4>" +
                 "<input name=\"file[file][]\" id=\"image_file\" type=\"file\">" +
                 "</div>" +
