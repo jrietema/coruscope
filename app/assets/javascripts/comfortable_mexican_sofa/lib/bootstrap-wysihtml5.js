@@ -439,7 +439,10 @@
                 "wysiwyg-color-blue" : 1,
                 "wysiwyg-color-teal" : 1,
                 "wysiwyg-color-aqua" : 1,
-                "wysiwyg-color-orange" : 1
+                "wysiwyg-color-orange" : 1,
+                "centered": 1,
+                "float-left": 1,
+                "float-right": 1
             },
             tags: {
                 "b":  {},
@@ -463,8 +466,7 @@
                 },
                 "a":  {
                     set_attributes: {
-                        target: "_blank",
-                        rel:    "nofollow"
+                        target: "_blank"
                     },
                     check_attributes: {
                         href:   "url" // important to avoid XSS

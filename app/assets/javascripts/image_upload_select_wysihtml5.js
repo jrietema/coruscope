@@ -9,11 +9,7 @@ wysiHelpers = {
   getImageTemplate: function() {
     /* this is what goes in the wysiwyg content after the image has been chosen */
     var tmpl;
-    var imgEntry = "<img src='<%= url %>' alt='<%= caption %>'>";
-    tmpl = _.template("<div class='img <%= klass %>'>" +
-                      imgEntry +
-                      "<span class=\"caption\"><%= caption %></span>" +
-                      "</div>");
+    tmpl = _.template("<img class='<%= klass %>' src='<%= url %>' alt='<%= caption %>'>");
     return tmpl;
   }
 };

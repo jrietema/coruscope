@@ -38,16 +38,22 @@ body h3 {
 .float-right {
   float: right;
 }
-.img.centered {
-  width: 100%;
-  text-align: center;
-  img {
-    width: auto;
-    margin: 0 auto;
-  }
+img.float-right,
+img.float-left {
+  display: inline;
+  max-width: 31.914%;
 }
-.img .caption {
-  display: none;
+img.float-right {
+  margin: 0.375em 0 0.375em 0.8em;
+}
+img.float-left {
+  margin: 0.375em 0.8em 0.375em 0;
+}
+img.centered {
+  width: 100%;
+  margin: 0.5em auto;
+  float: left;
+  clear: both;
 }
 
 section {
