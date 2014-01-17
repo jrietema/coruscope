@@ -70,8 +70,9 @@ module ApplicationHelper
     end
   end
 
-  def fancytree_grouped_hash(groups, items, branch_id=nil, top_node=true, new_link=true)
+  def fancytree_grouped_hash(groups, items, branch_id=nil, top_node=true, new_link=true, &labelling)
     item_model = groups[branch_id].first.grouped_type.underscore.split('/').last unless groups[branch_id].empty?
+    labelling = ->(item) { fancytree_label_for(item) } unless block_given?
     collection = groups[branch_id].map do |group|
       child_groups = groups[group.id] || []
       page_hash = { title: group.label, key: group.id, href: method("edit_admin_cms_site_group_path".sub('site_site','site')).call({site_id: @site.id, id: group.id, format: :js}) }
@@ -83,7 +84,7 @@ module ApplicationHelper
       child_items = items[group.id] || []
       unless child_items.empty?
         child_items.each do |item|
-          child_contents << { title: fancytree_label_for(item), key: item.id, href: method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: @site.id, id: item.id, format: :js})}
+          child_contents << { title: labelling.call(item), key: item.id, href: method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: @site.id, id: item.id, format: :js})}
         end
       end
       page_hash.merge!({folder: true, children: child_contents})
@@ -102,6 +103,11 @@ module ApplicationHelper
       collection << { title: html }
     end
     collection
+  end
+
+  # simplify standard calls for grouped items
+  def fancytree_group_select_hash(groups, items, labelling)
+    fancytree_grouped_hash(groups, items, nil, true, true, &labelling)
   end
 
   def fancytree_label_for(item)

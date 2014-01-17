@@ -14,8 +14,9 @@ Coruscope::Application.routes.draw do
     namespace :cms, as: :admin_cms, path: 'admin', :except => [:show, :new] do
       resources :sites do
         resources :groups do
-          get :files,     :on => :collection
-          get :snippets,  :on => :collection
+          get :files,     on: :collection
+          get :snippets,  on: :collection
+          get :images,    on: :collection
         end
       end
       get 'sites/:site_id/file/groups/new', to: 'groups#new', as: :new_file_group, defaults: { grouped_type: 'Cms::File'}

@@ -84,3 +84,40 @@ function enableFancytree(selector, dataUrl) {
         }
     })
 };
+
+/* A select-like element */
+function enableFancychooser(selector, dataUrl) {
+    $(selector).fancytree({
+        minExpandLevel: 1,
+        // prevent navigation on re-load
+        postinit: function(isReloading, isError) {
+            this.reactivate();
+        },
+        extensions: [
+            // , 'persist'
+        ],
+        source: { url: dataUrl},
+        //[
+        //{ title: '#{t('admin.cms.base.sites')}', href: '#{admin_cms_sites_path}' },
+        //{ title: '#{@site.label} actions', key: 'actions', folder: true, children:
+        //[
+        //{ title: '#{t('admin.cms.base.layouts')}', href: '#{admin_cms_site_layouts_path(@site)}'},
+        //{ title: '#{t('admin.cms.base.pages')}', href: '#{admin_cms_site_pages_path(@site)}'},
+        //{ title: '#{t('admin.cms.base.snippets')}', href: '#{admin_cms_site_snippets_path(@site)}'},
+        //{ title: '#{t('admin.cms.base.files')}', href: '#{admin_cms_site_files_path(@site)}'}
+        //]
+        //}],
+        /*,
+        click: function(event, data) {
+            var node = data.node;
+            // Use href attribute to load the content
+            if( node.data.href ){
+                // Open target via AJAX and update dynamic-content
+                $.get(node.data.href, function(data) {
+                    $('#dynamic-content').html(data);
+                });
+            }
+        }
+        */
+    })
+};

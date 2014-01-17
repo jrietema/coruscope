@@ -15,6 +15,12 @@ class Admin::Cms::GroupsController < Admin::Cms::BaseController
     render :action => :index, :layout => false
   end
 
+  def images
+    @items = @site.files.includes(:categories).for_category(params[:category]).where("file_content_type LIKE 'image%'").order('cms_files.position').group_by(&:group_id)
+    groups_by_parent('Cms::File')
+    render :template => '/admin/cms/groups/images', :layout => false
+  end
+
   def new
     render
   end
