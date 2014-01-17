@@ -1,6 +1,6 @@
 /* Image Modal Dialog for upload or selection of existing images.
    This was adapted from Bass Jobsen's mod of wysihtml5 image upload
-   and Rcode5's modification thereof (github.com/rcode5/image-wysigyg-sample).
+   and Rcode5's modification thereof (github.com/rcode5/image-wysiwyg-sample).
  */
 
 var xhrFetchingImages;
@@ -73,17 +73,27 @@ bootWysiOverrides = {
         chooserPreview.hide();
         chooserPreview.attr('src','');
         insertImageModal.find('.uploadresult').html('');
-        $('#file1').val('');
+        $('#image_file').val('');
         insertImageModal.find('.fancytree_chooser').show();
         insertImageModal.modal('hide');
       }
+    };
+
+    var previewImageFile = function(imgData) {
+        chooserPreview.attr('src',imageData.url);
+        insertImageModal.find('.fancytree_chooser').hide();
+        chooserPreview.show();
+        if(imageData.url2) {
+            chooserResolutionSelect.show();
+        }
+        chooserOrientationSelect.show();
     };
 
     chooserSave.on('click', function(ev) {
       insertImage();
     });
     
-    chooser.on('click', '.fancytree-exp-n', function(ev) {
+    chooser.on('click', '.fancytree-node:not(.fancytree-folder)', function(ev) {
       var imageData = getDataFromChosen($(ev.currentTarget));
       chooserPreview.attr('src',imageData.url);
       insertImageModal.find('.fancytree_chooser').hide();
@@ -92,16 +102,6 @@ bootWysiOverrides = {
           chooserResolutionSelect.show();
       }
       chooserOrientationSelect.show();
-      // alert('You chose: ' +$item.html());
-      /*
-      insertImage($imageData);
-      insertImageModal.modal('hide');
-      $('#uploadresult').html('');
-      $('#image_chooser_preview').attr('src','');
-      $('#resolution_select').hide();
-      $('#orientation_select').hide();
-      $('#file1').val('');
-      */
     });
     
     insertImageModal.on('hide', function() {
@@ -113,8 +113,16 @@ bootWysiOverrides = {
       
       if (!activeButton) {
         insertImageModal.modal('show');
+
+          chooserResolutionSelect.hide();
+          chooserOrientationSelect.hide();
+          chooserPreview.hide();
+          chooserPreview.attr('src','');
+          insertImageModal.find('.uploadresult').html('');
+          $('#image_file').val('');
+          insertImageModal.find('.fancytree_chooser').show();
         
-        $('#file1').change(function() {
+        $('#image_file').change(function() {
           $(this).uploadimage('/upload', function(res) {
             if(res.status)
             {

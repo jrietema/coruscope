@@ -79,7 +79,7 @@ module ApplicationHelper
       # add child groups/folders
       child_contents = []
       unless child_groups.empty?
-        child_contents = (fancytree_grouped_hash(groups, items, group.id, false))
+        child_contents = (fancytree_grouped_hash(groups, items, group.id, false, false, &labelling))
       end
       child_items = items[group.id] || []
       unless child_items.empty?
