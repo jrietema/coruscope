@@ -49,8 +49,10 @@ de:
       cms/file:
         file: Datei
         description: Beschreibung
+        group_id: Ordner
       cms/snippet:
         identifier: Identifikator
+        group_id: Ordner
       cms/group:
         label: Name
         description: Beschreibung
@@ -103,7 +105,7 @@ de:
     files:
       created: Datei hochgeladen
       creation_failure: Fehler beim hochladen der Datei
-      updated: Datei hochgeladen
+      updated: Datei aktualisiert
       update_failure: Fehler beim hochladen der Datei
       deleted: Datei gelöscht
       not_found: Datei nicht gefunden

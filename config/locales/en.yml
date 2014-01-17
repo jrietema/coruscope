@@ -40,8 +40,10 @@ en:
       cms/file:
         file: File
         description: Description
+        group_id: Folder
       cms/snippet:
         identifier: Identifier
+        group_id: Folder
       cms/group:
         label: Label
         decription: Description

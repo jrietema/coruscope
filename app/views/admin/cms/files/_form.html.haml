@@ -2,13 +2,21 @@
 
 = form.text_field :label
 = form.file_field :file, :multiple => @file.new_record?
+- if (options = simple_options_group_select_for(@file)).present?
+  = form.select :group_id, options
 
 - unless @file.new_record?
   = form.element t('.current_file') do
-    = image_tag @file.file.url if @file.is_image?
+    = image_tag @file.file.url, class: :image_preview if @file.is_image?
     = link_to @file.file.url, @file.file.url, :target => '_blank'
 
-= form.text_area :description, cols: 8
+= content_for_ajax :meta_pane do
+  = comfy_form_for @file, as: :file, url: { action: :update}, type: :vertical do |metaform|
+    = render :partial => 'admin/cms/categories/form', :object => metaform
+    = form.text_area :description, cols: 8
+    - unless @file.new_record?
+      %button.btn.btn-small.btn-primary.pull-right
+        = t('.update')
 
 = render :partial => 'admin/cms/categories/form', :object => form
 

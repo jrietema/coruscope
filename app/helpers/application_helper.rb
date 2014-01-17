@@ -83,7 +83,7 @@ module ApplicationHelper
       child_items = items[group.id] || []
       unless child_items.empty?
         child_items.each do |item|
-          child_contents << { title: item.label, key: item.id, href: method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: @site.id, id: item.id, format: :js})}
+          child_contents << { title: fancytree_label_for(item), key: item.id, href: method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: @site.id, id: item.id, format: :js})}
         end
       end
       page_hash.merge!({folder: true, children: child_contents})
@@ -102,6 +102,15 @@ module ApplicationHelper
       collection << { title: html }
     end
     collection
+  end
+
+  def fancytree_label_for(item)
+    case item
+      when Cms::File
+        image_tag(item.file.url(:mini), class: :fullsize, alt: nil) + ' ' + item.label
+      else
+        item.label
+    end
   end
 
   # any collection is transformed into a hash ordered by parent_id, for building fancytrees
@@ -128,18 +137,23 @@ module ApplicationHelper
   end
 
   def options_for_group_select(site, from=nil, type=nil, current=nil, depth=0, exclude_self=true, spacer=' -')
-    type = from.grouped_type unless from.nil?
+    type ||= from.grouped_type unless from.nil?
     return [] if type.nil?
-    current ||= site.groups.root.where(grouped_type: type).first || from
+    current ||= site.groups.root.where(grouped_type: type).first
     return [] if (current == from && exclude_self) || !current
     out = []
     out << [ "#{spacer*depth}#{current.label}", current.id ] unless current == from
-    child_pages = Cms::Group.all.where(parent_id: current.id, site_id: site.id)
+    child_pages = Cms::Group.all.where(parent_id: current.id, site_id: site.id, grouped_type: type)
     child_pages.each do |child|
-      opt = options_for_group_select(site, from, nil, child, depth + 1, exclude_self, spacer)
+      opt = options_for_group_select(site, from, type, child, depth + 1, exclude_self, spacer)
       out += opt
     end if child_pages.size.nonzero?
     return out.compact
+  end
+
+  # much simpler call with defaults to options_for_group_select
+  def simple_options_group_select_for(obj)
+    options_for_group_select(obj.site || @site, nil, obj.class.name, nil, 0, false)
   end
 
 

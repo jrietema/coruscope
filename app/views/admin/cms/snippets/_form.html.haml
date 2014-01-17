@@ -9,6 +9,8 @@
 = content_for_ajax :meta_pane do
   = comfy_form_for @snippet, as: :snippet, url: { action: @snippet.new_record? ? :create : :update}, html: {multipart: true}, type: :vertical do |metaform|
     = metaform.text_field :identifier, :data => {:slug => true}
+    - if (options = simple_options_group_select_for(@snippet)).present?
+      = metaform.select :group_id, options
     = render :partial => 'admin/cms/categories/form', :object => metaform
     - unless @snippet.new_record?
       %button.btn.btn-small.btn-primary.pull-right
