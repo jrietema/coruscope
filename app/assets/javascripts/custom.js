@@ -4,8 +4,12 @@ function initPageNav(list, selector, offset) {
     var idx = 0;
     var navId = $(list).parent('div, nav').attr('id');
     $(selector).each(function() {
-       var name = ($(this).html().trim() || '').replace(/[\s,.;-]+.*$/,'');
-       if(name == '') { return; }
+       var tokens = ($(this).html().trim() || '').replace(/[-\s,.;]+/,'-').split('-');
+       var name = tokens[0];
+       if(tokens.length == 0 || name == '') { return; }
+       if(tokens.length == 2) {
+           name = tokens[0] + ' ' + tokens[1];
+       }
        var id = idx++;
        var newLink = document.createElement('a');
        $(newLink).attr('href', '#section' + id);

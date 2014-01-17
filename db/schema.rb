@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131030191344) do
+ActiveRecord::Schema.define(version: 20140116145747) do
 
   create_table "cms_blocks", force: true do |t|
     t.integer  "page_id",                     null: false
@@ -50,12 +50,24 @@ ActiveRecord::Schema.define(version: 20131030191344) do
     t.integer  "position",                       default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id"
   end
 
   add_index "cms_files", ["site_id", "block_id"], name: "index_cms_files_on_site_id_and_block_id", using: :btree
   add_index "cms_files", ["site_id", "file_file_name"], name: "index_cms_files_on_site_id_and_file_file_name", using: :btree
   add_index "cms_files", ["site_id", "label"], name: "index_cms_files_on_site_id_and_label", using: :btree
   add_index "cms_files", ["site_id", "position"], name: "index_cms_files_on_site_id_and_position", using: :btree
+
+  create_table "cms_groups", force: true do |t|
+    t.string  "label",                                   null: false
+    t.string  "grouped_type",                            null: false
+    t.integer "site_id",                                 null: false
+    t.integer "parent_id"
+    t.integer "position",                    default: 0
+    t.string  "description",    limit: 2048
+    t.text    "presets"
+    t.integer "children_count"
+  end
 
   create_table "cms_layouts", force: true do |t|
     t.integer  "site_id",                                     null: false
@@ -125,6 +137,7 @@ ActiveRecord::Schema.define(version: 20131030191344) do
     t.boolean  "is_shared",                   default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id"
   end
 
   add_index "cms_snippets", ["site_id", "identifier"], name: "index_cms_snippets_on_site_id_and_identifier", unique: true, using: :btree

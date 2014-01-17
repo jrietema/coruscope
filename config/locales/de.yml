@@ -16,6 +16,7 @@ de:
       cms/page: Seite
       cms/snippet: Baustein
       cms/file: Datei
+      cms/group: Ordner
     attributes:
       cms/site:
         identifier: Identifikator
@@ -50,6 +51,10 @@ de:
         description: Beschreibung
       cms/snippet:
         identifier: Identifikator
+      cms/group:
+        label: Name
+        description: Beschreibung
+        presets: Einstellungen
 
   # -- Controllers ----------------------------------------------------------
   cms:
@@ -96,9 +101,9 @@ de:
       not_found: Revision nicht gefunden
 
     files:
-      created: Datei hochgeladet
+      created: Datei hochgeladen
       creation_failure: Fehler beim hochladen der Datei
-      updated: Datei hochgeladet
+      updated: Datei hochgeladen
       update_failure: Fehler beim hochladen der Datei
       deleted: Datei gelöscht
       not_found: Datei nicht gefunden
@@ -107,6 +112,14 @@ de:
       site_not_found: Web-Site nicht gefunden
       layout_not_found: Layout nicht gefunden
       page_not_found: Seite nicht gefunden
+
+    groups:
+      created: Ordner erstellt
+      creation_failure: Fehler beim erstellen des Ordners
+      updated: Ordner aktualisiert
+      update_failure: Fehler beim aktualisieren des Ordners
+      deleted: Ordner gelöscht
+      not_found: Ordner nicht gefunden
 
   # -- Views ----------------------------------------------------------------
   admin:
@@ -249,3 +262,11 @@ de:
           insert: Bild einfügen
         link:
           create: Link erstellen
+
+      groups:
+        new_link: Neuen Ordner erstellen
+        new:
+          title: Neuer Ordner
+        form:
+          create: Ordner erstellen
+          update: Ordner aktualisieren

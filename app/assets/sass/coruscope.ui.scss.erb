@@ -27,6 +27,9 @@
             }
         }
     }
+  #content {
+      min-height: 610px;
+  }
 
 #coruscope
   textarea.CodeMirror {
@@ -51,9 +54,8 @@
         position: absolute;
         top: 2px;
         right: 2px;
-        width: 60%;
+        width: 40%;
         z-index: 0;
-        text-align: right;
         a {
             z-index: 80;
         }
@@ -95,6 +97,13 @@ form.formatted
     .files {
         margin-top: 0.3em;
     }
+}
+
+#meta_pane
+    form.formatted
+        .control-group
+            textarea {
+                max-height: 160px;
 }
 
 /* Restyle content-actions (right-hand column moved into left) */

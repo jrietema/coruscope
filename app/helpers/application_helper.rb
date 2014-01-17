@@ -62,12 +62,46 @@ module ApplicationHelper
     item_model = pages[branch_id].first.class.name.underscore.split('/').last unless pages[branch_id].empty?
     pages[branch_id].map do |page|
       child_pages = pages[page.id] || []
-      page_hash = { title: page.label, key: page.id, href: method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: @site.id, id: page.id, format: :js}) }
+      page_hash = { title: page.label, key: page.id, href: '' }#method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: @site.id, id: page.id, format: :js}) }
       unless child_pages.empty?
         page_hash.merge!({ folder: true, children: fancytree_pages_hash(pages, page.id)})
       end
       page_hash
     end
+  end
+
+  def fancytree_grouped_hash(groups, items, branch_id=nil, top_node=true)
+    item_model = groups[branch_id].first.grouped_type.underscore.split('/').last unless groups[branch_id].empty?
+    collection = groups[branch_id].map do |group|
+      child_groups = groups[group.id] || []
+      page_hash = { title: group.label, key: group.id, href: method("edit_admin_cms_site_group_path".sub('site_site','site')).call({site_id: @site.id, id: group.id, format: :js}) }
+      # add child groups/folders
+      child_contents = []
+      unless child_groups.empty?
+        child_contents = (fancytree_grouped_hash(groups, items, group.id, false))
+      end
+      child_items = items[group.id] || []
+      unless child_items.empty?
+        child_items.each do |item|
+          child_contents << { title: item.label, key: item.id, href: method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: @site.id, id: item.id, format: :js})}
+        end
+      end
+      page_hash.merge!({folder: true, children: child_contents})
+      if top_node
+        # just return the children, skip the root node
+        child_contents
+      else
+        # page and collection as children
+        page_hash
+      end
+    end
+    if top_node
+      collection = collection.first # remove array nesting
+      grouped_type = groups[branch_id].first.grouped_type.underscore.split('/').last
+      html = link_to content_tag(:i, '', :class => 'icon-plus').concat(t(:new_link, :scope => 'admin.cms.groups')), eval("admin_cms_new_#{grouped_type}_group_path(site_id: #{@site.id})")
+      collection << { title: html }
+    end
+    collection
   end
 
   # any collection is transformed into a hash ordered by parent_id, for building fancytrees
@@ -85,10 +119,24 @@ module ApplicationHelper
     return [] if (current_page == from_page && exclude_self) || !current_page
     out = []
     out << [ "#{spacer*depth}#{current_page.label}", current_page.id ] unless current_page == from_page
-    child_pages = Cms::Page.all.where(parent_id: current_page.id)
+    child_pages = Cms::Page.all.where(parent_id: current_page.id, site_id: site.id)
     child_pages.each do |child|
       opt = options_for_page_select(site, from_page, child, depth + 1, exclude_self, spacer)
-      puts "Child-page: #{child.label} - with #{child.children.size} subpages:\n#{opt}"
+      out += opt
+    end if child_pages.size.nonzero?
+    return out.compact
+  end
+
+  def options_for_group_select(site, from=nil, type=nil, current=nil, depth=0, exclude_self=true, spacer=' -')
+    type = from.grouped_type unless from.nil?
+    return [] if type.nil?
+    current ||= site.groups.root.where(grouped_type: type).first || from
+    return [] if (current == from && exclude_self) || !current
+    out = []
+    out << [ "#{spacer*depth}#{current.label}", current.id ] unless current == from
+    child_pages = Cms::Group.all.where(parent_id: current.id, site_id: site.id)
+    child_pages.each do |child|
+      opt = options_for_group_select(site, from, nil, child, depth + 1, exclude_self, spacer)
       out += opt
     end if child_pages.size.nonzero?
     return out.compact

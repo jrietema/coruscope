@@ -15,11 +15,11 @@
 
 - unless Cms::Snippet.where(site_id: @site.id).empty?
   != javascript_tag do
-    enableFancytree('#snippets-tree', '#{admin_cms_site_snippets_url(site_id: @site.id, format: :json)}');
+    enableFancytree('#snippets-tree', '#{snippets_admin_cms_site_groups_url(site_id: @site.id, format: :json)}');
 
 - unless Cms::File.where(site_id: @site.id).empty?
   != javascript_tag do
-    enableFancytree('#files-tree', '#{admin_cms_site_files_url(site_id: @site.id, format: :json)}');
+    enableFancytree('#files-tree', '#{files_admin_cms_site_groups_url(site_id: @site.id, format: :json)}');
 
 .content-actions
   = yield :right_column

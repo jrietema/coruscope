@@ -16,6 +16,7 @@ en:
       cms/page: Page
       cms/snippet: Snippet
       cms/file: File
+      cms/group: Folder
     attributes:
       cms/site:
         identifier: Identifier
@@ -41,6 +42,10 @@ en:
         description: Description
       cms/snippet:
         identifier: Identifier
+      cms/group:
+        label: Label
+        decription: Description
+        presets: Presets
 
   # -- Controllers ----------------------------------------------------------
   cms:
@@ -98,6 +103,14 @@ en:
       site_not_found: Site Not Found
       layout_not_found: Layout Not Found
       page_not_found: Page Not Found
+
+    groups:
+      created: Folder created
+      creation_failure: Failed to create folder
+      updated: Folder updated
+      update_failure: Failed to update folder
+      deleted: Folder deleted
+      not_found: Folder not found
 
   # -- Views ----------------------------------------------------------------
   admin:
@@ -240,4 +253,12 @@ en:
           insert: Insert Image
         link:
           create: Create Link
+
+      groups:
+        new_link: Create new folder
+        new:
+          title: New Folder
+        form:
+          create: Create folder
+          update: Update folder
 

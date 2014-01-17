@@ -1,0 +1,6 @@
+.page-header
+  %h4= t('.title') + ' (' + @group.grouped_type.constantize.model_name.human + ')'
+
+%div
+  = comfy_form_for @group, :as => :group, :url => {:action => :create}, type: :vertical do |form|
+    = render form

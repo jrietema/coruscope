@@ -27,12 +27,19 @@ class Cms::File < ActiveRecord::Base
   belongs_to :site
   belongs_to :block
 
+  belongs_to :group,
+             inverse_of: :items
+
   # -- Validations ----------------------------------------------------------
   validates :site_id,
             :presence   => true
   validates_attachment_presence :file
   validates :file_file_name,
             :uniqueness => {:scope => :site_id}
+
+  validates_inclusion_of :site_id,
+            if: ->(i) { !i.group.nil? },
+            in: ->(i) { [i.group.site_id] }
 
   # -- Callbacks ------------------------------------------------------------
   before_save   :assign_label

@@ -9,6 +9,20 @@ Coruscope::Application.routes.draw do
   end
 
   comfy_route :cms_admin, :path => '/admin'
+
+  scope :module => :admin do
+    namespace :cms, as: :admin_cms, path: 'admin', :except => [:show, :new] do
+      resources :sites do
+        resources :groups do
+          get :files,     :on => :collection
+          get :snippets,  :on => :collection
+        end
+      end
+      get 'sites/:site_id/file/groups/new', to: 'groups#new', as: :new_file_group, defaults: { grouped_type: 'Cms::File'}
+      get 'sites/:site_id/snippet/groups/new', to: 'groups#new', as: :new_snippet_group, defaults: { grouped_type: 'Cms::Snippet'}
+    end
+  end
+
   comfy_route :cms, :path => '/', :sitemap => false
 
   # The priority is based upon order of creation: first created -> highest priority.

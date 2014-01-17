@@ -1,0 +1,16 @@
+= form.text_field :label
+= form.hidden_field :grouped_type
+
+= content_for_ajax :meta_pane do
+  = comfy_form_for @group, as: :group, url: {action: action_name}, type: :vertical do |metaform|
+    = metaform.text_area :description, rows: 6
+    = metaform.text_area :presets, rows: 6
+    - unless @group.new_record?
+      %button.btn.btn-small.btn-primary.pull-right
+        = t('.update')
+
+- if (options = options_for_group_select(@site, @group)).present?
+  = form.select :parent_id, options
+
+.form-actions
+  = form.submit t(@group.new_record?? '.create' : '.update'), :class => 'btn btn-primary'
