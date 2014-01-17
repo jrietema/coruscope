@@ -263,4 +263,5 @@ en:
         form:
           create: Create folder
           update: Update folder
+        none: Kein Ordner
 

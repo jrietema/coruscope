@@ -142,7 +142,8 @@ module ApplicationHelper
     current ||= site.groups.root.where(grouped_type: type).first
     return [] if (current == from && exclude_self) || !current
     out = []
-    out << [ "#{spacer*depth}#{current.label}", current.id ] unless current == from
+    label = current.parent_id.nil? ? t(:none, :scope => 'admin.cms.groups') : current.label
+    out << [ "#{spacer*depth}#{label}", current.id ] unless current == from
     child_pages = Cms::Group.all.where(parent_id: current.id, site_id: site.id, grouped_type: type)
     child_pages.each do |child|
       opt = options_for_group_select(site, from, type, child, depth + 1, exclude_self, spacer)
