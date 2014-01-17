@@ -62,7 +62,7 @@ module ApplicationHelper
     item_model = pages[branch_id].first.class.name.underscore.split('/').last unless pages[branch_id].empty?
     pages[branch_id].map do |page|
       child_pages = pages[page.id] || []
-      page_hash = { title: page.label, key: page.id, href: '' }#method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: @site.id, id: page.id, format: :js}) }
+      page_hash = { title: page.label, key: page.id, href: method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: @site.id, id: page.id, format: :js}) }
       unless child_pages.empty?
         page_hash.merge!({ folder: true, children: fancytree_pages_hash(pages, page.id)})
       end
@@ -70,7 +70,7 @@ module ApplicationHelper
     end
   end
 
-  def fancytree_grouped_hash(groups, items, branch_id=nil, top_node=true)
+  def fancytree_grouped_hash(groups, items, branch_id=nil, top_node=true, new_link=true)
     item_model = groups[branch_id].first.grouped_type.underscore.split('/').last unless groups[branch_id].empty?
     collection = groups[branch_id].map do |group|
       child_groups = groups[group.id] || []
@@ -95,7 +95,7 @@ module ApplicationHelper
         page_hash
       end
     end
-    if top_node
+    if top_node && new_link
       collection = collection.first # remove array nesting
       grouped_type = groups[branch_id].first.grouped_type.underscore.split('/').last
       html = link_to content_tag(:i, '', :class => 'icon-plus').concat(t(:new_link, :scope => 'admin.cms.groups')), eval("admin_cms_new_#{grouped_type}_group_path(site_id: #{@site.id})")
