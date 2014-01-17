@@ -48,6 +48,7 @@ en:
         label: Label
         decription: Description
         presets: Presets
+        parent_id: Containing Folder
 
   # -- Controllers ----------------------------------------------------------
   cms:

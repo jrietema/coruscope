@@ -72,12 +72,14 @@
                 "<div class='modal-body'>" +
                 "<div class=\"fancytree_chooser\" class='chooser_wrapper'>" +
                 "<div class='image_chooser images'></div>" +
-                "<h4>Or Upload one to insert</h4>" +
-                "<input name=\"file\" id=\"file1\" type=\"file\">" +
+                "<div class=\"image_upload\">" +
+                "<h4>Upload</h4>" +
+                "<input name=\"file[file][]\" id=\"image_file\" type=\"file\">" +
+                "</div>" +
                 "</div>" +
                 "<div class=\"uploadresult\"></div>" +
                 "</div>" +
-                "<img class=\"image_chooser_preview\" src=\"\"/>" +
+                "<img class=\"image_chooser_preview img-polaroid\" src=\"\"/>" +
                 "<div class=\"resolution_select\" style=\"display: none;\">" +
                 "<form class=\"formatted\"><div class=\"control-group\">" +
                 "<label for=\"resized_image_resolution\"><input type=\"radio\" class=\"resized_image_resolution\" name=\"image_resolution\" value=\"resized\" checked/>resized Resolution (640x480)</label>" +

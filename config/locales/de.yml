@@ -57,6 +57,7 @@ de:
         label: Name
         description: Beschreibung
         presets: Einstellungen
+        parent_id: Übergeordneter Ordner
 
   # -- Controllers ----------------------------------------------------------
   cms:

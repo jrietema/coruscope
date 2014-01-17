@@ -57,7 +57,7 @@ window.CMS.wysiwyg = ->
     $(element).wysihtml5
       html:         true
       color:        false
-      stylesheets:  []
+      stylesheets:  ['<%= stylesheet_path(:ail) %>']
       locale:       'de-DE'
 
 

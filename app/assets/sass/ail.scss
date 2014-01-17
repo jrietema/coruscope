@@ -32,6 +32,24 @@ body h3 {
   color: #000;
 }
 
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.img.centered {
+  width: 100%;
+  text-align: center;
+  img {
+    width: auto;
+    margin: 0 auto;
+  }
+}
+.img .caption {
+  display: none;
+}
+
 section {
   div {
     font-size: 1.12em;

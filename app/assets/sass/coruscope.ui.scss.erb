@@ -47,14 +47,22 @@
             max-height: 18px;
 }
 
-.bootstrap-wysihtml5-insert-image-modal
+.bootstrap-wysihtml5-insert-image-modal {
+    padding: 0 16px;
+    label {
+        margin-top: 0.33em;
+        > input[type='radio'] {
+            margin-right: 0.5em;
+            margin-top: -3px;
+        }
+    }
     .image_chooser {
         max-height: 240px;
         overflow-y: auto;
         > ul > li > .fancytree-lastsib {
             display: none;
         }
-}
+    }
     .image_chooser_preview {
         max-height: 240px;
         max-width: 480px;
@@ -63,6 +71,7 @@
     .image_orientation_select {
         max-width: 50%;
     }
+}
 
 #coruscope
   textarea.CodeMirror {
