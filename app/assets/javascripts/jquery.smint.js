@@ -20,6 +20,7 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			$smintItems = $smint.find('a'),
 			$window = $(window),
 			settings = $.extend({}, $.fn.smint.defaults, options),
+            $performScrollAction = false,
 			// Set the variables needed
 			optionLocs = [],
 			lastScrollTop = 0,
@@ -28,6 +29,12 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			curi = 0,
             verticalOffset = options.verticalOffset || 0,
 			stickyTop = $smint.offset().top - verticalOffset;
+
+        var removeActive = function() {
+            $smintItems.each(function(){
+                $(this).parent('li').removeClass('active');
+            });
+        };
 
 		var stickyMenu = function(scrollingDown) {
 			// current distance top
@@ -48,16 +55,18 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			//	$smint.css({ 'position': 'absolute', 'top': stickyTop, 'left': 'auto' }).removeClass('fxd');
 			// }
 
+            /*
+
 			if (!scrollingDown) {
 				while (true) {
 					if (scrollTop >= (optionLocs[curi].top - verticalOffset)) {
-						$smintItems.removeClass('active');
-						$('#' + optionLocs[curi].id).addClass('active');
+                        removeActive();
+						$('#' + optionLocs[curi].id).parent('li').addClass('active');
 						// The foll. makes the page very slow.
-						/*if(optionLocs[curi].hash != null && optionLocs[curi].hash != lastHash) {
-							window.location.hash = optionLocs[curi].hash;
-							lastHash = optionLocs[curi].hash;
-						}*/
+						//if(optionLocs[curi].hash != null && optionLocs[curi].hash != lastHash) {
+						//	window.location.hash = optionLocs[curi].hash;
+						//	lastHash = optionLocs[curi].hash;
+						//}
 						break;
 					}
 					curi--;
@@ -66,28 +75,34 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			else {
 				while (true) {
 					if (scrollTop < (optionLocs[curi].bottom - verticalOffset)) {
-						$smintItems.removeClass('active');
-						$('#' + optionLocs[curi].id).addClass('active');
+						removeActive();
+						$('#' + optionLocs[curi].id).parent('li').addClass('active');
 						// The foll. makes the page very slow.
-						/*if(optionLocs[curi].hash != null && optionLocs[curi].hash != lastHash) {
-							window.location.hash = optionLocs[curi].hash;
-							lastHash = optionLocs[curi].hash;
-						}*/
+						// if(optionLocs[curi].hash != null && optionLocs[curi].hash != lastHash) {
+						//	window.location.hash = optionLocs[curi].hash;
+						//	lastHash = optionLocs[curi].hash;
+						//}
 						break;
 					}
 					curi++;
 					//Added as failsafe, should not be needed.
-					/*
-					if(curi > optionLocs.length) {
-						break;
-					}
-					*/
+					//if(curi > optionLocs.length) {
+					//	break;
+					//}
 				}
 			}
+            */
 		};
 
 		// run function every time you scroll but not needed to be run for each of the $smintItems
 		$(window).scroll(function() {
+            if(!$performScrollAction) {
+                window.setTimeout(checkScrollAction, 150);
+            }
+            var $performScrollAction = true;
+        });
+
+        var checkScrollAction = function() {
 			//Get the direction of scroll
 			var st = $(this).scrollTop(),
 				scrollingDown = (st > lastScrollTop);
@@ -97,12 +112,13 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			// Check if at bottom of page, if so, add class to last <a> as sometimes the last div
 			// isnt long enough to scroll to the top of the page and trigger the active state.
 			if ($(window).scrollTop() + $(window).height() == $(document).height() - verticalOffset) {
-				$smintItems.removeClass('active');
-				$smintItems.last().addClass('active');
+				removeActive();
+				$smintItems.last().parent('li').addClass('active');
 			}
-		});
+            $performScrollAction = false;
+		};
 
-		$smintItems.first().addClass('active');
+		// $smintItems.first().addClass('active');
 
 		// This function assumes that the elements are already in a sorted manner.
 		$smintItems.each(function() {
