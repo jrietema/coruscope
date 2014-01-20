@@ -25,6 +25,13 @@
       = t('admin.cms.base.meta')
   != javascript_tag do
     $('.nav-tabs li a').each(function(i){if($(this).attr('href').match(/^#/)){$(this).attr('data-toggle', 'tab');}});
+    var initializedTabs = ['meta_pane'];
+    function initializeTreeTab(id) {
+    if(initializedTabs.indexOf(id) < 0) {
+    enableFancytree('#'+id, $('#'+id).data('src'));
+    initializedTabs[initializedTabs.length] = id;
+    }
+    }
 
 
   = cms_hook :navigation

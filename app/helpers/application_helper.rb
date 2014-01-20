@@ -241,7 +241,7 @@ module ApplicationHelper
         action_url = action_url_method.concat "(:site_id => #{@site.id})"
       end
     end
-    "$('##{dom_id}').attr('href','#{eval(action_url || action_url_method)}');"
+    "$('##{dom_id}').attr('href','#{eval(action_url || action_url_method)}'); initializeTreeTab('#{model}s-tree');"
   end
 
   # renders hidden fields with behavior to copy from the data-attribute=true field on submit
