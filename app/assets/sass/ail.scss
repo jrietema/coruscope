@@ -43,6 +43,10 @@ img.float-left {
   display: inline;
   max-width: 31.914%;
 }
+.four.columns img.float-right,
+.four.columns img.float-left {
+  max-width: auto;
+}
 img.float-right {
   margin: 0.375em 0 0.375em 0.8em;
 }
@@ -66,7 +70,7 @@ section {
     padding: 0 1em;
   }
   .eight.columns {
-    font-size: 0.75em;
+    font-size: 0.875em;
   }
   div.columns {
     margin: 1.5em 0;
@@ -381,7 +385,7 @@ nav#page_nav {
     padding: 0 7%;
     height: 2.563em;
     overflow-y: hidden;
-    background-color: $color_three;
+    background-color: $color_two;
     display: block;
     z-index: $page_nav_z;
     li {
@@ -706,3 +710,15 @@ li.field input + .picker {
   position: relative;
   top: 13px;
 }
+/*
+section.row .field input,
+section.row .field .adjoined {
+  font-size: 1em;
+  line-height: 1.2em;
+}
+
+section.row .field input[type='text'].wide,
+section.row .field textarea.wide {
+  max-width: 400px;
+}
+*/
