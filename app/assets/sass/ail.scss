@@ -45,7 +45,7 @@ img.float-left {
 }
 .four.columns img.float-right,
 .four.columns img.float-left {
-  max-width: auto;
+  max-width: auto !important;
 }
 img.float-right {
   margin: 0.375em 0 0.375em 0.8em;
@@ -64,6 +64,9 @@ section {
   div {
     font-size: 1.12em;
   }
+  header + div {
+    font-size: 0.875em;
+  }
   .four.columns,
   .six.columns {
     font-size: 0.75em;
@@ -71,6 +74,9 @@ section {
   }
   .eight.columns {
     font-size: 0.875em;
+  }
+  .centered {
+    text-align: center;
   }
   div.columns {
     margin: 1.5em 0;
@@ -138,11 +144,18 @@ body section div {
   }
 }
 
+body #content-top + section.row {
+  padding-top: 1.5em;
+}
+
 /* Table-Colors */
 
 table thead {
   background-color: $color_one;
   color: #FFFFFF;
+  th {
+    text-align: left;
+  }
 }
 table tbody tr td:first-child {
   background-color: #ddeff0;
@@ -390,11 +403,17 @@ nav#page_nav {
     z-index: $page_nav_z;
     li {
       border-left: 1px solid #fff;
-      padding: 0 0.45em 0.15em;
       margin: 0.75em 0;
       display: inline;
       float: left;
       z-index: $page_nav_z;
+      padding: 0 0.45em 0.15em;
+    }
+    li.active {
+      background-color: #fff;
+      a, a:hover {
+        color: $color_one;
+      }
     }
     li:first-child {
       border-left: 0;
