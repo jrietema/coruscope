@@ -45,7 +45,7 @@ img.float-left {
 }
 .four.columns img.float-right,
 .four.columns img.float-left {
-  max-width: none !important;
+  max-width: 100%;
 }
 img.float-right {
   margin: 0.375em 0 0.375em 0.8em;
@@ -77,6 +77,10 @@ section {
   }
   .centered {
     text-align: center;
+  }
+  .eight.columns + .four.columns {
+    float: right;
+    padding-right: 0px;
   }
   div.columns {
     margin: 1.5em 0;
@@ -144,7 +148,7 @@ body section div {
   }
 }
 
-body #content-top + section.row {
+body #content-top + section.row > div:first-child {
   padding-top: 1.5em;
 }
 
