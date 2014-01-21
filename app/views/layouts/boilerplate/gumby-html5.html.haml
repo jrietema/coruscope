@@ -29,5 +29,5 @@
   %meta{property: 'twitter:description', content: 'AiL - Spanischkurse, Volontariate, Praktika und High School Programme in verschiedensten Regionen Costa Ricas.'}
   %meta{property: 'twitter:image', content: cms_site_asset_path(@cms_site, "images/#{cms_site_handle(@cms_site)}.png")}
 
-%body{class: @cms_layout.identifier}
+%body{class: [@cms_layout.identifier, (@cms_page == @cms_site.pages.root) ? 'home' : 'subsection'].join(' ')}
   = yield

@@ -32,6 +32,18 @@ body h3 {
   color: #000;
 }
 
+body .row {
+  b {
+    font-weight: bold;
+  }
+  .columns i {
+    font-style: italic;
+  }
+  u {
+    text-decoration: underline;
+  }
+}
+
 .float-left {
   float: left;
 }
@@ -146,6 +158,18 @@ body section div {
     font-size: 0.8em;
     content: " #{$entypo-icon-fast-forward}";
   }
+}
+/*
+section.slideshow {
+  min-height: 330px;
+  overflow: auto;
+  margin-top: $header_height;
+}
+*/
+
+body #content-top {
+  display: block;
+  width: 100%;
 }
 
 body #content-top + section.row > div:first-child {
@@ -309,6 +333,7 @@ header {
   width: 100%;
   text-align: center;
   max-width: none !important;
+  padding-left: 5%;
   height: $nav_height;
   max-height: $nav_height;
   position: relative;
@@ -317,9 +342,16 @@ header {
   > ul {
     display: inline-block;
     width: auto;
-    margin: 0 auto;
+    margin: 0;
+    float: left;
     height: $nav_height;
+    min-width: 920px;
+    overflow-y: hidden;
+    li.home {
+      margin-left: 12px;
+    }
     > li {
+      float: left;
       line-height: $nav_height;
       > a {
         height: $nav_height;
@@ -393,18 +425,21 @@ nav#page_nav {
   width: 100%;
   max-width: none;
   float: left;
-  height: 0;
+  height: auto;
   /* text-align: center; */
   ul.anchors {
     float: left;
     vertical-align: middle;
     width: 100%;
-    padding: 0 7%;
+    padding: 0 5%;
     height: 2.563em;
     overflow-y: hidden;
     background-color: $color_two;
     display: block;
     z-index: $page_nav_z;
+    li:first-child {
+      margin-left: 30px;
+    }
     li {
       border-left: 1px solid #fff;
       margin: 0.75em 0;
@@ -437,6 +472,50 @@ nav#page_nav {
 .layout-standardkurse nav#page_nav,
 .kurse nav#page_nav {
   background-color: $color_two;
+}
+
+.breadcrumb-wrapper {
+  width: 100%;
+  height: 36px;
+  overflow: auto;
+  float: left;
+  padding-left: 5%;
+  background-color: #292929;
+  .breadcrumbs {
+    float: left;
+    overflow-y: hidden;
+    width: 100%;
+    padding-left: 12px;
+    margin: 0;
+    li {
+      float: left;
+      display: inline-block;
+      color: #fff;
+      vertical-align: middle;
+      padding: 0.33em 0 0.2em;
+      margin-right: 4px;
+    }
+    li:first-child {
+      margin-left: 20px;
+    }
+    a, i {
+      color: #fff;
+      text-decoration: none;
+      line-height: 1em;
+      margin: 0;
+      font-weight: normal;
+    }
+    a {
+      font-size: 0.9em;
+    }
+    a:hover {
+      color: $color_one;
+      text-decoration: underline;
+    }
+    a:after {
+      content: '' !important;
+    }
+  }
 }
 
 section.slideshow,
@@ -538,18 +617,23 @@ section.teaser {
 }
 
 /* Second Level Pages */
-.bereichslayout,
-.layout-ebene-drei {
+body.subsection {
   section.slideshow {
     header {
       min-height: 48px;
+      height: auto;
+      margin-bottom: -7px;
+      float: none;
       img {
-        margin-bottom: -7px;
+        display: block;
+        float: left;
       }
     }
+    /* If Breadcrumbs get added into the slideshow section
     .slide-caption {
-      bottom: 0;
+      bottom: 36px;
     }
+    */
   }
 }
 body section:last-child {
