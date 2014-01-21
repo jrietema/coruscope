@@ -9,6 +9,7 @@ de:
     title: Titel
     parent: Untergeordnet zu
     full_path: Pfad
+    navigation_root_id: Navigationsbaum ab
   activerecord:
     models:
       cms/site: Web-Site
@@ -46,6 +47,8 @@ de:
         accommodation: Unterkunft
         pricing: Preise
         right_column: Rechte Spalte
+        navigation_root_id: In Navigationsbaum ab
+        render_as_page: Eigenständige Seite
       cms/file:
         file: Datei
         description: Beschreibung
@@ -194,6 +197,7 @@ de:
           create: Erstelle Seite
           update: Seite speichern
           is_published: Veröffentlicht
+          render_as_page: Eigenständige Seite
         form_blocks:
           no_tags: |-
             Layout has hat keine Inhalt-Tags definiert.<br/>

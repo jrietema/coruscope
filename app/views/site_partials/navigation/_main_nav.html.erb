@@ -8,19 +8,19 @@
         </li>
       <% end %>
       <% parents = breadcrumbs(@cms_page, :slug) %>
-      <% @cms_site.pages.root.children.published.each do |page| %>
+      <% @cms_site.pages.root.children.published.subpage(@cms_site.pages.root).each do |page| %>
         <li class="<%= (parents.include?(page.slug)) ? 'active' : '' %>">
             <%= link_to page.label, page_path(page) %>
-            <% unless page.children.published.empty? %>
+            <% unless page.children.published.subpage(page).empty? %>
             <div class="dropdown">
               <ul class="subnav">
-                <% page.children.published.each do |subpage| %>
+                <% page.children.published.subpage(page).each do |subpage| %>
                     <li class="<%= (parents.include?(subpage.slug)) ? 'active' : '' %>">
                       <%= link_to subpage.label, page_path(subpage) %>
-                      <% unless subpage.children.published.empty? %>
+                      <% unless subpage.children.published.subpage(subpage).empty? %>
                       <div class="dropdown">
                         <ul class="subnav2">
-                        <% subpage.children.published.each do |subsubpage| %>
+                        <% subpage.children.published.subpage(subpage).each do |subsubpage| %>
                         <li class="<%= (parents.include?(subsubpage.slug)) ? 'active' : '' %>">
                           <%= link_to subsubpage.label, page_path(subsubpage) %>
                         </li>

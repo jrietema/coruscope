@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116145747) do
+ActiveRecord::Schema.define(version: 20140121171710) do
 
   create_table "cms_blocks", force: true do |t|
     t.integer  "page_id",                     null: false
@@ -88,20 +88,22 @@ ActiveRecord::Schema.define(version: 20140116145747) do
   add_index "cms_layouts", ["site_id", "identifier"], name: "index_cms_layouts_on_site_id_and_identifier", unique: true, using: :btree
 
   create_table "cms_pages", force: true do |t|
-    t.integer  "site_id",                                         null: false
+    t.integer  "site_id",                                             null: false
     t.integer  "layout_id"
     t.integer  "parent_id"
     t.integer  "target_page_id"
-    t.string   "label",                                           null: false
+    t.string   "label",                                               null: false
     t.string   "slug"
-    t.string   "full_path",                                       null: false
-    t.text     "content",        limit: 16777215
-    t.integer  "position",                        default: 0,     null: false
-    t.integer  "children_count",                  default: 0,     null: false
-    t.boolean  "is_published",                    default: true,  null: false
-    t.boolean  "is_shared",                       default: false, null: false
+    t.string   "full_path",                                           null: false
+    t.text     "content",            limit: 16777215
+    t.integer  "position",                            default: 0,     null: false
+    t.integer  "children_count",                      default: 0,     null: false
+    t.boolean  "is_published",                        default: true,  null: false
+    t.boolean  "is_shared",                           default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "navigation_root_id",                                  null: false
+    t.boolean  "render_as_page",                      default: true
   end
 
   add_index "cms_pages", ["parent_id", "position"], name: "index_cms_pages_on_parent_id_and_position", using: :btree

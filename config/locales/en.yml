@@ -9,6 +9,7 @@ en:
     title: Title
     parent: Parent
     full_path: Full Path
+    navigation_root_id: In Navigation Tree
   activerecord:
     models:
       cms/site: Site
@@ -37,6 +38,8 @@ en:
         slug: Slug
         target_page_id: Redirect to Page
         is_published: Published
+        navigation_root_id: In Navigation Tree
+        render_as_page: Full Page Rendering
       cms/file:
         file: File
         description: Description
@@ -185,6 +188,7 @@ en:
           create: Create Page
           update: Update Page
           is_published: Published
+          render_as_page: Full Page Rendering
         form_blocks:
           no_tags: |-
             Layout has no content tags defined.<br/>

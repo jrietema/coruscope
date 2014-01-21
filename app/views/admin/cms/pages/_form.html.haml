@@ -19,6 +19,9 @@
     - if (options = options_for_page_select(@site, @page)).present?
       = metaform.select :parent_id, options
 
+    - if (options = breadcrumbs(@page).reverse.select{|o|o != @page}.map{|o| [o.label, o.id ]})
+      = metaform.select :navigation_root_id, options
+
     - if (options = options_for_page_select(@site, @page, nil, 0, false)).present?
       = metaform.select :target_page_id, [["---- #{t('.select_target_page')} ----", nil]] + options
 
@@ -26,6 +29,8 @@
       %label.checkbox.inline
         %input{:type => 'checkbox'}
         = ::Cms::Page.human_attribute_name(:is_published)
+      %label.checkbox.inline
+        = form.check_box(:render_as_page, :label => t('.render_as_page'))
       %button.btn.btn-small.btn-primary.pull-right
         = t('.update')
 
@@ -42,6 +47,7 @@
     $('#cms-current-context span').text('#{escape_javascript(current_context_title(nil))}')
 
 = form.check_box :is_published, :label => t('.is_published')
+= form.check_box :render_as_page, :label => t('.render_as_page')
 = data_copy_field_for :page, :slug
 = data_copy_field_for :page, :parent_id
 = data_copy_field_for :page, :layout_id
@@ -49,5 +55,5 @@
 = render 'admin/cms/partials/page_form_after', :object => form
 
 .form-actions
-  = form.submit t('.preview'), :name => 'preview', :id => nil, :class => 'btn'
+  = form.submit t('.preview'), :name => 'preview', :id => nil, :class => 'btn', disabled: !@page.render_as_page
   = form.submit t(@page.new_record?? '.create' : '.update'), :class => 'btn btn-primary'
