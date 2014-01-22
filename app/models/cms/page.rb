@@ -180,8 +180,13 @@ class Cms::Page < ActiveRecord::Base
   # in the parentage hierarchy
   def validate_navigation_root
     page = self
-    while !(page = page.parent).nil?
-      return true if page == self.navigation_root
+    if page.parent_id.nil?
+      # root pages need their own id set as navigation root - or the site's root
+      return true if [page.id, page.site.pages.root.id].include?(page.navigation_root_id)
+    else
+      while !(page = page.parent).nil?
+        return true if page == self.navigation_root
+      end
     end
     errors.add(:navigation_root_id, :invalid)
   end
