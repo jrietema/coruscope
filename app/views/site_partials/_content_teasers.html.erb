@@ -8,9 +8,12 @@
     <% subpage_url = page_path(page).concat("##{subpage.slug}") %>
     <li class="clickable" onclick="document.location.href='<%= subpage_url %>';">
       <div class="content-wrapper">
-          <%= cms_page_content('teaser.content', subpage) %>
+          <%= cms_page_content('teaser.content', subpage) || '' %>
           <%= link_to t('more', :scope => 'cms.content'), subpage_url %>
+          <% teaser_image = cms_page_content('teaser.image', subpage) %>
+          <% unless teaser_image.nil? || teaser_image.file.nil? %>
           <%= link_to image_tag(cms_page_content('teaser.image', subpage).file.url(:resized)), subpage_url %>
+          <% end %>
       </div>
     </li>
 <% end %>
