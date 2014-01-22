@@ -277,7 +277,10 @@ body > header {
   z-index: 1500;
 }
 body {
-  padding-top: $header_height + $nav_height + 31px; /*- 5px; */
+  padding-top: $header_height + $nav_height + 31px;
+}
+body.home {
+  padding-top: $header_height + $nav_height - 5px;
 }
 header #identity {
   float: left;
