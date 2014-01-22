@@ -6,10 +6,12 @@
 <ul class="<%= klass %> <%= page.slug %>">
 <% subpages.each do |subpage| %>
     <% subpage_url = page_path(page).concat("##{subpage.slug}") %>
-    <li>
-      <%= cms_page_content('teaser.content', subpage) %>
-      <%= link_to t('more', :scope => 'cms.content'), subpage_url %>
-      <%= link_to image_tag(src: cms_page_content('teaser.image', subpage).file.url(:resized)), subpage_url %>
+    <li class="clickable" onclick="document.location.href='<%= subpage_url %>';">
+      <div class="content-wrapper">
+          <%= cms_page_content('teaser.content', subpage) %>
+          <%= link_to t('more', :scope => 'cms.content'), subpage_url %>
+          <%= link_to image_tag(cms_page_content('teaser.image', subpage).file.url(:resized)), subpage_url %>
+      </div>
     </li>
 <% end %>
 </ul>
