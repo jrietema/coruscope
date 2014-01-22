@@ -44,9 +44,9 @@ module ApplicationHelper
   def breadcrumbs(page, method=nil)
     crumbs = []
     while !page.nil?
-      return (crumbs << page.site.pages.root) if page.is_leaf_node # don't add leaf_node parents to breadcrumbs
       crumbs << (method ? page.send(method) : page)
       page = page.parent
+      return (crumbs << page.site.pages.root) if !page.nil? && page.is_leaf_node # don't add leaf_node parents to breadcrumbs
     end
     crumbs
   end
