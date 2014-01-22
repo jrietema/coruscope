@@ -31,7 +31,6 @@
       min-height: 610px;
   }
 
-
 /* Fancytree Dialogs */
 #coruscope
     .fancytree-container
@@ -128,23 +127,39 @@
     overflow-y: auto;
 }
 
-form.formatted
-    .control-group {
-    .control-label {
-        font-size: 85%;
-        font-weight: bold;
-        letter-spacing: 0.05em;
-        margin-bottom: 0px;
+#coruscope
+    form.formatted {
+        .control-group {
+            clear: both;
+            .control-label {
+                font-size: 85%;
+                font-weight: bold;
+                letter-spacing: 0.05em;
+                margin-bottom: 0px;
+            }
+            .files {
+                margin-top: 0.3em;
+            }
+            img.image-preview {
+                width: auto;
+                height: auto;
+                max-width: 640px;
+                max-height: 640px;
+            }
+            input[type='file'],
+            div.files {
+                float: left;
+                max-width: 45%;
+            }
+        }
+        #form-blocks
+            .nav {
+            width: 100%;
+        }
     }
-    .files {
-        margin-top: 0.3em;
-    }
-    img.image-preview {
-        width: auto;
-        height: auto;
-        max-width: 640px;
-        max-height: 640px;
-    }
+
+#content_messages a {
+    margin-left: 1.75em;
 }
 
 #meta_pane

@@ -13,7 +13,8 @@ class Cms::Snippet < ActiveRecord::Base
 
   # -- Callbacks ------------------------------------------------------------
   before_validation :assign_label
-  before_create :assign_position
+  before_create :assign_position,
+                :assign_group_id
   after_save    :clear_cached_page_content
   after_destroy :clear_cached_page_content
 
@@ -47,6 +48,12 @@ class Cms::Snippet < ActiveRecord::Base
   def assign_position
     max = self.site.snippets.maximum(:position)
     self.position = max ? max + 1 : 0
+  end
+
+  def assign_group_id
+    if self.group_id.nil?
+      self.group_id = site.groups.snippets.root.first.id
+    end
   end
 
 end

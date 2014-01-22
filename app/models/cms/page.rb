@@ -45,6 +45,9 @@ class Cms::Page < ActiveRecord::Base
             :unless     => lambda{ |p| p.site && (p.site.pages.count == 0 || p.site.pages.root == self) }
   validates :layout,
             :presence   => true
+  validates :is_leaf_node,
+            :acceptance => false,
+            :if => ->(p) {!p.render_as_page}
   validate :validate_target_page
   validate :validate_format_of_unescaped_slug
   validate :validate_navigation_root

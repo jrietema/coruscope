@@ -25,12 +25,11 @@
     - if (options = options_for_page_select(@site, @page, nil, 0, false)).present?
       = metaform.select :target_page_id, [["---- #{t('.select_target_page')} ----", nil]] + options
 
-    #form-save.box
-      %label.checkbox.inline
-        %input{:type => 'checkbox'}
-        = ::Cms::Page.human_attribute_name(:is_published)
-      %label.checkbox.inline
+    #meta-save.box
+      %label.checkbox
         = form.check_box(:render_as_page, :label => t('.render_as_page'))
+      %label.checkbox
+        = form.check_box(:is_leaf_node, :label => t('.is_leaf_node'))
       %button.btn.btn-small.btn-primary.pull-right
         = t('.update')
 

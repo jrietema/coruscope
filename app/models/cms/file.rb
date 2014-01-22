@@ -43,7 +43,8 @@ class Cms::File < ActiveRecord::Base
 
   # -- Callbacks ------------------------------------------------------------
   before_save   :assign_label
-  before_create :assign_position
+  before_create :assign_position,
+                :assign_group_id
   after_save    :reload_page_cache
   after_destroy :reload_page_cache
 
@@ -65,6 +66,12 @@ class Cms::File < ActiveRecord::Base
   def assign_position
     max = Cms::File.maximum(:position)
     self.position = max ? max + 1 : 0
+  end
+
+  def assign_group_id
+    if self.group_id.nil?
+      self.group_id = site.groups.files.root.first.id
+    end
   end
 
   def reload_page_cache

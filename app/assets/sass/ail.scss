@@ -72,22 +72,36 @@ img.centered {
   clear: both;
 }
 
-section {
+.home section {
   div {
     font-size: 1.12em;
   }
-  /*
-  header + div {
-    font-size: 0.875em;
-  }
-  */
   .four.columns,
   .six.columns {
     font-size: 0.75em;
     padding: 0 1em;
   }
-  .eight.columns {
+}
+section {
+  /*
+  header + div {
     font-size: 0.875em;
+  }
+  */
+  /*
+  .four.columns,
+  .six.columns {
+    font-size: 0.75em;
+    padding: 0 1em;
+  }
+  */
+  div.columns {
+    font-size: 0.875em;
+  }
+  table tr td,
+  table tr th,
+  form li.field {
+    font-size: 100%;
   }
   .centered {
     text-align: center;
@@ -263,7 +277,7 @@ body > header {
   z-index: 1500;
 }
 body {
-  padding-top: $header_height + $nav_height - 5px;
+  padding-top: $header_height + $nav_height + 31px; /*- 5px; */
 }
 header #identity {
   float: left;
@@ -338,6 +352,7 @@ header {
   position: relative;
   z-index: 1500;
   background-color: $color_one;
+  margin: 0;
   > ul {
     display: inline-block;
     width: auto;
@@ -447,12 +462,6 @@ nav#page_nav {
       z-index: $page_nav_z;
       padding: 0 0.45em 0.15em;
     }
-    li.active {
-      background-color: #fff;
-      a, a:hover {
-        color: $color_one;
-      }
-    }
     li:first-child {
       border-left: 0;
     }
@@ -477,11 +486,21 @@ nav#page_nav {
   width: 100%;
   height: 36px;
   overflow: auto;
+  /*
+  position: fixed;
+  top: $header_height + $nav_height;
+  left: 0;
+  */
+  /*
   position: absolute;
   top: 0;
   left: 0;
+  */
   padding-left: 5%;
+  /*
   background: transparent url('/images/ail/heading_bg.png') repeat top left;
+  */
+  background-color: #282828;
   .breadcrumbs {
     float: left;
     overflow-y: hidden;

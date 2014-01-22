@@ -1,1 +1,8 @@
-<%= fancytree_pages_hash(@pages_by_parent).to_json.html_safe %>
+<%# labelling = ->(item) {
+    label = item.label
+    edit_url = edit_admin_cms_site_page_url(site_id: @site.id, id: item.id, format: :js)
+    delete_url = admin_cms_site_page_url(site_id: @site.id, id: item.id, format: :js, method: :delete)
+    "<span class='page-data'><a href='#' data-url='#{edit_url}' alt='#{t(:edit, :scope => 'admin.cms.pages.index_branch')}'>#{label} <i class='icon-pencil'></i></a><a href='#' data-url='#{delete_url}' alt='#{t(:delete, :scope => 'admin.cms.pages.index_branch')}' class='delete'><i class='icon-remove-sign'></i></a></span>"
+} %>
+
+<%= fancytree_pages_hash(@pages_by_parent, nil).to_json.html_safe %>

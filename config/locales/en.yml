@@ -40,6 +40,7 @@ en:
         is_published: Published
         navigation_root_id: In Navigation Tree
         render_as_page: Full Page Rendering
+        is_leaf_node: Maximum Navigation Depth
       cms/file:
         file: File
         description: Description
@@ -187,6 +188,7 @@ en:
         edit:
           title: Editing Page
           revision: Revision
+          create_subpage: Create Subpage
         form:
           select_target_page: No Redirect
           preview: Preview
@@ -194,6 +196,7 @@ en:
           update: Update Page
           is_published: Published
           render_as_page: Full Page Rendering
+          is_leaf_node: Maximum Navigation Depth
         form_blocks:
           no_tags: |-
             Layout has no content tags defined.<br/>
