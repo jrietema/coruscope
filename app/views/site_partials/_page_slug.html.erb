@@ -1,5 +1,1 @@
-<% if defined?(@cms_subpage) %>
-<%= @cms_subpage.slug %>
-<% else %>
-<%= 'content_' + (@cms_subcontent_index = (defined?(@cms_subcontent_index) ? (@cms_subcontent_index += 1) : 1)).to_s %>
-<% end %>
+<% if defined?(@cms_subpage) %><%= @cms_subpage.slug %><% else %><%= 'content_' + (@cms_subcontent_index = (defined?(@cms_subcontent_index) ? (@cms_subcontent_index += 1) : 1)).to_s.strip %><% end %>
