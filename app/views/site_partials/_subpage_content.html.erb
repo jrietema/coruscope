@@ -1,6 +1,7 @@
-<% page = (defined?(param_1) ? @cms_page.site.pages.where(id: param_1).first : @cms_page) || @cms_page %>
+<% page = (defined?(param_1) ? @cms_page.site.pages.where(slug: param_1).first : @cms_page) || @cms_page %>
 <% categories = (defined?(param_2) ? param_2 : []) %>
 <% subpages = (categories.empty? ? page.children : page.children.for_category(categories)).select{|p| !p.render_as_page && p.is_published} %>
 <% subpages.each do |subpage| %>
+<% @cms_subpage = subpage %>
 <%= render :inline => subpage.content %>
 <% end %>

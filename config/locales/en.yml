@@ -119,6 +119,11 @@ en:
       not_found: Folder not found
 
   # -- Views ----------------------------------------------------------------
+  cms:
+    content:
+      more: Mehr
+
+
   admin:
     cms:
       base:

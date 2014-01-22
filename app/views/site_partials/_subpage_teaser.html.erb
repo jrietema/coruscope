@@ -1,0 +1,16 @@
+<% page = (defined?(param_1) ? @cms_page.site.pages.where(slug: param_1).first : @cms_page) || @cms_page %>
+<% categories = (defined?(param_2) ? param_2 : []) %>
+<% klass = (defined?(param_3) ? param_3 : 'content-teaser') %>
+<% subpages = (categories.empty? ? page.children : page.children.for_category(categories)).select{|p| !p.render_as_page && p.is_published} %>
+<% unless subpages.empty? %>
+<ul class="<%= klass %> <%= page.slug %>">
+<% subpages.each do |subpage| %>
+    <% subpage_url = page_path(page).concat("##{subpage.slug}") %>
+    <li>
+      <%= cms_page_content('teaser.content', subpage) %>
+      <%= link_to t('more', :scope => 'cms.content'), subpage_url %>
+      <%= link_to image_tag(src: cms_page_content('teaser.image', subpage).file.url(:resized)), subpage_url %>
+    </li>
+<% end %>
+</ul>
+<% end %>

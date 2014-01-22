@@ -128,6 +128,10 @@ de:
       not_found: Ordner nicht gefunden
 
   # -- Views ----------------------------------------------------------------
+  cms:
+    content:
+      more: Mehr
+
   admin:
     cms:
       base:
