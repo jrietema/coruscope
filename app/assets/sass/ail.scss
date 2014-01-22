@@ -631,11 +631,7 @@ body.subsection {
         float: left;
       }
     }
-    /* If Breadcrumbs get added into the slideshow section
-    .slide-caption {
-      bottom: 36px;
-    }
-    */
+    overflow-y: hidden;
   }
 }
 body section:last-child {
