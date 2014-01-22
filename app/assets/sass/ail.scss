@@ -110,6 +110,11 @@ section {
     float: right;
     padding-right: 0px;
   }
+  .twelve.columns {
+    h1,h2,h3,h4,h5 {
+      text-align: center;
+    }
+  }
   div.columns {
     margin: 1.5em 0;
   }
