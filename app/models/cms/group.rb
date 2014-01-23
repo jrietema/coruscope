@@ -11,18 +11,22 @@ class Cms::Group < ActiveRecord::Base
 
   # -- Relationships --------------------------------------------------------
   belongs_to :site
-  has_many :items,
-           -> { order 'position ASC, label ASC'},
-           class_name: -> (i) { i.grouped_type }
+  has_many :files,
+           class_name: 'Cms::File'
+  has_many :snippets,
+           class_name: 'Cms::Snippet'
 
   # -- Callbacks ------------------------------------------------------------
   before_create     :assign_position
+  before_save       :assign_hierarchy_path
 
   # -- Validations ----------------------------------------------------------
   validates :site_id,
             presence: true
   validates :label,
             presence: true
+  validates :label,
+            uniqueness: { scope: :parent_id }
   validates :grouped_type,
             inclusion: GROUPABLES
 
@@ -39,6 +43,17 @@ class Cms::Group < ActiveRecord::Base
     return if self.position.to_i > 0
     max = self.parent.children.maximum(:position)
     self.position = max ? max + 1 : 0
+  end
+
+  def assign_hierarchy_path
+    hierarchy = []
+    group = self
+    # stop before reaching the default group with parent_id=nil
+    while !group.nil? && !group.parent_id.nil?
+      hierarchy << group.label.strip
+      group = group.parent
+    end
+    self.hierarchy_path = hierarchy.reverse.join('/')
   end
 
 end

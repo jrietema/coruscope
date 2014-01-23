@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //  require jquery.ui.datepicker
 //= require jquery.smint
+//= require jquery.fancybox
 //= require custom

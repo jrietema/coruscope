@@ -27,3 +27,8 @@ function initPageNav(list, selector, offset) {
         $('#' + navId).smint({verticalOffset: offset || 0});
     }
 }
+
+/* Enables Fancybox on all image galleries */
+$(function(){
+    $('.fancybox').fancybox();
+});

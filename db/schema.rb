@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122180107) do
+ActiveRecord::Schema.define(version: 20140123150354) do
 
   create_table "cms_blocks", force: true do |t|
     t.integer  "page_id",                     null: false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140122180107) do
     t.string  "description",    limit: 2048
     t.text    "presets"
     t.integer "children_count"
+    t.string  "hierarchy_path"
   end
 
   create_table "cms_layouts", force: true do |t|

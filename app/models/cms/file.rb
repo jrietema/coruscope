@@ -49,6 +49,7 @@ class Cms::File < ActiveRecord::Base
   after_destroy :reload_page_cache
 
   # -- Scopes ---------------------------------------------------------------
+  default_scope       -> { order 'position ASC, label ASC'}
   scope :images,      -> { where(:file_content_type => IMAGE_MIMETYPES) }
   scope :not_images,  -> { where('file_content_type NOT IN (?)', IMAGE_MIMETYPES) }
 

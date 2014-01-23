@@ -165,6 +165,18 @@ module ApplicationHelper
     options_for_group_select(obj.site || @site, nil, obj.class.name, nil, 0, false)
   end
 
+  # hierarchical hash with group image contents across all levels
+  def image_content_for_group(group, group_name=nil)
+    images = []
+    unless group.nil?
+      images = group.files.images.map{|i| {src: i.file.url(:original), normal: i.file.url(:resized), thumb: i.file.url(:cms_thumb), title: i.description, group: group_name || '' }}
+      group.children.each do |subgroup|
+        images << image_content_for_group(subgroup, subgroup.label)
+      end
+    end
+    images
+  end
+
 
   def content_for_ajax(name, content = nil, options = {}, &block)
     if block_given?
@@ -226,6 +238,15 @@ module ApplicationHelper
       tag.nil? ? text : content_tag(tag, text)
     else
       ''
+    end
+  end
+
+  # This is a helper for passing the current subpage's slug to the Comfy Layout
+  def subpage_slug
+    if defined?(@cms_subpage)
+      @cms_subpage.slug
+    else
+      'content_' + (@cms_subcontent_index = (defined?(@cms_subcontent_index) ? (@cms_subcontent_index += 1) : 1)).to_s.strip
     end
   end
 
