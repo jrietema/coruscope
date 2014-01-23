@@ -9,7 +9,7 @@ class Cms::Snippet < ActiveRecord::Base
   belongs_to :site
 
   belongs_to :group,
-             inverse_of: :items
+             inverse_of: :snippets
 
   # -- Callbacks ------------------------------------------------------------
   before_validation :assign_label

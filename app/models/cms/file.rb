@@ -28,7 +28,7 @@ class Cms::File < ActiveRecord::Base
   belongs_to :block
 
   belongs_to :group,
-             inverse_of: :items
+             inverse_of: :files
 
   # -- Validations ----------------------------------------------------------
   validates :site_id,
