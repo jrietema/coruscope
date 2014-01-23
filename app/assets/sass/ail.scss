@@ -849,14 +849,17 @@ body section div {
   }
   .fancybox-wrapper {
     text-align: center;
-    margin-bottom: 0.5em;
+    margin-bottom: 1.5em;
   }
   .fancybox-wrapper .caption {
-    font-size: 90%;
-    line-height: 90%;
+    display: block;
+    font-size: 0.8em;
+    line-height: 1.2em;
     font-weight: $semibold;
+    font-style: normal;
     width: auto;
-    margin: -3px auto 0;
+    margin: 0 auto;
+    vertical-align: top;
   }
 }
 
