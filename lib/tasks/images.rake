@@ -46,7 +46,7 @@ namespace :images do
         pretty = filename.gsub(/(\d{6})\d+/,'\1').gsub(/([-_]+\d{3})\d+/,'\1')
         unless pretty =~ /^[A-Za-züÜäÄöÖ]/ || pretty =~ /\w{6}/
           # slap a label on it if it doesn't begin with letters
-          pretty = group_label.concat('_' + pretty.gsub(/[-_]+\d+]/,''))
+          pretty = group_label.concat('_' + pretty.gsub(/[-_]+\d+/,''))
         end
         # downcase file ending
         pretties = pretty.split('.')
