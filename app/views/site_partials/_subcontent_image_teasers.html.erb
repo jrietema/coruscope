@@ -1,0 +1,21 @@
+<% image_only = (!defined?(param_1) || !(param_1 =~ /^text/)) %>
+<% klass = (defined?(param_2) ? param_2 : 'content-teaser') %>
+<% unless @cms_page.children.empty? %>
+    <ul class="<%= klass %> <%= @cms_page.slug %>">
+      <% @cms_page.children.each do |subpage| %>
+          <% content_hash = "##{subpage.slug}" %>
+          <li class="clickable" onclick="document.location.hash='<%= content_hash %>';">
+            <div class="content-wrapper">
+              <% unless image_only %>
+              <%= cms_page_content('teaser.content', subpage) || '' %>
+              <%= link_to t('more', :scope => 'cms.content'), content_hash %>
+              <% end %>
+              <% teaser_image = cms_page_content('teaser.image', subpage) %>
+              <% unless teaser_image.nil? || teaser_image.file.nil? %>
+                  <%= link_to image_tag(cms_page_content('teaser.image', subpage).file.url(:resized)), content_hash, class: subpage.identifier, id: "goto-#{subpage.slug}" %>
+              <% end %>
+            </div>
+          </li>
+      <% end %>
+    </ul>
+<% end %>

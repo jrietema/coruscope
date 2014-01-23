@@ -17,9 +17,12 @@ $font_color_head: #17297c;
 $color_heading: #666666;
 $color_soft_margin: #c5baa6;
 $color_footer: #a2a2a2;
+$color_image_nav: #003366;
 
 $header_height: 128px;
 $nav_height: 60px;
+
+$page_nav_z: 6999;
 
 $semibold: 600;
 
@@ -444,12 +447,11 @@ header {
 }
 
 nav#page_nav {
-  $page_nav_z: 1850;
   width: 100%;
   max-width: none;
   float: left;
   height: auto;
-  z-index: 6999;
+  z-index: $page_nav_z;
   /* text-align: center; */
   ul.anchors {
     float: left;
@@ -490,6 +492,53 @@ nav#page_nav {
 .layout-standardkurse nav#page_nav,
 .kurse nav#page_nav {
   background-color: $color_two;
+}
+
+nav#content_images {
+  width: 100%;
+  max-width: none;
+  float: left;
+  height: auto;
+  z-index: $page_nav_z;
+  /* text-align: center; */
+  ul {
+    float: left;
+    vertical-align: middle;
+    width: 100%;
+    padding: 0 5%;
+    overflow-y: hidden;
+    background-color: $color_image_nav;
+    display: block;
+    z-index: $page_nav_z;
+    li:first-child {
+      margin-left: 30px;
+    }
+    li {
+      margin: 8px 0;
+      display: inline;
+      float: left;
+      z-index: $page_nav_z;
+      padding: 0 4px;
+    }
+    li a {
+      color: #fff;
+      z-index: $page_nav_z;
+      text-decoration: none;
+      display: block;
+      line-height: 90%;
+      padding: 2px;
+      img {
+        height: 85px;
+        width: auto;
+      }
+    }
+    li a:hover,
+    li.active a {
+      color: $font_color_head;
+      border: 2px solid $color_head;
+      padding: 0;
+    }
+  }
 }
 
 .breadcrumb-wrapper {

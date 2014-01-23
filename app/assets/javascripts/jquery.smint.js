@@ -25,7 +25,7 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			optionLocs = [],
 			lastScrollTop = 0,
 			lastHash = '',
-			menuHeight = $smint.height(),
+			menuHeight = ((options.menuFixed) ? 2.5*$smint.height() : $smint.height()),
 			curi = 0,
             verticalOffset = options.verticalOffset || 0,
 			stickyTop = $smint.offset().top - verticalOffset;
@@ -154,7 +154,7 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 				//e.preventDefault();
 				
 				// Scroll the page to the desired position!
-				$("html, body").animate({ scrollTop: sectionTop - menuHeight - verticalOffset}, settings.scrollSpeed);
+				$("html, body").animate({ scrollTop: sectionTop - menuHeight - (verticalOffset * 0.8)}, settings.scrollSpeed);
 			})
 		});
 
