@@ -25,7 +25,9 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			optionLocs = [],
 			lastScrollTop = 0,
 			lastHash = '',
-			menuHeight = ((options.menuFixed) ? 2.5*$smint.height() : $smint.height()),
+        // TODO: this is a poor adjustment for verticalOffset differences in the scenario:
+        // body padding, absolute menu pinning and scroll offset
+			menuHeight = ((options.menuFixed) ? 2.3*$smint.height() : $smint.height()),
 			curi = 0,
             verticalOffset = options.verticalOffset || 0,
 			stickyTop = $smint.offset().top - verticalOffset;

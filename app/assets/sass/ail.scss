@@ -283,7 +283,7 @@ body > header {
   background-color: $color_head;
   height: $header_height + $nav_height - 5px;
   width: 100%;
-  z-index: 1500;
+  z-index: $page_nav_z + 5;
 }
 body {
   padding-top: $header_height + $nav_height + 31px;
@@ -362,7 +362,7 @@ header {
   height: $nav_height;
   max-height: $nav_height;
   position: relative;
-  z-index: 1500;
+  z-index: $page_nav_z + 10;
   background-color: $color_one;
   margin: 0;
   > ul {
