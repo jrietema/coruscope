@@ -1,2 +1,5 @@
+.page-header
+  %h6= @file.cms_path
+
 = comfy_form_for @file, as: :file, url: {action: :update}, type: :vertical do |form|
   = render form

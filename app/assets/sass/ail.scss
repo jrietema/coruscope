@@ -185,6 +185,7 @@ body section div {
   }
 }
 
+
 body #content-top {
   display: block;
   width: 100%;
@@ -838,6 +839,25 @@ body section:last-child {
       top: 0;
       height: 100%;
     }
+}
+
+/* Fancybox images in content */
+body section div {
+  .fancybox-wrapper a:after {
+    content: '';
+    font-size: 0;
+  }
+  .fancybox-wrapper {
+    text-align: center;
+    margin-bottom: 0.5em;
+  }
+  .fancybox-wrapper .caption {
+    font-size: 90%;
+    line-height: 90%;
+    font-weight: $semibold;
+    width: auto;
+    margin: -3px auto 0;
+  }
 }
 
 

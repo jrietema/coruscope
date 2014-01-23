@@ -58,6 +58,12 @@ class Cms::File < ActiveRecord::Base
     IMAGE_MIMETYPES.include?(file_content_type)
   end
 
+  # path within the group hierarchy - this is needed for adressing
+  # the image for cms layout helper calls
+  def cms_path
+    [group.hierarchy_path, self.label].select{|p| !p.blank?}.join('/')
+  end
+
   protected
 
   def assign_label

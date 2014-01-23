@@ -250,6 +250,19 @@ module ApplicationHelper
     end
   end
 
+  # Helper for generating a gallery image tag
+  def image(path, caption=true, klass='fancybox')
+    path_tokens = path.split('/')
+    image_name = path_tokens.pop
+    group = path_tokens.empty? ? @cms_site.groups.files.root : @cms_site.groups.files.where(['hierarchy_path LIKE ?', path_tokens.join('/')]).first
+    return '' if group.nil?
+    image = @cms_site.files.images.where(['label LIKE ? AND group_id = ?', image_name, group.id]).first
+    return '' if image.nil? || image.file.nil?
+    html = link_to image_tag(image.file.url(:resized)), image.file.url, class: klass, title: image.description
+    html << content_tag(:span, image.description, class: 'caption')
+    content_tag(:div, html, class: klass + '-wrapper')
+  end
+
   # Override the
   def comfy_form_for(record, options = {}, &proc)
     options[:builder] = ComfortableMexicanSofa::FormBuilder
