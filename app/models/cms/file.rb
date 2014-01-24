@@ -13,7 +13,7 @@ class Cms::File < ActiveRecord::Base
         if f.respond_to?(:instance) && f.instance.respond_to?(:dimensions)
           (f.instance.dimensions.blank?? { } : { :original => f.instance.dimensions }).merge(
               :cms_thumb => '80x60#',
-              :resized => '640x480#',
+              :resized => '640x480',
               :mini => '40x30#'
           )
         end
