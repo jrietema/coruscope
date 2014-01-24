@@ -2,7 +2,6 @@
 <% klass = (defined?(param_2) ? param_2 : 'three') %>
 <% unless group.nil? %>
     <% images = image_content_for_group(group) %>
-<% end %>
 <ul id="teaser-group" class="tiles <%= klass %> up">
   <% images.each do |image| %>
       <li class="teaser">
@@ -17,3 +16,4 @@
   <% end %>
 </ul>
 <br/>
+<% end %>
