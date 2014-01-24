@@ -4,7 +4,7 @@
     <li class="teaser">
       <% unless teaser_image.nil? || teaser_image.empty? %>
       <a href="<%= page_path(subpage) %>">
-        <%= image_tag(teaser_image.first.file.url) %>
+        <%= image_tag(teaser_image.first.file.url(:resized)) %>
         <span class="caption"><%= subpage.label %></span>
       </a>
       <% else %>
