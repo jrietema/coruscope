@@ -1,0 +1,31 @@
+<% @cms_form ||= @cms_site.contact_forms.where(identifier: param_1).first %>
+<% @contact ||= @cms_form.build_contact(params.fetch('contact')) %>
+
+<div id="<%= @cms_form.identifier %>-wrapper">
+  <h3><%= t(@cms_form.identifier, :scope => 'cms.contact_form.title') %></h3>
+  <%= formatted_form_for [:cms, @cms_form, @contact], url: cms_contact_form_contacts_url(contact_form_id: @cms_form.id, method: :post), type: :vertical, html: { id: @cms_form.identifier } do |f| %>
+      <% @cms_form.contact_fields.each do |field| %>
+          <%= contact_form_field(f, @cms_form, field) %>
+      <% end %>
+      <% ((params['contact'] || {}).keys - @cms_form.contact_fields).each do |field| %>
+          <%= hidden_field_tag "contact[#{field}]", params['contact'][field] %>
+      <% end %>
+      <% if @cms_site.css_framework.underscore.to_sym == :gumby %>
+          <div class="medium primary btn">
+            <button type='submit' form='<%#= @cms_form.identifier %>'>
+              <% if @cms_form.contact_form.nil? %>
+              <%= t((@cms_form.submit_label || :submit), :scope => 'cms.contact_form') %>
+              <% else %>
+              <%= t((@cms_form.submit_label || :continue), :scope => 'cms.contact_form') %>
+              <% end %>
+            </button>
+          </div>
+          <div class="medium default btn">
+            <button type='reset' form='<%= @cms_form.identifier %>'><%= t((:cancel), :scope => 'cms.contact_form') %></button>
+          </div>
+      <% else %>
+          <button type='submit' form='<%= @cms_form.identifier %>' class="btn btn-small btn-primary pull-right"><%= t((@cms_form.submit_label || :submit), :scope => 'cms.contact_form') %></button>
+          <button type='reset' form='<%= @cms_form.identifier %>' class="btn btn-small pull-right"><%= t((:cancel), :scope => 'cms.contact_form') %></button>
+      <% end %>
+  <% end %>
+</div>

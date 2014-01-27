@@ -9,6 +9,8 @@ class Cms::Site < ActiveRecord::Base
     site.has_many :files
     site.has_many :categories
     site.has_many :groups, class_name: 'Cms::Group'
+    site.has_many :contact_forms, class_name: 'Cms::ContactForm'
+    site.has_many :contact, class_name: 'Cms::Contact'
   end
 
   has_many :file_groups,
@@ -63,6 +65,46 @@ class Cms::Site < ActiveRecord::Base
   def destroy
     self.class.where(:id => self.id).update_all(:is_mirrored => false) if self.is_mirrored?
     super
+  end
+
+  # Names of contact fields for translation
+  def contact_field_name(contact_field)
+    contact_field_translations[contact_field]
+  end
+
+  # Types and other options for contact fields
+  # Options include:
+  # - mandatory: this field cannot be left blank
+  # - options: options for select
+  # - width/height: dimensions of the field
+  # - acceptance: this fields needs to be true
+  # - link_url: info link url
+  def contact_field_options(contact_field)
+    contact_field_definitions[contact_field]
+  end
+
+  def contact_field_definitions
+    @contact_field_definitions ||= YAML.load(read_attribute(:contact_field_definitions) || '') || {}
+  end
+
+  def contact_field_definitions=(defs)
+    write_attribute(:contact_field_definitions, defs.to_yaml)
+  end
+
+  def contact_field_translations
+    @contact_field_translations ||= YAML.load(read_attribute(:contact_field_translations) || '') || {}
+  end
+
+  def contact_field_translations=(defs)
+    write_attribute(:contact_field_translations, defs.to_yaml)
+  end
+
+  def contact_form_wrap_tag
+    contact_field_definitions['wrap_tag']
+  end
+
+  def css_framework
+    'Gumby'
   end
 
   protected

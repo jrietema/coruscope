@@ -874,6 +874,14 @@ body section div {
   }
 }
 
+#google-map {
+  width: 620px;
+  height: 500px;
+  a:after {
+    content: '';
+  }
+}
+
 
 body > footer {
   background-color: $color_footer;

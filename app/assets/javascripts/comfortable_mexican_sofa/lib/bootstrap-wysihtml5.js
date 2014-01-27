@@ -442,7 +442,9 @@
                 "wysiwyg-color-orange" : 1,
                 "centered": 1,
                 "float-left": 1,
-                "float-right": 1
+                "float-right": 1,
+                "photo": 1,
+                "rounded": 1
             },
             tags: {
                 "b":  {},

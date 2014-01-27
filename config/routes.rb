@@ -24,6 +24,12 @@ Coruscope::Application.routes.draw do
     end
   end
 
+  namespace :cms do
+    resources :contact_forms do
+      resources :contacts
+    end
+  end
+
   comfy_route :cms, :path => '/', :sitemap => false
 
   # The priority is based upon order of creation: first created -> highest priority.

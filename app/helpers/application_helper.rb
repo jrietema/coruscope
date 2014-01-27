@@ -298,4 +298,96 @@ module ApplicationHelper
     data_tag ||= attribute
     hidden_field_tag "#{model}[#{attribute}]", eval("@#{model}.#{attribute}"), id: "copy_#{data_tag}", data: {copy: data_tag}
   end
+
+  # Creates formatted form fields according to contact_form_definitions
+  def contact_form_field(form_builder, contact_form, field, value=nil)
+    value ||= @contact.getFieldValue(field)
+    contact_field_definition = contact_form.site.contact_field_options(field).symbolize_keys
+    wrap_tag = contact_form.site.contact_form_wrap_tag
+    translations = contact_form.site.contact_field_translations
+    options_for_html = {}
+    %w(width height prepend append in label values options).each do |dim|
+      options_for_html[dim] = contact_field_definition[dim.to_sym] unless contact_field_definition[dim.to_sym].nil?
+    end
+    label = t((options_for_html[:label].blank? ? (translations[field] || field) : options_for_html[:label]), :scope => 'cms.contact_form.fields')
+    options_for_html[:label] = h(label)
+    case @cms_site.css_framework.underscore.to_sym
+      when :gumby
+        gumby_field_tag(form_builder, contact_field_definition[:type], field, options_for_html, value, wrap_tag)
+      else
+        bootstrap_field_tag(form_builder, contact_field_definition[:type], field, options_for_html, value, wrap_tag)
+    end
+  end
+end
+
+def gumby_field_tag(form_builder, type, field, options_for_html, value, wrap_tag=nil)
+  label = options_for_html.delete(:label)
+  options_for_html.merge!({:placeholder => label})
+  prepend = options_for_html.delete('prepend')
+  append = options_for_html.delete('append')
+  klasses = %w(field)
+  label_tag = content_tag(:label, label, { class: 'inline', for: "contact[#{field}]" })
+  html = case type.underscore.to_sym
+           when :text, :datetimer
+             text_field_tag "contact[#{field}]", value, options_for_html.merge!({class: 'input'})
+           when :password
+             password_field_tag "contact[#{field}]", value, options_for_html.merge!({class: 'input'})
+           when :number
+             number_field_tag "contact[#{field}]", value, options_for_html.merge!({class: 'input'})
+           when :email
+             email_field_tag "contact[#{field}]", value, options_for_html.merge!({class: 'input'})
+           when :phone
+             phone_field_tag "contact[#{field}]", value, options_for_html.merge!({class: 'input'})
+           when :country
+             options = localized_country_options_for_select(value, [:DE, :AT, :CH, :GB, :US])
+             label_tag + content_tag(:div, select_tag("contact[#{field}]", options, options_for_html), class: 'picker')
+           when :select
+            options = options_for_select(options_for_html.delete('options') || [], value)
+             label_tag + content_tag(:div, select_tag("contact[#{field}]", options, options_for_html), class: 'picker')
+           when :checkbox
+             content_tag(:label, label + check_box_tag("contact[#{field}]", 1, !value.false?, options_for_html.merge!({class: 'input'})), { for: "contact[#{field}]"})
+           when :textarea
+             label_tag + text_area_tag("contact[#{field}]", value, options_for_html.merge!({class: 'input'}))
+           else
+             # Text field
+             text_field_tag "contact[#{field}]", value, options_for_html.merge!({class: 'input'})
+         end
+  unless prepend.blank?
+    html = content_tag(:span, prepend, class: 'adjoined') + html
+    klasses << 'prepend'
+  end
+  unless append.blank?
+    html = html + content_tag(:span, append, class: 'adjoined')
+    klasses << 'append'
+  end
+  html = content_tag(wrap_tag || :li, html, class: klasses.join(' '))
+  html
+end
+
+def bootstrap_field_tag(form_builder, type, field, options_for_html, value, wrap_tag=nil)
+  html = case type.underscore.to_sym
+           when :text
+             form_builder.textarea field, options_for_html
+           when :password
+             form_builder.password_field field, options_for_html
+           when :number
+             form_builder.number_field field, options_for_html
+           when :email
+             form_builder.email_field field, options_for_html
+           when :phone
+             form_builder.phone_field field, options_for_html
+           when :select
+             form_builder.select field, options_for_html.delete(:options), options_for_html
+           when :checkbox
+             options_for_html[:values].nil? ? /
+                 form_builder.check_box(options_for_html.delete(:values), options_for_html) /
+             : form_builder.check_box(field, options_for_html)
+           when :datetime
+             form_builder.text_field field, options_for_html.merge!({class: 'datetime'})
+           else
+             # Text field
+             form_builder.text_field field, options_for_html
+         end
+  html = content_tag(wrap_tag, html, class: :field) unless wrap_tag.blank?
+  html
 end

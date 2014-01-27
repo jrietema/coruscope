@@ -124,6 +124,36 @@ en:
     content:
       more: Mehr
 
+    contact_form:
+      submit: Submit
+      continue: Continue
+      cancel: Cancel
+      title:
+        information: Request for Information
+        contact: Contact Form
+        participant: Participant Form
+        booking: Booking Form
+      fields:
+        first_name: First Name
+        last_name: Last Name
+        email: Email
+        phone: Telephone
+        more_phone_numbers: Other Telephone numbers
+        address: Address
+        postcode: Postcode
+        city: City
+        country: Country
+        gender: Gender
+        date_of_birth: Date of Birth
+        nationality: Nationality
+        passport_number: Passport Number
+        institution: Company or Organization
+        institution1: School, University, Organization or Company of Affiliation
+        program_choice: Progam Choice
+        program_begin: Preferred Program Commencement
+        program_length: Preferred Program Duration
+        questions_and_comments: Questions/Comments
+
 
   admin:
     cms:
