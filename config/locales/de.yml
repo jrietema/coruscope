@@ -149,6 +149,7 @@ de:
         email: E-Mail Adresse
         phone: Tel.-Nr.
         more_phone_numbers: Weitere Telefonnr.
+        other_phone_numbers: Weitere Telefonnr.
         address: Adresse
         postcode: Postleitzahl
         city: Stadt
@@ -161,7 +162,7 @@ de:
         institution1: Schule, Universität, Organisation oder Firma, der Sie zur Zeit angehören
         program_choice: Programmwahl
         program_begin: Gewünschter Programmbeginn
-        program_length: Gewünschte Programmdauer
+        program_duration: Gewünschte Programmdauer
         questions_and_comments: Fragen/Anmerkungen
       gender:
         male: männlich

@@ -5,12 +5,23 @@
   <h3><%= t(@cms_form.identifier, :scope => 'cms.contact_form.title') %></h3>
   <%= formatted_form_for [:cms, @cms_form, @contact], url: cms_contact_form_contacts_url(contact_form_id: @cms_form.id, method: :post), type: :vertical, html: { id: @cms_form.identifier } do |f| %>
       <% @cms_form.contact_fields.each do |field| %>
-          <%= contact_form_field(f, @cms_form, field) %>
+          <% if field.is_a?(Array) %>
+          <%# encapsulate in a fieldset %>
+            <% @fieldset_index ||= 0 %>
+            <fieldset id="<%= @cms_form.identifier %>_set_<%= @fieldset_index += 1 %>">
+              <% field.each do |subfield| %>
+                  <%= contact_form_field(f, @cms_form, subfield) %>
+              <% end %>
+            </fieldset>
+          <% else %>
+            <%= contact_form_field(f, @cms_form, field) %>
+          <% end %>
       <% end %>
       <% ((params['contact'] || {}).keys - @cms_form.contact_fields).each do |field| %>
           <%= hidden_field_tag "contact[#{field}]", params['contact'][field] %>
       <% end %>
       <span class="hint"><%= t(:required_hint, :scope => 'cms.contact_form', :symbol => '*') %></span>
+      <div class="button-group">
       <% if @cms_site.css_framework.underscore.to_sym == :gumby %>
           <div class="medium primary btn">
             <button type='submit' form='<%#= @cms_form.identifier %>'>
@@ -28,5 +39,6 @@
           <button type='submit' form='<%= @cms_form.identifier %>' class="btn btn-small btn-primary pull-right"><%= t((@cms_form.submit_label || :submit), :scope => 'cms.contact_form') %></button>
           <button type='reset' form='<%= @cms_form.identifier %>' class="btn btn-small pull-right"><%= t((:cancel), :scope => 'cms.contact_form') %></button>
       <% end %>
+      </div>
   <% end %>
 </div>

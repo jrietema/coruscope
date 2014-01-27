@@ -306,10 +306,16 @@ module ApplicationHelper
     wrap_tag = contact_form.site.contact_form_wrap_tag
     translations = contact_form.contact_field_translations
     options_for_html = {}
-    %w(width height prepend append in label values options mandatory).each do |dim|
+    %w(width height prepend append in label values mandatory).each do |dim|
       options = contact_field_definition[dim.to_sym]
       next if options.blank? || (options.is_a?(Enumerable) && options.empty?)
       options_for_html[dim] = contact_field_definition[dim.to_sym]
+    end
+    unless contact_field_definition[:options].blank?
+      options_for_html['options'] ||= {}
+      contact_field_definition[:options].keys.each do |k|
+        options_for_html['options'][t(k, :scope => "cms.contact_form.#{field}")] = contact_field_definition[:options][k]
+      end
     end
     label = t((options_for_html[:label].blank? ? (translations[field] || field) : options_for_html[:label]), :scope => 'cms.contact_form.fields')
     options_for_html[:label] = h(label)
@@ -349,7 +355,7 @@ def gumby_field_tag(form_builder, type, field, options_for_html, value, wrap_tag
              options = localized_country_options_for_select(value, [:DE, :AT, :CH, :GB, :US])
              label_tag + content_tag(:div, select_tag("contact[#{field}]", options, options_for_html), class: 'picker')
            when :select
-            options = options_for_select(options_for_html.delete('options') || [], value)
+            options = options_for_select((options_for_html.delete('options') || {}), value)
              label_tag + content_tag(:div, select_tag("contact[#{field}]", options, options_for_html), class: 'picker')
            when :checkbox
              content_tag(:label, label + check_box_tag("contact[#{field}]", 1, !value.false?, options_for_html.merge!({class: 'input'})), { for: "contact[#{field}]"})

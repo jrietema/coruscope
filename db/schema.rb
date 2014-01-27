@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127211641) do
+ActiveRecord::Schema.define(version: 20140127220948) do
 
   create_table "cms_blocks", force: true do |t|
     t.integer  "page_id",                     null: false
@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 20140127211641) do
   add_index "cms_categorizations", ["category_id", "categorized_type", "categorized_id"], name: "index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id", unique: true, using: :btree
 
   create_table "cms_contact_forms", force: true do |t|
-    t.integer "site_id",                    null: false
-    t.string  "identifier",                 null: false
-    t.string  "contact_fields"
+    t.integer "site_id",                                null: false
+    t.string  "identifier",                             null: false
+    t.string  "contact_fields",             limit: 600
     t.string  "addressee"
     t.string  "mailer_subject"
     t.string  "submit_label"
-    t.string  "redirect_url",               null: false
+    t.string  "redirect_url",                           null: false
     t.text    "mailer_body"
     t.integer "contact_form_id"
     t.text    "contact_field_options"
@@ -145,13 +145,13 @@ ActiveRecord::Schema.define(version: 20140127211641) do
   add_index "cms_revisions", ["record_type", "record_id", "created_at"], name: "index_cms_revisions_on_rtype_and_rid_and_created_at", using: :btree
 
   create_table "cms_sites", force: true do |t|
-    t.string  "label",                                      null: false
-    t.string  "identifier",                                 null: false
-    t.string  "hostname",                                   null: false
+    t.string  "label",                                                  null: false
+    t.string  "identifier",                                             null: false
+    t.string  "hostname",                                               null: false
     t.string  "path"
-    t.string  "locale",                     default: "en",  null: false
-    t.boolean "is_mirrored",                default: false, null: false
-    t.string  "contact_fields"
+    t.string  "locale",                                 default: "en",  null: false
+    t.boolean "is_mirrored",                            default: false, null: false
+    t.string  "contact_fields",             limit: 600
     t.text    "contact_field_translations"
     t.text    "contact_field_definitions"
     t.string  "default_addressee"

@@ -140,6 +140,7 @@ en:
         email: Email
         phone: Telephone
         more_phone_numbers: Other Telephone numbers
+        other_phone_numbers: Other Telephone numbers
         address: Address
         postcode: Postcode
         city: City
@@ -152,7 +153,7 @@ en:
         institution1: School, University, Organization or Company of Affiliation
         program_choice: Progam Choice
         program_begin: Preferred Program Commencement
-        program_length: Preferred Program Duration
+        program_duration: Preferred Program Duration
         questions_and_comments: Questions/Comments
       gender:
         male: male

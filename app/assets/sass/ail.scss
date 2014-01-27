@@ -934,11 +934,28 @@ body > footer {
   width: 80%;
 }
 .twelve.columns .contact-form-wrapper {
-  width: 66%;
+  width: 100%;
 }
 .contact-form-wrapper {
   h3 {
     padding-left: 14px;
+  }
+  fieldset {
+    width: 46%;
+    float: left;
+    position: relative;
+    .field.prepend input,
+    .field.append input {
+      width: 375px;
+    }
+  }
+  /* Rails creates a div with hidden elements as the first child */
+  fieldset:nth-child(even) {
+    margin-right: 20px;
+    clear: left;
+  }
+  fieldset:nth-child(odd) {
+    float: right;
   }
   .field {
     font-family: $font-family;
@@ -947,11 +964,15 @@ body > footer {
       font-size: 0.825em;
       margin-bottom: 0;
       padding-left: 14px;
+      color: #555;
     }
     .picker {
       float: left;
       clear: left;
       margin: 0;
+      select {
+        width: 140%;
+      }
     }
     textarea {
       height: 190px;
@@ -985,6 +1006,9 @@ body > footer {
     clear: left;
     padding-left: 14px;
     font-size: 85%;
+  }
+  .button-group {
+    clear: both;
   }
   form .btn,
   form select,
