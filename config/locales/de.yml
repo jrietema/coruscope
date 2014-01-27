@@ -138,7 +138,7 @@ de:
       continue: Weiter
       cancel: Abbrechen
       title:
-        information: Anfrage
+        information: Ihre Anfrage
         contact: Kontaktformular
         participant: Teilnahmeformular
         booking: Buchung
@@ -162,6 +162,19 @@ de:
         program_begin: Gewünschter Programmbeginn
         program_length: Gewünschte Programmdauer
         questions_and_comments: Fragen/Anmerkungen
+      gender:
+        male: männlich
+        female: weiblich
+      program_choice:
+        beginners_course: Spanischkurs Anfänger
+        intermediate_course: Spanischkurs Mittelstufe
+        advanced_course: Spanischkurs Fortgeschrittene
+        professional_course: Spanischkurs Profis
+        professors_course: Spanischkurs Professoren
+        travel_course1: Alejuela & M. Antonio
+        voluntary_work: Voluntariat
+        work_experience: Praktikum
+        highschool: Highschool
 
 
   admin:

@@ -554,20 +554,7 @@ nav#content_images {
   width: 100%;
   height: 36px;
   overflow: auto;
-  /*
-  position: fixed;
-  top: $header_height + $nav_height;
-  left: 0;
-  */
-  /*
-  position: absolute;
-  top: 0;
-  left: 0;
-  */
   padding-left: 5%;
-  /*
-  background: transparent url('/images/ail/heading_bg.png') repeat top left;
-  */
   background-color: #282828;
   .breadcrumbs {
     float: left;
@@ -939,6 +926,37 @@ body > footer {
       bottom: 0;
       left: 0;
     }
+  }
+}
+
+/* Form Styles */
+.contact-form-wrapper {
+  h3 {
+    padding-left: 14px;
+  }
+  .field {
+    font-family: $font-family;
+    width: 80%;
+    label.inline {
+      float: left;
+      font-size: 0.825em;
+      margin-bottom: 0;
+      padding-left: 14px;
+    }
+    .picker {
+      float: left;
+      clear: left;
+      margin: 0;
+    }
+  }
+  form .btn,
+  form select,
+  form input,
+  form textarea {
+    font-family: $font-family !important;
+  }
+  form .btn {
+    margin-left: 14px;
   }
 }
 
