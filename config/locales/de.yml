@@ -138,8 +138,10 @@ de:
       continue: Weiter
       cancel: Abbrechen
       required_hint: '%{symbol} markiert erforderliche Felder'
+      request: Anfordern
+      apply: Anmelden
       title:
-        information: informationen anfordern
+        information: Informationen anfordern
         contact: Kontaktformular
         participant: Anmeldung
         booking: Buchung
@@ -159,7 +161,7 @@ de:
         nationality: Staatsangehörigkeit
         passport_number: Passnummer
         institution: Firma o. Organisation
-        institution1: Schule, Universität, Organisation oder Firma, der Sie zur Zeit angehören
+        institution1: Schule, Universität, Organisation oder Firma
         program_choice: Programmwahl
         program_begin: Gewünschter Programmbeginn
         program_duration: Gewünschte Programmdauer

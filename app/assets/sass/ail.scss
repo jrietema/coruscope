@@ -36,7 +36,8 @@ body h3 {
   color: #000;
 }
 
-body .row {
+body .row,
+body.wysihtml5-editor {
   b {
     font-weight: bold;
   }
@@ -87,18 +88,6 @@ img.centered {
   }
 }
 section {
-  /*
-  header + div {
-    font-size: 0.875em;
-  }
-  */
-  /*
-  .four.columns,
-  .six.columns {
-    font-size: 0.75em;
-    padding: 0 1em;
-  }
-  */
   div.columns {
     font-size: 0.875em;
   }
@@ -134,11 +123,21 @@ section {
     margin-top: 0px !important;
   }
 }
+body.wysihtml5-editor {
+  font-size: 0.875em;
+  .centered {
+    text-align: center;
+  }
+  h1,h2,h3,h4,h5 {
+    text-align: center;
+  }
+}
 
 section > h1,
 section > div > h1,
 .row > h1,
-section header h1 {
+section header h1,
+body.wysihtml5-editor h1 {
   margin: 30px auto 20px;
   min-width: 320px;
   padding-left: 20px;
@@ -152,7 +151,10 @@ section header h1 {
 .row > h1,
 .row > h2,
 .row > h3,
-section header > h1 {
+section header > h1,
+.wysihtml5-editor > h1,
+.wysihtml5-editor > h2,
+.wysihtml5-editor > h3 {
   text-align: center;
 }
 .row > h1:first-child,
@@ -160,8 +162,8 @@ section header > h1 {
 .row > h3:first-child {
   margin-top: 1.8em;
 }
-.row h3 {
-  /* font-weight: $semibold; */
+.row h3,
+.wysihtml5-editor h3 {
   font-size: 1.625em;
 }
 
@@ -173,7 +175,8 @@ body a:hover {
   color: $color_two;
 }
 /* Links in Text Body */
-body section div {
+body section div,
+body.wysihtml5-editor {
   a {
     color: $color_one;
     font-weight: $semibold;
@@ -229,13 +232,16 @@ table tbody tr:nth-child(even) td {
 }
 
 /* Content Lists */
-section.row ul {
+section.row ul,
+body.wysihtml5-editor ul {
   margin: 0.5em 0;
 }
-section.row ul li {
+section.row ul li,
+body.wysihtml5-editor ul li {
   padding-left: 1.625em;
 }
-section.row ul li:before {
+section.row ul li:before,
+body.wysihtml5-editor ul li:before {
   font-family: "#{$icons}";
   font-size: 120%;
   margin-left: -1.25em;
@@ -266,22 +272,26 @@ body > header {
 }
 
 /* Content-Images */
-section .column img {
+section .column img,
+.wysihtml5-editor img {
   width: 100%;
   float: left;
   clear: both;
 }
-section .column img.left {
+section .column img.left,
+.wysihtml5-editor img.left {
   width: 65%;
   float: left;
   clear: none;
 }
-section .column img.right {
+section .column img.right,
+.wysihtml5-editor img.right{
   width: 65%;
   float: right;
   clear: none;
 }
-section .column img.small {
+section .column img.small,
+.wysihtml5-editor img.small {
   width: 31.9%;
 }
 
@@ -793,6 +803,10 @@ body section:last-child {
     .content-wrapper {
       overflow-y: hidden;
       height: 100%;
+      a:last-child:after {
+        /* this is the image link */
+        content: '' !important;
+      }
     }
     h1, h2,h3,h4,p,ul,li {
       float: left;
@@ -1023,6 +1037,13 @@ body > footer {
     margin-left: 14px;
     float: right;
   }
+  form .btn.primary {
+    background-color: $color_one;
+  }
+}
+
+#information-wrapper h3 {
+  margin-top: 18px;
 }
 
 /* Move the Datepicker UI 'forward' */
@@ -1035,15 +1056,3 @@ li.field input + .picker {
   position: relative;
   top: 13px;
 }
-/*
-section.row .field input,
-section.row .field .adjoined {
-  font-size: 1em;
-  line-height: 1.2em;
-}
-
-section.row .field input[type='text'].wide,
-section.row .field textarea.wide {
-  max-width: 400px;
-}
-*/

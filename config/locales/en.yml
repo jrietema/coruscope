@@ -125,10 +125,12 @@ en:
       more: Mehr
 
     contact_form:
-      submit: Submit
+      submit: Send
       continue: Continue
       cancel: Cancel
       required_hint: '%{symbol} indicates required fields'
+      request: Send
+      apply: Apply
       title:
         information: Request for Information
         contact: Contact Form
@@ -150,7 +152,7 @@ en:
         nationality: Nationality
         passport_number: Passport Number
         institution: Company or Organization
-        institution1: School, University, Organization or Company of Affiliation
+        institution1: School, University, Organization or Company
         program_choice: Progam Choice
         program_begin: Preferred Program Commencement
         program_duration: Preferred Program Duration
