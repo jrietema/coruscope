@@ -137,6 +137,7 @@ de:
       submit: Absenden
       continue: Weiter
       cancel: Abbrechen
+      required_hint: '%{symbol} markiert erforderliche Felder'
       title:
         information: Ihre Anfrage
         contact: Kontaktformular

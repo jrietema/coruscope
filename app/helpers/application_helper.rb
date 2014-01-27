@@ -302,12 +302,14 @@ module ApplicationHelper
   # Creates formatted form fields according to contact_form_definitions
   def contact_form_field(form_builder, contact_form, field, value=nil)
     value ||= @contact.getFieldValue(field)
-    contact_field_definition = contact_form.site.contact_field_options(field).symbolize_keys
+    contact_field_definition = contact_form.contact_field_options_for(field).symbolize_keys
     wrap_tag = contact_form.site.contact_form_wrap_tag
-    translations = contact_form.site.contact_field_translations
+    translations = contact_form.contact_field_translations
     options_for_html = {}
-    %w(width height prepend append in label values options).each do |dim|
-      options_for_html[dim] = contact_field_definition[dim.to_sym] unless contact_field_definition[dim.to_sym].nil?
+    %w(width height prepend append in label values options mandatory).each do |dim|
+      options = contact_field_definition[dim.to_sym]
+      next if options.blank? || (options.is_a?(Enumerable) && options.empty?)
+      options_for_html[dim] = contact_field_definition[dim.to_sym]
     end
     label = t((options_for_html[:label].blank? ? (translations[field] || field) : options_for_html[:label]), :scope => 'cms.contact_form.fields')
     options_for_html[:label] = h(label)
@@ -321,14 +323,19 @@ module ApplicationHelper
 end
 
 def gumby_field_tag(form_builder, type, field, options_for_html, value, wrap_tag=nil)
-  label = options_for_html.delete(:label)
-  options_for_html.merge!({:placeholder => label})
   prepend = options_for_html.delete('prepend')
   append = options_for_html.delete('append')
+  mandatory = options_for_html.delete('mandatory')
+  label = options_for_html.delete(:label) + (mandatory ? ' *' : '')
+  options_for_html.merge!({:placeholder => (value.blank? ? label : value)})
+  if mandatory
+    options_for_html.merge!({:required => true})
+  end
   klasses = %w(field)
+  klasses << 'completed' unless value.blank?
   label_tag = content_tag(:label, label, { class: 'inline', for: "contact[#{field}]" })
   html = case type.underscore.to_sym
-           when :text, :datetimer
+           when :string, :datetimer
              text_field_tag "contact[#{field}]", value, options_for_html.merge!({class: 'input'})
            when :password
              password_field_tag "contact[#{field}]", value, options_for_html.merge!({class: 'input'})
@@ -346,18 +353,18 @@ def gumby_field_tag(form_builder, type, field, options_for_html, value, wrap_tag
              label_tag + content_tag(:div, select_tag("contact[#{field}]", options, options_for_html), class: 'picker')
            when :checkbox
              content_tag(:label, label + check_box_tag("contact[#{field}]", 1, !value.false?, options_for_html.merge!({class: 'input'})), { for: "contact[#{field}]"})
-           when :textarea
+           when :textarea, :text
              label_tag + text_area_tag("contact[#{field}]", value, options_for_html.merge!({class: 'input'}))
            else
              # Text field
              text_field_tag "contact[#{field}]", value, options_for_html.merge!({class: 'input'})
          end
   unless prepend.blank?
-    html = content_tag(:span, prepend, class: 'adjoined') + html
+    html = content_tag(:span, content_tag(:i, '', class: prepend), class: 'adjoined') + html
     klasses << 'prepend'
   end
   unless append.blank?
-    html = html + content_tag(:span, append, class: 'adjoined')
+    html = html + content_tag(:span, content_tag(:i, '', class: append), class: 'adjoined')
     klasses << 'append'
   end
   html = content_tag(wrap_tag || :li, html, class: klasses.join(' '))

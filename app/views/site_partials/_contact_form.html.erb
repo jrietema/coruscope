@@ -10,6 +10,7 @@
       <% ((params['contact'] || {}).keys - @cms_form.contact_fields).each do |field| %>
           <%= hidden_field_tag "contact[#{field}]", params['contact'][field] %>
       <% end %>
+      <span class="hint"><%= t(:required_hint, :scope => 'cms.contact_form', :symbol => '*') %></span>
       <% if @cms_site.css_framework.underscore.to_sym == :gumby %>
           <div class="medium primary btn">
             <button type='submit' form='<%#= @cms_form.identifier %>'>

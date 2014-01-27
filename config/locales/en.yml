@@ -128,6 +128,7 @@ en:
       submit: Submit
       continue: Continue
       cancel: Cancel
+      required_hint: '%{symbol} indicates required fields'
       title:
         information: Request for Information
         contact: Contact Form

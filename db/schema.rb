@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127142106) do
+ActiveRecord::Schema.define(version: 20140127211641) do
 
   create_table "cms_blocks", force: true do |t|
     t.integer  "page_id",                     null: false
@@ -40,15 +40,17 @@ ActiveRecord::Schema.define(version: 20140127142106) do
   add_index "cms_categorizations", ["category_id", "categorized_type", "categorized_id"], name: "index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id", unique: true, using: :btree
 
   create_table "cms_contact_forms", force: true do |t|
-    t.integer "site_id",         null: false
-    t.string  "identifier",      null: false
+    t.integer "site_id",                    null: false
+    t.string  "identifier",                 null: false
     t.string  "contact_fields"
     t.string  "addressee"
     t.string  "mailer_subject"
     t.string  "submit_label"
-    t.string  "redirect_url",    null: false
+    t.string  "redirect_url",               null: false
     t.text    "mailer_body"
     t.integer "contact_form_id"
+    t.text    "contact_field_options"
+    t.text    "contact_field_translations"
   end
 
   create_table "cms_contacts", force: true do |t|

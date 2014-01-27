@@ -930,13 +930,18 @@ body > footer {
 }
 
 /* Form Styles */
+.eight.columns .contact-form-wrapper {
+  width: 80%;
+}
+.twelve.columns .contact-form-wrapper {
+  width: 66%;
+}
 .contact-form-wrapper {
   h3 {
     padding-left: 14px;
   }
   .field {
     font-family: $font-family;
-    width: 80%;
     label.inline {
       float: left;
       font-size: 0.825em;
@@ -948,6 +953,38 @@ body > footer {
       clear: left;
       margin: 0;
     }
+    textarea {
+      height: 190px;
+    }
+    i {
+      font-style: normal !important;
+    }
+  }
+  .field.prepend input,
+  .field.append input {
+    width: 445px;
+  }
+  .field.completed ::-webkit-input-placeholder {
+    color: #000;
+    opacity: 1;
+  }
+  .field.completed :-moz-placeholder {
+    color: #000;
+    opacity: 1;
+  }
+  .field.completed ::-moz-placeholder {
+    color: #000;
+    opacity: 1;
+  }
+  .field.completed :-ms-input-placeholder {
+    color: #000;
+    opacity: 1;
+  }
+  .hint {
+    float: left;
+    clear: left;
+    padding-left: 14px;
+    font-size: 85%;
   }
   form .btn,
   form select,
@@ -957,6 +994,7 @@ body > footer {
   }
   form .btn {
     margin-left: 14px;
+    float: right;
   }
 }
 
