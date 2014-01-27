@@ -1,5 +1,5 @@
-<% @cms_form ||= @cms_site.contact_forms.where(identifier: param_1).first %>
-<% @contact ||= @cms_form.build_contact(params['contact'].blank? ? {} : params.fetch('contact')) %>
+<% @cms_form = @cms_site.contact_forms.where(identifier: param_1).first %>
+<% @contact = @cms_form.build_contact(params['contact'].blank? ? {} : params.fetch('contact')) %>
 
 <div id="<%= @cms_form.identifier %>-wrapper" class="contact-form-wrapper">
   <h3><%= t(@cms_form.identifier, :scope => 'cms.contact_form.title') %></h3>

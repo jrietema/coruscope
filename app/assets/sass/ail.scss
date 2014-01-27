@@ -119,6 +119,9 @@ section {
       text-align: center;
     }
   }
+  .six.columns:nth-child(even) {
+    float: right;
+  }
   div.columns {
     margin: 1.5em 0;
   }

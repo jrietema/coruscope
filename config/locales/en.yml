@@ -132,7 +132,7 @@ en:
       title:
         information: Request for Information
         contact: Contact Form
-        participant: Participant Form
+        participant: Application Form
         booking: Booking Form
       fields:
         first_name: First Name
