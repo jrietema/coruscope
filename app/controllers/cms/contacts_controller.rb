@@ -10,6 +10,7 @@ class Cms::ContactsController < Cms::BaseController
     if @cms_form.contact_form.nil?
       # don't render a second-stage form on success and save the contact
       if @contact.save
+        Cms::ContactMailer.contact_mail(@contact).deliver
         render_success
       else
         re_render_form

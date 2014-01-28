@@ -4,7 +4,8 @@ class Cms::Contact < ActiveRecord::Base
   belongs_to :site
   belongs_to :contact_form
 
-  before_validation :set_email_from_contact_field
+  before_validation :set_email_from_contact_field,
+                    :set_message_body_from_contact_fields
 
   validate :contact_field_validation
   validates :contact_form_id,
@@ -29,8 +30,6 @@ class Cms::Contact < ActiveRecord::Base
     contact_fields = value_hash
   end
 
-  protected
-
   def contact_fields
     @fields ||= (YAML.load(read_attribute(:contact_fields) || '')) || {}
     @fields.symbolize_keys! unless @fields.empty?
@@ -44,6 +43,15 @@ class Cms::Contact < ActiveRecord::Base
       fields[field] = value_hash[field]
     end
     write_attribute(:contact_fields, fields.to_yaml)
+  end
+
+  def set_message_body_from_contact_fields
+    body = ''
+    contact_form.contact_field_options.keys.each do |field|
+      next unless contact_form.contact_field_options[field]['body']
+      body << "<p>#{getFieldValue(field)}</p>"
+    end
+    body
   end
 
   protected

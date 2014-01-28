@@ -140,11 +140,17 @@ de:
       required_hint: '%{symbol} markiert erforderliche Felder'
       request: Anfordern
       apply: Anmelden
+      request_from: Anfrage vom
       title:
         information: Informationen anfordern
         contact: Kontaktformular
         participant: Anmeldung
         booking: Buchung
+      subject:
+        information: Infomaterial anfordern
+        contact: Kontaktanfrage
+        participant: Teilnahme
+        booking: Buchungsanfrage
       fields:
         first_name: Vorname
         last_name: Nachname

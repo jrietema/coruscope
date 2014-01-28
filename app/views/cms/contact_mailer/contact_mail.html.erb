@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+    <h1><%= @about %> (<%= @contact.email %>)</h1>
+    <p><%= t(:request_from, :scope => 'cms.contact_form') %> <%= @contact.created_at.strftime('%d.%m.%Y') %></p>
+    <% unless @message.blank? %>
+    <p><%= @message %></p>
+    <% end %>
+    <% @contact_form.contact_fields.each do |field| %>
+    <p>
+      <span><%= t(field, :scope => 'cms.contact_form.fields') %>:</span><br>
+      <%= @contact.getFieldValue(field) %>
+    </p>
+    <% end %>
+</body>
+</html>

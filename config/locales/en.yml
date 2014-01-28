@@ -131,11 +131,17 @@ en:
       required_hint: '%{symbol} indicates required fields'
       request: Send
       apply: Apply
+      request_from: Request from
       title:
         information: Request for Information
         contact: Contact Form
         participant: Application Form
         booking: Booking Form
+      subject:
+        information: Request for Information
+        contact: Contact Request
+        participant: Participation Request
+        booking: Booking Request
       fields:
         first_name: First Name
         last_name: Last Name
