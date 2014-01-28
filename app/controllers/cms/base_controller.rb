@@ -13,7 +13,7 @@ class Cms::BaseController < ApplicationController
 
     if @cms_site
       if @cms_site.path.present?
-        unless %w(assets files).include?(controller_name)
+        unless %w(assets files contacts).include?(controller_name)
           if params[:cms_path] && params[:cms_path].match(/\A#{@cms_site.path}/)
             params[:cms_path].gsub!(/\A#{@cms_site.path}/, '')
             params[:cms_path] && params[:cms_path].gsub!(/\A\//, '')

@@ -25,8 +25,10 @@ Coruscope::Application.routes.draw do
   end
 
   namespace :cms do
-    resources :contact_forms do
-      resources :contacts
+    resources :sites do
+      resources :contact_forms do
+        resources :contacts
+      end
     end
   end
 

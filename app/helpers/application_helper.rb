@@ -1,14 +1,18 @@
 module ApplicationHelper
   # Help build gumby forms
 
-  def page_path(page)
+  def page_path(page, include_site=true)
     site_path = page.site.path
     path_elems = [page.slug.to_s]
     while !page.parent.nil?
       page = page.parent
       path_elems << page.slug.to_s
     end
-    File.join('/', site_path, path_elems.reverse.compact)
+    if include_site
+      File.join('/', site_path, path_elems.reverse.compact)
+    else
+      File.join(path_elems.reverse.compact)
+    end
   end
 
   # path to static assets for cms site

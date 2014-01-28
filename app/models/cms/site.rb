@@ -67,6 +67,10 @@ class Cms::Site < ActiveRecord::Base
     super
   end
 
+  def contact_fields
+    @contact_fields ||= YAML.load(read_attribute(:contact_fields) || '') || []
+  end
+
   # Names of contact fields for translation
   def contact_field_name(contact_field)
     contact_field_translations[contact_field]
