@@ -19,7 +19,7 @@ $color_soft_margin: #c5baa6;
 $color_footer: #a2a2a2;
 $color_image_nav: #003366;
 
-$header_height: 128px;
+$header_height: 108px;
 $nav_height: 60px;
 
 $page_nav_z: 6999;
@@ -305,6 +305,7 @@ body > header {
   height: $header_height + $nav_height - 5px;
   width: 100%;
   z-index: $page_nav_z + 5;
+  min-width: 1024px;
 }
 body {
   padding-top: $header_height + $nav_height + 31px;
@@ -317,13 +318,16 @@ header #identity {
   height: $header_height - 5px;
   padding: 5px 4% 0;
   overflow-y: hidden;
+  img {
+    height: 90px;
+  }
   hgroup {
-    padding-top: 1.2em;
+    padding-top: 15px;
     padding-left: 0.75em;
     max-width: 700px;
     h1 {
       width: 100%;
-      font-size: 2.45em;
+      font-size: 1.75em;
       color: $color_page_bg;
       font-weight: $semibold;
       /* font-weight: bold; */
@@ -332,7 +336,7 @@ header #identity {
       text-align: left;
     }
     h2 {
-      font-size: 1.25em;
+      font-size: 1em;
       font-weight: bold;
       color: #fff;
       padding-top: 0.15em;
@@ -346,7 +350,7 @@ header #identity {
 header {
   #direct_access {
     position: absolute;
-    top: 43px;
+    top: 35px;
     right: 2%;
     width: 320px;
     li {
