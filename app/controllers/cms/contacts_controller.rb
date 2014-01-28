@@ -3,8 +3,6 @@ class Cms::ContactsController < Cms::BaseController
   before_action :load_contact_form, :only => :create
   before_action :build_contact, :only => :create
 
-  before_action :test, :only => :createg
-
   # This controller only handles create actions = contact_form submissions
   def create
     if @cms_form.contact_form.nil?
@@ -68,10 +66,6 @@ class Cms::ContactsController < Cms::BaseController
 
   def build_contact
     @contact = @cms_form.build_contact(contact_params)
-  end
-
-  def test
-    render :inline => request.referer.inspect
   end
 
   def reconstruct_page_path(slug)
