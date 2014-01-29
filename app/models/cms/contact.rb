@@ -20,7 +20,7 @@ class Cms::Contact < ActiveRecord::Base
 
   def getFieldValue(field)
     return nil if self.contact_form.nil?
-    if self.contact_form.contact_fields.flatten.include?(field.to_s)
+    if self.contact_form.contact_field_names.include?(field.to_s)
       contact_fields[field.to_sym] || nil
     end
   end
@@ -86,9 +86,9 @@ class Cms::Contact < ActiveRecord::Base
   # accessors to contact fields
   def method_missing(method_name, *args)
     # attempt to get a field value
-    if(!contact_form.nil? && contact_form.contact_fields.include?(method_name.to_s))
+    if(!contact_form.nil? && contact_form.contact_field_names.include?(method_name.to_s))
       return getFieldValue(method_name.to_s)
-    elsif (!contact_form.nil?) && contact_form.contact_fields.map{|f| "#{f.to_s}=" }.include?(method_name.to_s)
+    elsif (!contact_form.nil?) && contact_form.contact_field_names.map{|f| "#{f.to_s}=" }.include?(method_name.to_s)
       setFieldValue(method_name.to_s.sub('=',''), args.first)
     else
       super(method_name, *args)

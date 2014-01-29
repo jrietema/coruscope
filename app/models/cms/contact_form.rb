@@ -6,6 +6,10 @@ class Cms::ContactForm < ActiveRecord::Base
   has_many :contact_forms, class_name: 'Cms::ContactForm'
   has_many :contacts, class_name: 'Cms::Contact'
 
+  def contact_field_names
+    contact_fields.flatten
+  end
+
   def contact_fields
     YAML.load(read_attribute(:contact_fields) || '') || []
   end

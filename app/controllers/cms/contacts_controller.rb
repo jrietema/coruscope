@@ -85,7 +85,7 @@ class Cms::ContactsController < Cms::BaseController
   private
 
   def contact_params
-    @contact_params = params.require(:contact).permit(@cms_site.contact_fields) || {}
+    @contact_params = params.require(:contact).permit(@cms_site.contact_field_names) || {}
   end
 
 end

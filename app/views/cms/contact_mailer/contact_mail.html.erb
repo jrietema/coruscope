@@ -9,7 +9,7 @@
     <% unless @message.blank? %>
     <p><%= @message %></p>
     <% end %>
-    <% @contact_form.contact_fields.each do |field| %>
+    <% @contact_form.contact_field_names.each do |field| %>
     <p>
       <span><%= t(field, :scope => 'cms.contact_form.fields') %>:</span><br>
       <%= @contact.getFieldValue(field) %>
