@@ -56,7 +56,7 @@ class Cms::ContactsController < Cms::BaseController
 
   def render_followup_form
     # redirect to the page containing the form (given by the redirect url)
-    render :action => :show, :controller => 'cms/content', :cms_path => @cms_form.redirect_url
+    redirect_to @cms_form.redirect_url
   end
 
   def load_contact_form

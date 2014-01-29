@@ -55,6 +55,10 @@ class Cms::ContactForm < ActiveRecord::Base
     write_attribute :contact_field_translations, translations.to_yaml
   end
 
+  def redirect_url
+    ['', read_attribute(:redirect_url).split('/')].flatten.join('/')
+  end
+
   def build_contact(field_values={})
     contact = self.contacts.new
     contact.contact_form = self
