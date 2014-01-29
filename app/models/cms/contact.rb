@@ -19,8 +19,8 @@ class Cms::Contact < ActiveRecord::Base
 =end
 
   def getFieldValue(field)
-    return nil if contact_form.nil?
-    if contact_form.contact_fields.include?(field.to_s)
+    return nil if self.contact_form.nil?
+    if self.contact_form.contact_fields.flatten.include?(field.to_s)
       contact_fields[field.to_sym] || nil
     end
   end
@@ -40,8 +40,10 @@ class Cms::Contact < ActiveRecord::Base
   def contact_fields=(value_hash)
     # don't store an ActiveRecord::Parameters instance
     fields = {}
-    value_hash.keys.each do |field|
-      fields[field] = value_hash[field]
+    unless value_hash.nil?
+      value_hash.keys.each do |field|
+        fields[field] = value_hash[field]
+      end
     end
     write_attribute(:contact_fields, fields.to_yaml)
   end

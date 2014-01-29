@@ -56,7 +56,7 @@ class Cms::ContactsController < Cms::BaseController
 
   def render_followup_form
     # redirect to the page containing the form (given by the redirect url)
-    redirect_to @cms_form.redirect_url
+    redirect_to "#{@cms_form.redirect_url}?#{serialize_contact_params}"
   end
 
   def load_contact_form
@@ -78,13 +78,14 @@ class Cms::ContactsController < Cms::BaseController
     url
   end
 
-  def serialize_contact_parameters
-    contact_params.keys.map{|field| "contact[#{field}]=#{contact_params[field]}"}.join("&")
+  def serialize_contact_params
+    {:contact => contact_params}.to_query
   end
 
   private
 
   def contact_params
-    params.require(:contact).permit(@cms_site.contact_fields)
+    @contact_params = params.require(:contact).permit(@cms_site.contact_fields) || {}
   end
+
 end
