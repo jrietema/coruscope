@@ -75,7 +75,7 @@ class Cms::ContactsController < Cms::BaseController
     unless tokens.empty?
       url << "##{tokens[1]}"
     end
-    url
+    url.gsub(/\/+/,'/')
   end
 
   def serialize_contact_params
