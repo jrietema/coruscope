@@ -19,6 +19,7 @@ class Cms::Contact < ActiveRecord::Base
 =end
 
   def getFieldValue(field)
+    return nil if contact_form.nil?
     if contact_form.contact_fields.include?(field.to_s)
       contact_fields[field.to_sym] || nil
     end
@@ -47,9 +48,11 @@ class Cms::Contact < ActiveRecord::Base
 
   def set_message_body_from_contact_fields
     body = ''
-    contact_form.contact_field_options.keys.each do |field|
-      next unless contact_form.contact_field_options[field]['body']
-      body << "<p>#{getFieldValue(field)}</p>"
+    unless contact_form.nil?
+      contact_form.contact_field_options.keys.each do |field|
+        next unless contact_form.contact_field_options[field]['body']
+        body << "<p>#{getFieldValue(field)}</p>"
+      end
     end
     body
   end
@@ -65,6 +68,10 @@ class Cms::Contact < ActiveRecord::Base
   # currently validates:
   # - presence of mandatory contact fields
   def contact_field_validation
+    if contact_form.nil?
+      self.errors.add(:contact_form_id, :missing)
+      return
+    end
     field_definitions = self.contact_form.contact_field_options
     field_definitions.keys.each do |field|
       next unless field_definitions[field][:mandatory]

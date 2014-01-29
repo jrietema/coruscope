@@ -15,7 +15,6 @@ class Cms::ContactsController < Cms::BaseController
       end
     else
       # perform a validation and re-render or pass on to second form stage
-      @contact.validate
       if @contact.valid?
         render_followup_form
       else
