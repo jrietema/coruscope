@@ -56,7 +56,7 @@ class Cms::ContactForm < ActiveRecord::Base
   end
 
   def redirect_url
-    ['', read_attribute(:redirect_url).split('/')].flatten.join('/')
+    ['', read_attribute(:redirect_url).split('/')].flatten.join('/').gsub(/\/+/,'/')
   end
 
   def build_contact(field_values={})
