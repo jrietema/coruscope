@@ -8,7 +8,7 @@ module ApplicationHelper
       page = page.parent
       path_elems << page.slug.to_s
     end
-    if include_site
+    if include_site && page.site.render_site_path
       File.join('/', site_path, path_elems.reverse.compact)
     else
       File.join(path_elems.reverse.compact)
