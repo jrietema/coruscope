@@ -27,10 +27,11 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			lastHash = '',
         // TODO: this is a poor adjustment for verticalOffset differences in the scenario:
         // body padding, absolute menu pinning and scroll offset
-			menuHeight = ((options.menuFixed) ? 2.3*$smint.height() : $smint.height()),
+			menuHeight = $smint.height(); // ((options.menuFixed) ? 2.3*$smint.height() : $smint.height()),
 			curi = 0,
             verticalOffset = options.verticalOffset || 0,
-			stickyTop = $smint.offset().top - verticalOffset;
+            origTop = $smint.offset().top;
+			stickyTop = origTop - verticalOffset;
 
         var removeActive = function() {
             $smintItems.each(function(){
@@ -53,15 +54,14 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 				}
 			}
             // Never change it back
-			// else {
-			//	$smint.css({ 'position': 'absolute', 'top': stickyTop, 'left': 'auto' }).removeClass('fxd');
-			// }
+			else {
+				$smint.css({ 'position': 'absolute', 'top': origTop, 'left': 'auto' }).removeClass('fxd');
+			}
 
-            /*
-
+            /* This is borked...
 			if (!scrollingDown) {
 				while (true) {
-					if (scrollTop >= (optionLocs[curi].top - verticalOffset)) {
+					if (optionLocs[curi] && (scrollTop >= (optionLocs[curi].top))) {
                         removeActive();
 						$('#' + optionLocs[curi].id).parent('li').addClass('active');
 						// The foll. makes the page very slow.
@@ -76,7 +76,7 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			}
 			else {
 				while (true) {
-					if (scrollTop < (optionLocs[curi].bottom - verticalOffset)) {
+					if (optionLocs[curi] && (scrollTop < (optionLocs[curi].bottom))) {
 						removeActive();
 						$('#' + optionLocs[curi].id).parent('li').addClass('active');
 						// The foll. makes the page very slow.
@@ -93,7 +93,8 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 					//}
 				}
 			}
-            */
+			*/
+
 		};
 
 		// run function every time you scroll but not needed to be run for each of the $smintItems
@@ -131,13 +132,13 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			//Fill the menu
 			var id = this.id,
 				matchingSection = $("."+id),
-				sectionTop = matchingSection.position().top,
+				sectionTop = matchingSection.offset().top - verticalOffset,
 				hash = null;
 			if($(this).attr("href").indexOf('#') >= 0) {
 				hash = $(this).attr("href").substr($(this).attr("href").indexOf('#') + 1);
 			}
 			optionLocs.push({
-				top: sectionTop - menuHeight,
+				top: sectionTop -  2 * menuHeight,
 				bottom: parseInt(matchingSection.height() * 0.9) + sectionTop - menuHeight, //Added so that if he is scrolling down and has reached 90% of the section.
 				id: id,
 				hash: hash
@@ -156,7 +157,7 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 				//e.preventDefault();
 				
 				// Scroll the page to the desired position!
-				$("html, body").animate({ scrollTop: sectionTop - menuHeight - (verticalOffset * 0.8)}, settings.scrollSpeed);
+				$("html, body").animate({ scrollTop: sectionTop - 2 * menuHeight}, settings.scrollSpeed);
 			})
 		});
 
