@@ -14,7 +14,35 @@ function copyFormData() {
     });
 }
 
-function enableFancytree(selector, dataUrl) {
+function loadOnFancytreeAction(url, method, parameters) {
+    var updateElement = $('#dynamic-content');
+    $('#dynamic-overlay').show();
+    if(!parameters) {
+        parameters = {};
+    }
+    switch(method) {
+        case 'POST':
+            $.post(url, parameters).done(function(data) {
+                updateElement.html(data);
+            }).always(function(){
+                $('#dynamic-overlay').hide();
+            });
+            break;
+        default:
+            $.get(url, parameters).done(function(data) {
+                updateElement.html(data);
+            }).always(function(){
+                $('#dynamic-overlay').hide();
+            });
+    }
+    $.get(url, function(data) {
+        updateElement.html(data);
+    }).always(function(){
+        $('#dynamic-overlay').hide();
+    });
+}
+
+function enableFancytree(selector, dataUrl, options) {
     if(!window.fancytrees) {
         window.fancytrees = {};
     }
@@ -78,7 +106,26 @@ function enableFancytree(selector, dataUrl) {
         click: function(event, data) {
             var node = $(data.originalEvent.target);
             if(node.parents('.node-actions').length != 0) {
+                // ensure action node not display element
+                while(!node.parent().hasClass('node-actions')) {
+                    node = node.parent();
+                }
                 // handle node action events
+                var actions = node.attr('class').split('-');
+                var nodeData = data.node.data;
+                if(nodeData.href) {
+                    for(var i=0; i < actions.length; i++) {
+                        switch(actions[i]) {
+                            case 'edit':
+                                // GET request on nodeData.href
+                                loadOnFancytreeAction(nodeData.href, 'GET', null);
+                                break;
+                            case 'delete':
+                                alert('Called DELETE');
+                                break;
+                        }
+                    }
+                }
             } else {
                 // move node actions into the current node
                 if(!node.hasClass('fancytree-node')) {
@@ -106,8 +153,6 @@ function enableFancytree(selector, dataUrl) {
         style: 'cursor: pointer;'
     }));
     actionControl.append($('<a/>', {html: '<i class="icon-remove"/>', title: 'Löschen', class: 'node-delete', style: 'cursor: pointer;'}));
-    // attach the events to the links:
-
     $(selector).append(actionControl);
 };
 
