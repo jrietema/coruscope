@@ -15,7 +15,10 @@ function copyFormData() {
 }
 
 function enableFancytree(selector, dataUrl) {
-    $(selector).fancytree({
+    if(!window.fancytrees) {
+        window.fancytrees = {};
+    }
+    window.fancytrees[selector] = $(selector).fancytree({
         minExpandLevel: 1,
         // prevent navigation on re-load
         postinit: function(isReloading, isError) {
@@ -73,16 +76,39 @@ function enableFancytree(selector, dataUrl) {
             }
         },
         click: function(event, data) {
-            var node = data.node;
-            // Use href attribute to load the content
-            if( node.data.href ){
-                // Open target via AJAX and update dynamic-content
-                $.get(node.data.href, function(data) {
-                    $('#dynamic-content').html(data);
-                });
+            var node = $(data.originalEvent.target);
+            if(node.parents('.node-actions').length != 0) {
+                // handle node action events
+            } else {
+                // move node actions into the current node
+                if(!node.hasClass('fancytree-node')) {
+                    node = node.parents('.fancytree-node');
+                }
+                // Remove and reinsert actionControls into the node
+                var actionControl = data.tree.$div.find('.node-actions');
+                if(node != actionControl.parent()) {
+                    actionControl.detach();
+                    node.append(actionControl);
+                    actionControl.show();
+                }
             }
         }
-    })
+    });
+    $(selector).css('position', 'relative');
+    var actionControl = $('<div/>',{
+        class: 'node-actions',
+        style: 'position: absolute; top: 0; right: 0; display: none;'
+    });
+    actionControl.append($('<a/>', {
+        html: '<i class="icon-edit"/>',
+        title: 'Bearbeiten',
+        class: 'node-edit',
+        style: 'cursor: pointer;'
+    }));
+    actionControl.append($('<a/>', {html: '<i class="icon-remove"/>', title: 'Löschen', class: 'node-delete', style: 'cursor: pointer;'}));
+    // attach the events to the links:
+
+    $(selector).append(actionControl);
 };
 
 /* A select-like element */
