@@ -103,6 +103,14 @@ function enableFancytree(selector, dataUrl, options) {
                 sourceNode.moveTo(node, hitMode);
             }
         },
+        lazyload: function(event, data) {
+            var node = data.node;
+            data.result = {
+                url: dataUrl,
+                data: {node: node.key},
+                cache: false
+            }
+        },
         click: function(event, data) {
             var node = $(data.originalEvent.target);
             if(node.parents('.node-actions').length != 0) {
@@ -141,6 +149,7 @@ function enableFancytree(selector, dataUrl, options) {
             }
         }
     });
+    window.fancytrees[selector].dataUrl = dataUrl;
     $(selector).css('position', 'relative');
     var actionControl = $('<div/>',{
         class: 'node-actions',

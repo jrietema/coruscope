@@ -1,1 +1,1 @@
-<%= fancytree_grouped_hash(@groups, @items).to_json.html_safe %>
+<%= fancytree_grouped_hash(@groups, @items, (params['node'].blank? ? nil : params['node'].to_i), params['node'].blank?).to_json.html_safe %>
