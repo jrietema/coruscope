@@ -32,7 +32,7 @@ Coruscope::Application.routes.draw do
     end
   end
 
-  comfy_route :cms, :path => '/', :sitemap => false
+  comfy_route :cms, :path => '/', :sitemap => true
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

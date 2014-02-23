@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140129110302) do
+ActiveRecord::Schema.define(version: 20140223204404) do
 
   create_table "cms_blocks", force: true do |t|
     t.integer  "page_id",                     null: false
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20140129110302) do
     t.boolean  "is_shared",                           default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "navigation_root_id",                                  null: false
+    t.integer  "navigation_root_id"
     t.boolean  "render_as_page",                      default: true
     t.boolean  "is_leaf_node",                        default: false
   end

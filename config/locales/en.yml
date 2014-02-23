@@ -203,6 +203,7 @@ en:
           title: New Site
         edit:
           title: Editing Site
+          create_mirror: Create Site Mirror
         form:
           create: Create Site
           update: Update Site

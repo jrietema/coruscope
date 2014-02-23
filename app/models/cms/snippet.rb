@@ -1,8 +1,8 @@
 class Cms::Snippet < ActiveRecord::Base
   include Cms::Base
+  include Cms::Mirrored
 
   cms_is_categorized
-  cms_is_mirrored
   cms_has_revisions_for :content
 
   # -- Relationships --------------------------------------------------------
@@ -51,7 +51,7 @@ class Cms::Snippet < ActiveRecord::Base
   end
 
   def assign_group_id
-    if self.group_id.nil?
+    if self.group_id.nil? && !site.groups.snippets.empty?
       self.group_id = site.groups.snippets.root.first.id
     end
   end

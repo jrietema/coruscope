@@ -47,28 +47,18 @@ function enableFancytree(selector, dataUrl, options) {
         window.fancytrees = {};
     }
     window.fancytrees[selector] = $(selector).fancytree({
-        minExpandLevel: 1,
-        // prevent navigation on re-load
-        postinit: function(isReloading, isError) {
-            this.reactivate();
-        },
+        // minExpandLevel: 1,
         extensions: [
-            'dnd' // , 'persist'
+            'dnd', 'persist'
         ],
         source: { url: dataUrl},
-        //[
-        //{ title: '#{t('admin.cms.base.sites')}', href: '#{admin_cms_sites_path}' },
-        //{ title: '#{@site.label} actions', key: 'actions', folder: true, children:
-        //[
-        //{ title: '#{t('admin.cms.base.layouts')}', href: '#{admin_cms_site_layouts_path(@site)}'},
-        //{ title: '#{t('admin.cms.base.pages')}', href: '#{admin_cms_site_pages_path(@site)}'},
-        //{ title: '#{t('admin.cms.base.snippets')}', href: '#{admin_cms_site_snippets_path(@site)}'},
-        //{ title: '#{t('admin.cms.base.files')}', href: '#{admin_cms_site_files_path(@site)}'}
-        //]
-        //}],
-        // persist: {
-        // mode: "hide"
-        // },
+        persist: {
+            cookiePrefix: 'ft-' + selector.match(/\w+/)[0] + '-',
+            cookie: {
+                expires: 1
+            },
+            types: 'active expanded'
+        },
         dnd:
         {
             preventVoidMoves: true, // Prevent dropping nodes 'before self', etc.

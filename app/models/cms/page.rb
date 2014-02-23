@@ -2,10 +2,10 @@
 
 class Cms::Page < ActiveRecord::Base
   include Cms::Base
+  include Cms::Mirrored
 
   cms_acts_as_tree :counter_cache => :children_count
   cms_is_categorized
-  cms_is_mirrored
   cms_has_revisions_for :blocks_attributes
 
   attr_accessor :tags,
@@ -175,7 +175,11 @@ class Cms::Page < ActiveRecord::Base
   # navigation root determines the kind of navigation a page is part of
   def assign_navigation_root
     if navigation_root.nil?
-      self.navigation_root_id = site.pages.root.id
+      if !site.pages.empty?
+        self.navigation_root_id = site.pages.root.id
+      else
+        self.navigation_root_id = self.id # this may be nil for new records
+      end
     end
   end
 
@@ -185,7 +189,8 @@ class Cms::Page < ActiveRecord::Base
     page = self
     if page.parent_id.nil?
       # root pages need their own id set as navigation root - or the site's root
-      return true if [page.id, page.site.pages.root.id].include?(page.navigation_root_id)
+      # exception: first page may have navigation_root_id nil
+      return true if [page.id, (page.site.pages.empty? ? nil : page.site.pages.root.id)].include?(page.navigation_root_id)
     else
       while !(page = page.parent).nil?
         return true if page == self.navigation_root

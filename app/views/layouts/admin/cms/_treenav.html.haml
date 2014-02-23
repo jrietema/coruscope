@@ -1,17 +1,17 @@
 .tab-content.column-content
   #sites-tree.tab-pane{class: (controller_name == 'sites' && action_name != 'edit') ? 'active' : '', data: {src: admin_cms_sites_url(format: :json)}}
-  #pages-tree.tab-pane{class: (controller_name == 'pages' && action_name != 'edit') ? 'active' : '', data: {src: admin_cms_site_pages_url(site_id: @site.id, format: :json)}}
-  #layouts-tree.tab-pane{class: (controller_name == 'layouts' && action_name != 'edit') ? 'active' : '', data: {src: admin_cms_site_layouts_url(site_id: @site.id, format: :json)}}
-  #snippets-tree.tab-pane{class: (controller_name == 'snippets' && action_name != 'edit') ? 'active' : '', data: {src: snippets_admin_cms_site_groups_url(site_id: @site.id, format: :json)}}
-  #files-tree.tab-pane{class: (controller_name == 'files' && action_name != 'edit') ? 'active' : '', data: {src: files_admin_cms_site_groups_url(site_id: @site.id, format: :json)}}
-  #meta_pane.tab-pane{class: action_name == 'edit' ? 'active' : ''}
-    = yield :meta_pane
+  - if @site && !@site.new_record?
+    #pages-tree.tab-pane{class: (controller_name == 'pages' && action_name != 'edit') ? 'active' : '', data: {src: admin_cms_site_pages_url(site_id: @site.id, format: :json)}}
+    #layouts-tree.tab-pane{class: (controller_name == 'layouts' && action_name != 'edit') ? 'active' : '', data: {src: admin_cms_site_layouts_url(site_id: @site.id, format: :json)}}
+    #snippets-tree.tab-pane{class: (controller_name == 'snippets' && action_name != 'edit') ? 'active' : '', data: {src: snippets_admin_cms_site_groups_url(site_id: @site.id, format: :json)}}
+    #files-tree.tab-pane{class: (controller_name == 'files' && action_name != 'edit') ? 'active' : '', data: {src: files_admin_cms_site_groups_url(site_id: @site.id, format: :json)}}
+    #meta_pane.tab-pane{class: action_name == 'edit' ? 'active' : ''}
+      = yield :meta_pane
 
-- if @site && !@site.new_record?
-  != javascript_tag do
-    $('.tab-content .tab-pane').each(function(){
-    if($(this).hasClass('active')) {initializeTreeTab($(this).attr('id'));}
-    });
+!= javascript_tag do
+  $('.tab-content .tab-pane').each(function(){
+  if($(this).hasClass('active')) {initializeTreeTab($(this).attr('id'));}
+  });
 
 .content-actions
   = yield :right_column

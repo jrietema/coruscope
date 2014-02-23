@@ -7,4 +7,6 @@
 - display image resolutions available in the image meta (and original resolution in central pane)
 - better asset urls for files
 - implement a version of fancytree as a select analog
-- update wysihtml5 to utilize an advanced file dialog with select options
+-# update wysihtml5 to utilize an advanced file dialog with select options
+
+- add translations for field values to cms.base.contact_form for better E-Mails!

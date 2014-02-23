@@ -68,7 +68,7 @@ module ApplicationHelper
     labelling = ->(item) { fancytree_label_for(item) } unless block_given?
     pages[branch_id].map do |page|
       child_pages = pages[page.id] || []
-      page_hash = { title: labelling.call(page), key: page.id, href: method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: @site.id, id: page.id, format: :js}) }
+      page_hash = { title: labelling.call(page), key: page.id, href: method("edit_admin_cms_site_#{item_model}_path".sub('site_site','site')).call({site_id: (@site.nil? ? nil : @site.id), id: page.id, format: :js}) }
       unless child_pages.empty?
         page_hash.merge!({ folder: true, children: fancytree_pages_hash(pages, page.id, &labelling)})
       end

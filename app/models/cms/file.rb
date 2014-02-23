@@ -76,7 +76,7 @@ class Cms::File < ActiveRecord::Base
   end
 
   def assign_group_id
-    if self.group_id.nil?
+    if self.group_id.nil? && !site.groups.files.empty?
       self.group_id = site.groups.files.root.first.id
     end
   end

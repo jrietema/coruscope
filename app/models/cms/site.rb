@@ -149,6 +149,7 @@ class Cms::Site < ActiveRecord::Base
       (site.layouts(:reload).roots + site.layouts.roots.map(&:descendants)).flatten.map(&:sync_mirror)
       (site.pages(:reload).roots + site.pages.roots.map(&:descendants)).flatten.map(&:sync_mirror)
       site.snippets(:reload).map(&:sync_mirror)
+      site.groups(:reload).snippets.map(&:sync_mirror)
     end
   end
 

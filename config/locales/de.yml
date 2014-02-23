@@ -212,6 +212,7 @@ de:
           title: Neue Web-Site
         edit:
           title: Web-Site bearbeiten
+          create_mirror: Mirror-site erstellen
         form:
           create: Erstelle Web-Site
           update: Web-Site speichern

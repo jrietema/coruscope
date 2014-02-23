@@ -3,6 +3,7 @@
 # it can hold resizing/cropping configurations.
 class Cms::Group < ActiveRecord::Base
   include Cms::Base
+  include Cms::Mirrored
 
   GROUPABLES = %w(Cms::Snippet Cms::File)
 

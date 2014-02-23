@@ -13,7 +13,7 @@
 //= require jquery.cookie
 //= require jquery.fancytree
 //= require jquery.fancytree.dnd
-//  require jquery.fancytree.persist
+//= require jquery.fancytree.persist
 //= require underscore
 //= require image_upload_select_wysihtml5
 // require jqueryupload
