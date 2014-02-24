@@ -80,7 +80,7 @@ module ApplicationHelper
     # use the containing group to determine model type if this is empty
     model_group = groups[branch_id]
     model_group ||= groups[groups.select{|k,g| g.include?(branch_id)}.keys.first]
-    item_model = model_group.first.grouped_type.underscore.split('/').last
+    item_model = (model_group || groups).first.grouped_type.underscore.split('/').last
     labelling = ->(item) { fancytree_label_for(item) } unless block_given?
     collection = (groups[branch_id].nil? ? [] : groups[branch_id]).map do |group|
       child_groups = groups[group.id] || []
