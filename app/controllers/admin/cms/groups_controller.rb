@@ -22,6 +22,8 @@ class Admin::Cms::GroupsController < Admin::Cms::BaseController
     mirrored_site_ids
     @items = Cms::File.includes(:categories).for_category(params[:category]).where(["file_content_type LIKE 'image%' AND site_id IN (?)", @site_ids]).order('cms_files.position').group_by(&:group_id)
     groups_by_parent('Cms::File')
+    # avoid multiple retrieval due to several web editors
+    response.headers['Cache-Control'] = 'max-age=60, must-revalidate'
     render :template => '/admin/cms/groups/images', :layout => false
   end
 
