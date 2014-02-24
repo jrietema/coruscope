@@ -82,7 +82,7 @@ module ApplicationHelper
     model_group ||= groups[groups.select{|k,g| g.include?(branch_id)}.keys.first]
     item_model = model_group.first.grouped_type.underscore.split('/').last
     labelling = ->(item) { fancytree_label_for(item) } unless block_given?
-    collection = groups[branch_id].nil? ? [] : groups[branch_id].map do |group|
+    collection = (groups[branch_id].nil? ? [] : groups[branch_id]).map do |group|
       child_groups = groups[group.id] || []
       page_hash = { title: group.label, key: group.id, folder: true, href: method("edit_admin_cms_site_group_path".sub('site_site','site')).call({site_id: @site.id, id: group.id, format: :js}) }
       if lazy && !top_node
@@ -94,7 +94,7 @@ module ApplicationHelper
         # add child groups/folders
         child_contents = []
         unless child_groups.empty?
-          child_contents = (fancytree_grouped_hash(groups, items, group.id, false, false, &labelling))
+          child_contents = (fancytree_grouped_hash(groups, items, group.id, false, false, lazy, &labelling))
         end
         child_items = items[group.id] || []
         unless child_items.empty?

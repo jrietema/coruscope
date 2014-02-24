@@ -67,6 +67,22 @@ class Cms::Site < ActiveRecord::Base
     super
   end
 
+  def mirrors
+    if is_mirrored
+      Cms::Site.mirrored
+    else
+      [self]
+    end
+  end
+
+  def original_mirror
+    if is_mirrored
+      Cms::Site.mirrored.first
+    else
+      self
+    end
+  end
+
   def contact_fields
     @contact_fields ||= YAML.load(read_attribute(:contact_fields) || '') || []
   end
@@ -143,13 +159,16 @@ class Cms::Site < ActiveRecord::Base
   # When site is marked as a mirror we need to sync its structure
   # with other mirrors.
   def sync_mirrors
+    # create a Default Snippet Group
+    self.groups.create({ label: 'Default', grouped_type: 'Cms::Snippet' })
+
     return unless is_mirrored_changed? && is_mirrored?
 
     [self, Cms::Site.mirrored.where("id != #{id}").first].compact.each do |site|
       (site.layouts(:reload).roots + site.layouts.roots.map(&:descendants)).flatten.map(&:sync_mirror)
       (site.pages(:reload).roots + site.pages.roots.map(&:descendants)).flatten.map(&:sync_mirror)
-      site.snippets(:reload).map(&:sync_mirror)
       site.groups(:reload).snippets.map(&:sync_mirror)
+      site.snippets(:reload).map(&:sync_mirror)
     end
   end
 

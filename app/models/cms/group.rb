@@ -27,7 +27,7 @@ class Cms::Group < ActiveRecord::Base
   validates :label,
             presence: true
   validates :label,
-            uniqueness: { scope: :parent_id }
+            uniqueness: { scope: [:parent_id, :site_id] }
   validates :grouped_type,
             inclusion: GROUPABLES
 

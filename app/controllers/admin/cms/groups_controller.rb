@@ -4,19 +4,23 @@ class Admin::Cms::GroupsController < Admin::Cms::BaseController
   before_action :load_group, :only => [:edit, :update, :destroy]
 
   def files
-    @items = @site.files.includes(:categories).for_category(params[:category]).order('cms_files.position').group_by(&:group_id)
+    mirrored_site_ids
+    @items = Cms::File.includes(:categories).for_category(params[:category]).where(['site_id IN (?)', @site_ids]).order('cms_files.position').group_by(&:group_id)
     groups_by_parent('Cms::File')
     render :action => :index, :layout => false
   end
 
   def snippets
+    @site_ids = [@site.id]
     @items = @site.snippets.includes(:categories).for_category(params[:category]).order('cms_snippets.position').group_by(&:group_id)
     groups_by_parent('Cms::Snippet')
-    render :action => :index, :layout => false
+    logger.info("@@@ SNIPPET GROUPS: #{@groups.inspect}")
+    render :action => :snippets, :layout => false
   end
 
   def images
-    @items = @site.files.includes(:categories).for_category(params[:category]).where("file_content_type LIKE 'image%'").order('cms_files.position').group_by(&:group_id)
+    mirrored_site_ids
+    @items = Cms::File.includes(:categories).for_category(params[:category]).where(["file_content_type LIKE 'image%' AND site_id IN (?)", @site_ids]).order('cms_files.position').group_by(&:group_id)
     groups_by_parent('Cms::File')
     render :template => '/admin/cms/groups/images', :layout => false
   end
@@ -55,19 +59,31 @@ class Admin::Cms::GroupsController < Admin::Cms::BaseController
 
   protected
 
+  def mirrored_site_ids
+    @site_ids = (@site.mirrors).uniq.map(&:id)
+  end
+
   def groups_by_parent(type)
-    @groups = @site.groups.where(grouped_type: type).group_by(&:parent_id)
+    @groups = Cms::Group.where(['grouped_type = ? AND site_id IN (?)', type, @site_ids]).group_by(&:parent_id)
   end
 
   def build_group
     type = params[:grouped_type]
-    default = @site.groups.where(grouped_type: type).first
-    @group = @site.groups.build({grouped_type: type, parent_id: default.nil? ? nil : default.id })
+    case type
+      when 'Cms::Snippet'
+        # create to this site
+        default = @site.groups.where(grouped_type: type).first
+        @group = @site.groups.build({grouped_type: type, parent_id: default.nil? ? nil : default.id })
+      else
+        # create on the original mirror
+        default = @site.original_mirror.groups.where(grouped_type: type).first
+        @group = @site.original_mirror.groups.build({grouped_type: type, parent_id: default.nil? ? nil : default.id })
+    end
     @group.attributes = group_params
   end
 
   def load_group
-    @group = @site.groups.find(params[:id])
+    @group = Cms::Group.where(['id = ? AND site_id IN (?)', params[:id], @site.mirrors.map(&:id)]).first
   end
 
   def group_params

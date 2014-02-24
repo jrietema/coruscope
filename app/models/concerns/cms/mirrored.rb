@@ -64,7 +64,8 @@ module Cms::Mirrored
                  when Cms::Snippet
                    m = site.snippets.find_by_identifier(self.identifier_was || self.identifier) || site.snippets.new
                    attr = {
-                       :identifier => self.identifier
+                       :identifier => self.identifier,
+                       :group_id => site.groups.find_by_label(self.group.try(:label)).try(:id)
                    }
                    if m.new_record?
                      attr.merge!({
@@ -75,20 +76,24 @@ module Cms::Mirrored
                    m.attributes = attr
                    m
                  when Cms::Group
-                   m = site.groups.find_by_label_and_grouped_type(self.label_was || self.label, self.grouped_type) || site.groups.new
-                   attr = {
-                       :grouped_type => self.grouped_type
-                   }
-                   if m.new_record?
-                     attr.merge!({
-                                     :label => self.label,
-                                     :parent_id => site.groups.find_by_label_and_grouped_type(self.parent.try(:label), self.grouped_type).try(:id)
-                                 })
+                   if self.grouped_type == 'Cms::Snippet'
+                     m = site.groups.find_by_label_and_grouped_type(self.label_was || self.label, self.grouped_type) || site.groups.new
+                     attr = {
+                         :grouped_type => self.grouped_type
+                     }
+                     if m.new_record?
+                       attr.merge!({
+                                       :label => self.label,
+                                       :parent_id => site.groups.find_by_label_and_grouped_type(self.parent.try(:label), self.grouped_type).try(:id)
+                                   })
+                     end
+                     m.attributes = attr
+                     m
+                   else
+                     nil
                    end
-                   m.attributes = attr
-                   m
                end
-
+      return if mirror.nil? # File Groups don't get mirrored
       mirror.is_mirrored = true
       begin
         copy_blocks = mirror.is_a?(Cms::Page) && mirror.new_record?
