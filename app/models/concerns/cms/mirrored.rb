@@ -56,7 +56,8 @@ module Cms::Mirrored
                      attr.merge!({
                                      :label      => m.label.blank?? self.label : m.label,
                                      :parent_id  => site.pages.find_by_full_path(self.parent.try(:full_path)).try(:id),
-                                     :layout     => site.layouts.find_by_identifier(self.layout.try(:identifier))
+                                     :layout     => site.layouts.find_by_identifier(self.layout.try(:identifier)),
+                                     :is_published => false
                                  })
                    end
                    m.attributes = attr
