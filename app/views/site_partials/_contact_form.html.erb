@@ -1,4 +1,4 @@
-<% @cms_form = @cms_site.contact_forms.where(identifier: param_1 || params['contact_form_id']).first %>
+<% @cms_form = Cms::ContactForm.where(['identifier = ? AND site_id IN (?)', param_1 || params['contact_form_id'], @cms_site.mirrors.map(&:id)]).first %>
 <% @contact ||= @cms_form.build_contact(params['contact'].blank? ? {} : params.fetch('contact')) %>
 
 <div id="<%= @cms_form.identifier %>-wrapper" class="contact-form-wrapper">
