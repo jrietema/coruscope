@@ -170,6 +170,12 @@ class Cms::Site < ActiveRecord::Base
       site.groups(:reload).snippets.map(&:sync_mirror)
       site.snippets(:reload).map(&:sync_mirror)
     end
+
+    # set all pages as navigation_root that don't have navigation_root and parent_root set
+    # this enables the navigations on new mirrored sites
+    self.pages.where(parent_id: nil, navigation_root_id: nil).each do |page|
+      page.update_attribute(:navigation_root_id, page.id)
+    end
   end
 
 end
