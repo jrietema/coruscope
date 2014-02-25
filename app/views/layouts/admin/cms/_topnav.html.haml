@@ -6,6 +6,10 @@
         %span#site_identity
           = @site.path
     %ul.nav
+      %li.site-locales
+        - if @site.mirrors.size > 1
+          - @site.mirrors.each do |mirror|
+            = link_to mirror.locale.upcase, admin_cms_site_pages_path(:site_id => mirror.id)
       %li.divider-vertical
       - if @site && !@site.new_record?
         = active_link_to new_admin_cms_site_page_path(@site), :id => :new_item_link, :wrap_tag => :li do
