@@ -1,11 +1,11 @@
 <%= formatted_form_for(resource, as: resource_name, url: session_path(resource_name), type: :vertical) do |f| %>
-    <h2>Coruscope Sign in</h2>
-    <%= f.email_field :email, :autofocus => true, :class => 'input', :placeholder => 'E-Mail' %>
-    <%= f.password_field :password, :class => 'input', :placeholder => 'Password' %>
+    <h2>Coruscope CMS <%= t(:sign_in, :scope => 'devise.labels') %></h2>
+    <%= f.email_field :email, :autofocus => true, :class => 'input', :placeholder => t(:email, :scope => 'devise.labels') %>
+    <%= f.password_field :password, :class => 'input', :placeholder => t(:password, :scope => 'devise.labels') %>
     <% if devise_mapping.rememberable? -%>
-      <%= f.check_box :remember_me, :label => 'Remember me' %>
+      <%= f.check_box :remember_me, :label => t(:remember_me, :scope => 'devise.labels') %>
     <% end %>
-    <%= f.submit "Sign in" %>
+    <%= f.submit t(:sign_in, :scope => 'devise.labels') %>
 <% end %>
 <% content_for :right_column do %>
 </br></br></br></br></br></br></br></br></br>
