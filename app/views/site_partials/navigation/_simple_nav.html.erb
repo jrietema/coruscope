@@ -1,4 +1,4 @@
-<% nav_root = defined?(param_1) ? Cms::Page.find_by_slug(param_1) : @cms_site.pages.root %>
+<% nav_root = defined?(param_1) ? Cms::Page.find_by_slug_and_site_id(param_1, @cms_site.id) : @cms_site.pages.root %>
 <% dom_id = defined?(param_2) ? param_2 : '' %>
 <% pages = nav_root.children.published %>
 <% unless nav_root.nil? %>
