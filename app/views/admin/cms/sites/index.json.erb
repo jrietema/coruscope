@@ -1,1 +1,2 @@
-<%= fancytree_pages_hash({nil => @sites}).to_json.html_safe %>
+<% labelling = -> (site) { "#{site.label} [#{site.locale.upcase}]"} %>
+<%= fancytree_pages_hash({nil => @sites}, nil, &labelling).to_json.html_safe %>

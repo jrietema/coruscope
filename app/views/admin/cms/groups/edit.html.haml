@@ -1,2 +1,5 @@
 = comfy_form_for @group, as: :group, url: {action: :update}, type: :vertical do |form|
   = render form
+
+= content_for_ajax :site_identity do
+  = @site.path
