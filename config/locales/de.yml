@@ -70,6 +70,7 @@ de:
       fixtures_enabled: CMS Fixtures are aktiviert. Alle Änderungen hier gespeichert werden verworfen.
 
     sites:
+      new: Neue Site
       created: Web-Site erstellt
       creation_failure: Fehler beim erstellen der Web-Site
       updated: Web-Site aktualisiert
@@ -78,6 +79,7 @@ de:
       not_found: Web-Site nicht gefunden
 
     layouts:
+      new: Neues Layout
       created: Layout erstellt
       creation_failure: Fehler beim erstellen des Layouts
       updated: Layout aktualisiert
@@ -86,6 +88,7 @@ de:
       not_found: Layout nicht gefunden
 
     pages:
+      new: Neue Seite
       created: Seite erstellt
       creation_failure: Fehler beim erstellen der Seite
       updated: Seite aktualisiert
@@ -95,6 +98,7 @@ de:
       layout_not_found: Kein Layout gefunden. Bitte erstellen Sie eines.
 
     snippets:
+      new: Neuer Baustein
       created: Baustein erstellt
       creation_failure: Fehler beim erstellen des Bausteins
       updated: Baustein aktualisiert
@@ -108,6 +112,7 @@ de:
       not_found: Revision nicht gefunden
 
     files:
+      new: Neue Datei
       created: Datei hochgeladen
       creation_failure: Fehler beim hochladen der Datei
       updated: Datei aktualisiert
@@ -121,6 +126,7 @@ de:
       page_not_found: Seite nicht gefunden
 
     groups:
+      new: Neuer Ordner
       created: Ordner erstellt
       creation_failure: Fehler beim erstellen des Ordners
       updated: Ordner aktualisiert

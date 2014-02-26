@@ -1,23 +1,23 @@
-.navbar.navbar-fixed-top.navbar-inverse
-  .navbar-inner
-    %a.brand
-      Coruscope
-      - unless (@site.nil? || @site.new_record?)
-        %span#site_identity
-          = @site.path
-    %ul.nav
-      %li.site-locales
-        - if @site.mirrors.size > 1
-          - @site.mirrors.each do |mirror|
-            = link_to mirror.locale.upcase, admin_cms_site_pages_path(:site_id => mirror.id)
-      %li.divider-vertical
-      - if @site && !@site.new_record?
-        = active_link_to new_admin_cms_site_page_path(@site), :id => :new_item_link, :wrap_tag => :li do
-          %i.icon-plus
-          = t('admin.cms.base.new')
-      %li#cms-current-context
-        = current_context_title
-      = active_link_to destroy_user_session_path(current_user), :method => :delete, :wrap_tag => :li do
-        = t('admin.cms.base.logout')
-      %li
-        = link_to current_user.email, '#', :tooltip => 'Profil'
+- context = (controller_name == 'groups' ? (defined?(@group) ? (@group.grouped_type.underscore.split(/\W/).last || '').pluralize : action_name) : controller_name)
+- @current_context = %w(sites pages layouts snippets files).include?(context) ? context : 'pages'
+.navbar-inner
+  %a.brand
+    Coruscope
+    - unless (@site.nil? || @site.new_record?)
+      %span#site_identity
+        = @site.path
+  %ul.nav
+    %li.site-locales
+      - if @site.mirrors.size > 1
+        - @site.mirrors.each do |mirror|
+          = link_to mirror.locale.upcase, url_for(action: :index, controller: @current_context, site_id: mirror.id), class: (mirror.locale == @site.locale ? 'active' : '')
+    %li.divider-vertical
+    - if @site && !@site.new_record?
+      - @new_url = url_for({action: :new, site_id: @site.id, controller: @current_context})
+      = active_link_to @new_url, :id => :new_item_link, :wrap_tag => :li do
+        %i.icon-plus
+        = t(:title, :scope => "admin.cms.#{@current_context}.new")
+    = active_link_to destroy_user_session_path(current_user), :method => :delete, :wrap_tag => :li do
+      = t('admin.cms.base.logout')
+    %li
+      = link_to current_user.email, '#', :tooltip => 'Profil'

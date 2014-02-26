@@ -7,5 +7,6 @@
 = comfy_form_for @layout, as: :layout, url: {action: :update}, type: :vertical do |form|
   = render form
 
-= content_for_ajax :site_identity do
-  = @site.path
+- if request.xhr?
+  = content_for_ajax :top do
+    = render :partial => 'layouts/admin/cms/topnav'

@@ -4,7 +4,8 @@
 
   .row-fluid.body-wrapper
     .span12
-    = render :partial => 'layouts/admin/cms/topnav'
+    #top.navbar.navbar-fixed-top.navbar-inverse
+      = render :partial => 'layouts/admin/cms/topnav'
     #content
       #content_header.row-fluid
         = render :partial => 'layouts/admin/cms/nav'

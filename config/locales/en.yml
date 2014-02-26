@@ -61,6 +61,7 @@ en:
       fixtures_enabled: CMS Fixtures are enabled. All changes done here will be discarded.
 
     sites:
+      new: New Site
       created: Site created
       creation_failure: Failed to create site
       updated: Site updated
@@ -69,6 +70,7 @@ en:
       not_found: Site not found
 
     layouts:
+      new: New Layout
       created: Layout created
       creation_failure: Failed to create layout
       updated: Layout updated
@@ -77,6 +79,7 @@ en:
       not_found: Layout not found
 
     pages:
+      new: New Page
       created: Page created
       creation_failure: Failed to create page
       updated: Page updated
@@ -86,6 +89,7 @@ en:
       layout_not_found: No Layouts found. Please create one.
 
     snippets:
+      new: New Snippet
       created: Snippet created
       creation_failure: Failed to create snippet
       updated: Snippet updated
@@ -99,6 +103,7 @@ en:
       not_found: Revision Not Found
 
     files:
+      new: New File
       created: Files uploaded
       creation_failure: Failed to upload files
       updated: File updated
@@ -112,6 +117,7 @@ en:
       page_not_found: Page Not Found
 
     groups:
+      new: New Group
       created: Folder created
       creation_failure: Failed to create folder
       updated: Folder updated
