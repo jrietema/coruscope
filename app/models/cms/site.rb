@@ -83,6 +83,11 @@ class Cms::Site < ActiveRecord::Base
     end
   end
 
+  # file groups from all mirrors
+  def file_group_by_hierarchy_path(path)
+    self.mirrors.map{|s| s.groups.files.where(hierarchy_path: path) }.flatten.first
+  end
+
   def contact_fields
     @contact_fields ||= YAML.load(read_attribute(:contact_fields) || '') || []
   end

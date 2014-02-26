@@ -1,4 +1,4 @@
-<% group = (defined?(param_1) ? @cms_page.site.groups.files.where(hierarchy_path: param_1).first : nil) %>
+<% group = (defined?(param_1) ? @cms_page.site.file_group_by_hierarchy_path(param_1) : nil) %>
 <% klass = (defined?(param_2) ? param_2 : 'three') %>
 <% unless group.nil? %>
     <% images = image_content_for_group(group) %>
