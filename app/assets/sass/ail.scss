@@ -5,7 +5,12 @@
 @import 'jquery.bxslider';
 @import 'jquery.fancybox';
 
-$font-family:  'Source Sans Pro', sans-serif !important;
+$font-family:  'Source Sans Pro', 'Open Sans', sans-serif !important;
+/* This is to enforce wysihtml5 editor style inheritance */
+html {
+  font-family: $font-family;
+}
+
 $body-font-color: #000;
 
 $color_head: #d2dc00;

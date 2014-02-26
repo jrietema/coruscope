@@ -5,6 +5,8 @@
   
   = stylesheet_link_tag 'coruscope'
   = stylesheet_link_tag 'comfortable_mexican_sofa/admin/application'
+  - if defined?(@site) && !(@site.font.blank?)
+    = stylesheet_link_tag @site.font
   = javascript_include_tag 'comfortable_mexican_sofa/application'
   = javascript_include_tag 'comfortable_mexican_sofa/admin/application'
   = javascript_include_tag 'coruscope'

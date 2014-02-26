@@ -57,8 +57,10 @@ window.CMS.wysiwyg = ->
     $(element).wysihtml5
       html:         true
       color:        false
+      style:        true
       stylesheets:  ['<%= stylesheet_path(:ail) %>']
       locale:       'de-DE'
+    $(element).css('font-family','inherit')
 
 
 window.CMS.codemirror = ->
