@@ -65,6 +65,11 @@ class Admin::Cms::FilesController < Admin::Cms::BaseController
   end
   
   def update
+    # use localized accessors for description
+    file_params.keys.select{|k| k =~ /^description_\w{2}/}.each do |p|
+      value = file_params.delete(p)
+      @file.send("#{p}=",value)
+    end
     @file.update_attributes!(file_params)
     flash[:success] = I18n.t('cms.files.updated')
     redirect_to :action => :edit, :id => @file

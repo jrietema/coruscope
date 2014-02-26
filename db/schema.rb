@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223204404) do
+ActiveRecord::Schema.define(version: 20140226163516) do
 
   create_table "cms_blocks", force: true do |t|
     t.integer  "page_id",                     null: false
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 20140223204404) do
     t.text     "contact_fields"
     t.text     "message_body"
   end
+
+  create_table "cms_file_translations", force: true do |t|
+    t.integer  "file_id",     null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+  end
+
+  add_index "cms_file_translations", ["file_id"], name: "index_cms_file_translations_on_cms_file_id", using: :btree
+  add_index "cms_file_translations", ["locale"], name: "index_cms_file_translations_on_locale", using: :btree
 
   create_table "cms_files", force: true do |t|
     t.integer  "site_id",                                    null: false

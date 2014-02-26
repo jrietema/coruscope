@@ -4,6 +4,14 @@ class Cms::BaseController < ApplicationController
 
   protected
 
+  # This method has many problems...
+  # Requests either have to
+  #   a) provide a site_id  - OR -
+  #   b) utilize the host name and the site path configured for the site
+  #
+  # This doesn't seem to be the case with some technical direct-access
+  # routes for assets (javascript/css/images), files, and of the
+  # contact form features
   def load_cms_site
     @cms_site ||= if params[:site_id]
                     ::Cms::Site.find_by_id(params[:site_id])

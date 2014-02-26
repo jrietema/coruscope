@@ -1,5 +1,7 @@
 class Cms::File < ActiveRecord::Base
   include Cms::Base
+  translates :description
+  globalize_accessors
 
   IMAGE_MIMETYPES = %w(gif jpeg pjpeg png tiff).collect{|subtype| "image/#{subtype}"}
 
