@@ -140,7 +140,7 @@ class Cms::Site < ActiveRecord::Base
         return alias_host if aliases.include?(host)
       end
     end
-    host
+    host.sub(/^(www|cms)\./,'')
   end
 
   def assign_identifier
