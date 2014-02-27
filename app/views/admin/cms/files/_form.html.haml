@@ -14,19 +14,19 @@
   = comfy_form_for @file, as: :file, url: { action: @file.new_record? ? :create : :update}, type: :vertical do |metaform|
     = render :partial => 'admin/cms/categories/form', :object => metaform
     - @locales = @site.mirrors.map(&:locale)
-    %ul.nav.nav-tabs
-      - @locales.each do |locale|
-        %li{class: (@site.locale == locale ? 'active' : '')}
-          %a{data: {toggle: :tab}, href: "#description_#{locale}"}
-            = locale.upcase
-    %div#description_per_locale.tab-content
-      - @locales.each do |locale|
-        %div{id: "description_#{locale}", class: "tab-pane fade#{@site.locale == locale ? ' in active' : ''}"}
-          .control-group
-            %label.control-label{for: "file_description_#{locale}"}
-              = "#{t(:description, :scope => 'activerecord.attributes.cms/file')} (#{locale.upcase})"
-            .controls
-              = text_area_tag "file[description_#{locale}]", @file.send("description_#{locale}"), cols: 8
+    - if @locales.size == 1
+      - locale = @locales.first
+      = form.text_area "description_#{locale.underscore}".to_sym, cols: 8, label: "#{t(:description, :scope => 'activerecord.attributes.cms/file')} (#{locale.upcase})"
+    - else
+      %ul.nav.nav-tabs
+        - @locales.each do |locale|
+          %li{class: (@site.locale == locale ? 'active' : '')}
+            %a{data: {toggle: :tab}, href: "#description_#{locale}"}
+              = locale.upcase
+      %div#description_per_locale.tab-content
+        - @locales.each do |locale|
+          %div{id: "description_#{locale}", class: "tab-pane fade#{@site.locale == locale ? ' in active' : ''}"}
+            = form.text_area "description_#{locale.underscore}".to_sym, cols: 8, label: "#{t(:description, :scope => 'activerecord.attributes.cms/file')} (#{locale.upcase})"
     - unless @file.new_record?
       %button.btn.btn-small.btn-primary.pull-right
         = t('.update')
