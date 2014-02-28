@@ -85,7 +85,7 @@ class Cms::Site < ActiveRecord::Base
 
   # file groups from all mirrors
   def file_group_by_hierarchy_path(path)
-    self.mirrors.map{|s| s.groups.files.where(hierarchy_path: path) }.flatten.first
+    self.mirrors.map{|s| s.groups.files.where(hierarchy_path: path) }.flatten.compact.first
   end
 
   def contact_fields
