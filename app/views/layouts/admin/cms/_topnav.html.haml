@@ -1,5 +1,5 @@
 - context = (controller_name == 'groups' ? (defined?(@group) ? (@group.grouped_type.underscore.split(/\W/).last || '').pluralize : action_name) : controller_name)
-- @current_context = %w(sites pages layouts snippets files).include?(context) ? context : 'pages'
+- @current_context = %w(pages layouts snippets files).include?(context) ? context : 'pages'
 .navbar-inner
   %a.brand
     Coruscope
