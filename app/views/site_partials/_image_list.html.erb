@@ -1,0 +1,18 @@
+<% group = (defined?(param_1) ? @cms_page.site.file_group_by_hierarchy_path(param_1) : nil) %>
+<% listklass = (defined?(param_2) ? param_2 : 'images') %>
+<% itemklass = (defined?(param_3) ? param_3 : '') %>
+<% unless group.nil? %>
+    <% images = image_content_for_group(group) %>
+    <ul class="<%= listklass %>">
+      <% images.each do |image| %>
+          <li class="<%= itemklass %>>">
+            <% unless image[:src].blank? %>
+                <%= image_tag(image[:src]) %>
+            <% else %>
+                &nbsp;
+            <% end %>
+          </li>
+      <% end %>
+    </ul>
+    <br/>
+<% end %>
