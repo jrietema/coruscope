@@ -16,4 +16,5 @@
 .form-actions
   = form.submit t(@site.new_record?? '.create' : '.update'), :class => 'btn btn-primary'
   =# TODO: add convenience copying of form input values to mirror site creation
-  = link_to t('create_mirror', :scope => 'admin.cms.sites.edit'), new_admin_cms_site_path, class: 'btn'
+  - unless @site.new_record?
+    = link_to t('create_mirror', :scope => 'admin.cms.sites.edit'), new_admin_cms_site_path, class: 'btn'
