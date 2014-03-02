@@ -279,9 +279,9 @@ module ApplicationHelper
   def image(path, caption=true, klass='fancybox')
     path_tokens = path.split('/')
     image_name = path_tokens.pop
-    group = path_tokens.empty? ? @cms_site.groups.files.root : @cms_site.groups.files.where(['hierarchy_path LIKE ?', path_tokens.join('/')]).first
-    return '' if group.nil?
-    image = @cms_site.files.images.where(['label LIKE ? AND group_id = ?', image_name, group.id]).first
+    groups = path_tokens.empty? ? @cms_site.mirrors.map{|s| s.groups.files.root } : @cms_site.mirrors.map{|s| s.groups.files.where(['hierarchy_path LIKE ?', path_tokens.join('/')]).first }.compact
+    return '' if groups.nil? || groups.empty?
+    image = @cms_site.mirrors.map{|s| s.files.images.where(['label LIKE ? AND group_id IN (?)', image_name, groups.map(&:id)]).first }.compact.first
     return '' if image.nil? || image.file.nil?
     html = link_to image_tag(image.file.url(:resized)), image.file.url, class: klass, title: image.description
     html << content_tag(:span, image.description, class: 'caption')
@@ -292,9 +292,9 @@ module ApplicationHelper
   def original_size_image(path, caption=true, klass='fancybox')
     path_tokens = path.split('/')
     image_name = path_tokens.pop
-    group = path_tokens.empty? ? @cms_site.groups.files.root : @cms_site.groups.files.where(['hierarchy_path LIKE ?', path_tokens.join('/')]).first
-    return '' if group.nil?
-    image = @cms_site.files.images.where(['label LIKE ? AND group_id = ?', image_name, group.id]).first
+    groups = path_tokens.empty? ? @cms_site.mirrors.map{|s| s.groups.files.root } : @cms_site.mirrors.map{|s| s.groups.files.where(['hierarchy_path LIKE ?', path_tokens.join('/')]).first }.compact
+    return '' if groups.nil? || groups.empty?
+    image = @cms_site.mirrors.map{|s| s.files.images.where(['label LIKE ? AND group_id IN (?)', image_name, groups.map(&:id)]).first }.compact.first
     return '' if image.nil? || image.file.nil?
     html = link_to image_tag(image.file.url), image.file.url, class: klass, title: image.description
     html << content_tag(:span, image.description, class: 'caption')
