@@ -11,10 +11,10 @@ module Cms::Mirrored
   # Mirrors of the object found on other sites
   def mirrors
     return [] unless self.site.is_mirrored?
-    (Cms::Site.mirrored - [self.site]).collect do |site|
+    (self.site.mirrors - [self.site]).collect do |site|
       case self
         when Cms::Layout  then site.layouts.find_by_identifier(self.identifier)
-        when Cms::Page    then site.pages.find_by_full_path(self.full_path)
+        when Cms::Page    then site.pages.find_by_identifier(self.identifier)
         when Cms::Snippet then site.snippets.find_by_identifier(self.identifier)
         when Cms::Group   then site.groups.find_by_label_and_grouped_type(self.label, self.grouped_type)
       end
@@ -48,14 +48,15 @@ module Cms::Mirrored
                    m.attributes = attr
                    m
                  when Cms::Page
-                   m = site.pages.find_by_full_path(self.full_path_was || self.full_path) || site.pages.new
+                   m = site.pages.find_by_identifier(self.identifier) || site.pages.new
                    attr = {
-                       :slug       => self.slug
+                       :parent_id  => site.pages.find_by_identifier(self.parent.try(:identifier)).try(:id)
                    }
                    if m.new_record?
                      attr.merge!({
                                      :label      => m.label.blank?? self.label : m.label,
-                                     :parent_id  => site.pages.find_by_full_path(self.parent.try(:full_path)).try(:id),
+                                     :identifier => m.identifier,
+                                     :slug       => self.slug,
                                      :layout     => site.layouts.find_by_identifier(self.layout.try(:identifier)),
                                      :is_published => false
                                  })

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226163516) do
+ActiveRecord::Schema.define(version: 20140303121021) do
 
   create_table "cms_blocks", force: true do |t|
     t.integer  "page_id",                     null: false
@@ -141,10 +141,12 @@ ActiveRecord::Schema.define(version: 20140226163516) do
     t.integer  "navigation_root_id"
     t.boolean  "render_as_page",                      default: true
     t.boolean  "is_leaf_node",                        default: false
+    t.string   "identifier",                                          null: false
   end
 
   add_index "cms_pages", ["parent_id", "position"], name: "index_cms_pages_on_parent_id_and_position", using: :btree
   add_index "cms_pages", ["site_id", "full_path"], name: "index_cms_pages_on_site_id_and_full_path", using: :btree
+  add_index "cms_pages", ["site_id", "identifier"], name: "index_cms_pages_on_site_id_and_identifier", using: :btree
 
   create_table "cms_revisions", force: true do |t|
     t.string   "record_type",                  null: false
@@ -167,6 +169,8 @@ ActiveRecord::Schema.define(version: 20140226163516) do
     t.text    "contact_field_definitions"
     t.string  "default_addressee"
     t.boolean "render_site_path",                       default: true
+    t.string  "font"
+    t.string  "font_family"
   end
 
   add_index "cms_sites", ["hostname"], name: "index_cms_sites_on_hostname", using: :btree

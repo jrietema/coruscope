@@ -28,6 +28,7 @@ class Cms::Page < ActiveRecord::Base
                     :assign_parent,
                     :escape_slug,
                     :assign_full_path,
+                    :assign_identifier,
                     :assign_navigation_root
   before_create     :assign_position
   before_save       :set_cached_content
@@ -39,6 +40,9 @@ class Cms::Page < ActiveRecord::Base
             :presence   => true
   validates :label,
             :presence   => true
+  validates :identifier,
+            :presence   => true,
+            :uniqueness => { :scope => :site_id }
   validates :slug,
             :presence   => true,
             :uniqueness => { :scope => :parent_id },
@@ -51,6 +55,7 @@ class Cms::Page < ActiveRecord::Base
   validate :validate_target_page
   validate :validate_format_of_unescaped_slug
   validate :validate_navigation_root
+  validate :validate_constant_identifier
 
   # -- Scopes ---------------------------------------------------------------
   default_scope -> { order('cms_pages.position') }
@@ -76,10 +81,11 @@ class Cms::Page < ActiveRecord::Base
     self.read_attribute(:full_path) || self.assign_full_path
   end
 
+  # NOTE: this is replaced by the (immutable) identifier attribute
   # Somewhat unique method of identifying a page that is not a full_path
-  def identifier
-    self.parent_id.blank?? 'index' : self.full_path[1..-1].slugify
-  end
+  # def identifier
+  #  self.parent_id.blank?? 'index' : self.full_path[1..-1].slugify
+  # end
 
   # Transforms existing cms_block information into a hash that can be used
   # during form processing. That's the only way to modify cms_blocks.
@@ -165,6 +171,17 @@ class Cms::Page < ActiveRecord::Base
     self.full_path = self.parent ? "#{CGI::escape(self.parent.full_path).gsub('%2F', '/')}/#{self.slug}".squeeze('/') : '/'
   end
 
+  # Assigns an immutable identifier that is needed as a permanent reference
+  # This identifier must remain identical across sites even if the slugs
+  # and paths differ.
+  def assign_identifier
+    self.identifier ||= unless self.full_path[/\w+/].blank?
+      self.full_path.gsub('/','.').underscore.gsub('_','-')
+    else
+      self.label.underscore.gsub('_','-')
+    end
+  end
+
   def assign_position
     return unless self.parent
     return if self.position.to_i > 0
@@ -211,6 +228,11 @@ class Cms::Page < ActiveRecord::Base
     return unless slug.present?
     unescaped_slug = CGI::unescape(self.slug)
     errors.add(:slug, :invalid) unless unescaped_slug =~ /^\p{Alnum}[\.\p{Alnum}\p{Mark}_-]*$/i
+  end
+
+  def validate_constant_identifier
+    return if new_record?
+    errors.add(:identifier, :invalid) unless self.identifier == self.identifier_was
   end
 
   def set_cached_content
