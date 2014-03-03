@@ -50,7 +50,8 @@ module Cms::Mirrored
                  when Cms::Page
                    m = site.pages.find_by_identifier(self.identifier) || site.pages.new
                    attr = {
-                       :parent_id  => site.pages.find_by_identifier(self.parent.try(:identifier)).try(:id)
+                       :parent_id  => site.pages.find_by_identifier(self.parent.try(:identifier)).try(:id),
+                       :render_as_page => m.render_as_page
                    }
                    if m.new_record?
                      attr.merge!({

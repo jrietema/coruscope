@@ -179,7 +179,7 @@ class Cms::Page < ActiveRecord::Base
       self.full_path.gsub('/','.').underscore.gsub('_','-')
     else
       self.label.underscore.gsub('_','-')
-    end + ":#{self.id}"
+    end
   end
 
   def assign_position
