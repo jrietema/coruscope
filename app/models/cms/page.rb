@@ -179,7 +179,7 @@ class Cms::Page < ActiveRecord::Base
       self.full_path.gsub('/','.').underscore.gsub('_','-')
     else
       self.label.underscore.gsub('_','-')
-    end
+    end + ":#{self.id}"
   end
 
   def assign_position
@@ -231,7 +231,7 @@ class Cms::Page < ActiveRecord::Base
   end
 
   def validate_constant_identifier
-    return if new_record?
+    return if new_record? || self.identifier_was.blank?
     errors.add(:identifier, :invalid) unless self.identifier == self.identifier_was
   end
 

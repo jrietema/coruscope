@@ -146,7 +146,6 @@ ActiveRecord::Schema.define(version: 20140303121021) do
 
   add_index "cms_pages", ["parent_id", "position"], name: "index_cms_pages_on_parent_id_and_position", using: :btree
   add_index "cms_pages", ["site_id", "full_path"], name: "index_cms_pages_on_site_id_and_full_path", using: :btree
-  add_index "cms_pages", ["site_id", "identifier"], name: "index_cms_pages_on_site_id_and_identifier", using: :btree
 
   create_table "cms_revisions", force: true do |t|
     t.string   "record_type",                  null: false
