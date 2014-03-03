@@ -44,7 +44,7 @@ class Cms::ContactsController < Cms::BaseController
   def render_success
     # redirect to form's redirect_url
     respond_to do |format|
-      redirect_url = reconstruct_page_path(@cms_form.redirect_url)
+      redirect_url = reconstruct_page_path(@cms_form.redirect_url(@cms_site))
       format.html do
         redirect_to redirect_url
       end
@@ -56,11 +56,11 @@ class Cms::ContactsController < Cms::BaseController
 
   def render_followup_form
     # redirect to the page containing the form (given by the redirect url)
-    redirect_to "#{@cms_form.redirect_url}?#{serialize_contact_params}"
+    redirect_to "#{@cms_form.redirect_url(@cms_site)}?#{serialize_contact_params}"
   end
 
   def load_contact_form
-    @cms_form = @cms_site.contact_forms.where(id: params['contact_form_id']).first
+    @cms_form = @cms_site.mirrors.map{|s| s.contact_forms.where(id: params['contact_form_id'])}.flatten.compact.first
   end
 
   def build_contact
@@ -85,7 +85,7 @@ class Cms::ContactsController < Cms::BaseController
   private
 
   def contact_params
-    @contact_params = params.require(:contact).permit(@cms_site.contact_fields) || {}
+    @contact_params = params.require(:contact).permit(@cms_site.mirrors.select{|s| !s.contact_fields.blank? }.first.try(:contact_fields)) || {}
   end
 
 end

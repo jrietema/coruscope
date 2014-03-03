@@ -59,7 +59,14 @@ class Cms::ContactForm < ActiveRecord::Base
     write_attribute :contact_field_translations, translations.to_yaml
   end
 
-  def redirect_url
+  def redirect_url(current_site=self.site)
+    path_or_identifier = read_attribute(:redirect_url)
+    if path_or_identifier[/^\./]
+      # treat as identifier
+      page = current_site.pages.where(identifier: read_attribute(:redirect_url)).first
+      return page.full_path unless page.nil?
+    end
+    # treat as path
     ['', read_attribute(:redirect_url).split('/')].flatten.join('/').gsub(/\/+/,'/')
   end
 

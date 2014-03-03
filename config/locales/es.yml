@@ -128,47 +128,47 @@ en:
   # -- Views ----------------------------------------------------------------
   cms:
     content:
-      more: Mehr
+      more: Más
 
     contact_form:
-      submit: Send
-      continue: Continue
-      cancel: Cancel
+      submit: Enviar
+      continue: Continuar
+      cancel: Cancelar
       required_hint: '%{symbol} indicates required fields'
-      request: Send
-      apply: Apply
-      request_from: Request from
+      request: Enviar
+      apply: Aplicar
+      request_from: Solicitud de
       title:
-        information: Request for Information
-        contact: Contact Form
-        participant: Application Form
-        booking: Booking Form
+        information: Solicitud de Información
+        contact:  Formulario de Contacto
+        participant: Participante
+        booking: Reserva
       subject:
-        information: Request for Information
-        contact: Contact Request
-        participant: Participation Request
-        booking: Booking Request
+        information: Solicitud de Información
+        contact: Solicitud de Contacto
+        participant: Participante
+        booking: Reserva
       fields:
-        first_name: First Name
-        last_name: Last Name
-        email: Email
-        phone: Telephone
+        first_name: Apellidos
+        last_name: Nombre
+        email: Correo electrónico
+        phone: Número de teléfono
         more_phone_numbers: Other Telephone numbers
         other_phone_numbers: Other Telephone numbers
         address: Address
         postcode: Postcode
-        city: City
-        country: Country
-        gender: Gender
-        date_of_birth: Date of Birth
-        nationality: Residency
-        passport_number: Passport Number
+        city: Ciudad
+        country: País
+        gender: Sexo
+        date_of_birth: Fecha de nacimiento
+        nationality: Nacionalidad
+        passport_number: Número de pasaporte
         institution: Company or Organization
-        institution1: School, University, Organization or Firm
-        program_choice: Progam Choice
-        program_begin: Start of Program
-        program_duration: Program Duration
-        questions_and_comments: Questions/Comments
+        institution1: Colegio, Universidad, Organización o Empresa
+        program_choice: Elección de Programa
+        program_begin: Inicio de Programa Deseado
+        program_duration: Duración de Programa Deseado
+        questions_and_comments: Preguntas/Comentarios
       gender:
         male: male
         female: female
@@ -181,9 +181,9 @@ en:
         travel_course1: Alejuela & M. Antonio
         50_plus: Travel 50 Plus
         teenies: Teenies
-        voluntary_work: Voluntary Work
-        work_experience: Work Experience
-        highschool: Highschool
+        voluntary_work: Voluntariado
+        work_experience: Práctica
+        highschool: High School
 
 
   admin:
