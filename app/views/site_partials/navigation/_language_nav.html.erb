@@ -7,7 +7,7 @@
     <% locales.each do |locale| %>
       <% locale_site = @cms_site.mirrors.select{|m| m.locale == locale}.first %>
       <% unless locale_site.nil? %>
-        <% mirror_page = locale_site.pages.where(identifier: @cms_page.identifier).first %>
+        <% mirror_page = locale_site.pages.where(identifier: @cms_page.identifier).published.first || locale_site.pages.root %>
         <% next if mirror_page.nil? %>
       <li class="<%= (@cms_site == locale_site) ? 'active' : '' %>">
         <%= link_to t(:language_name, :locale => locale), page_path(mirror_page) %>
