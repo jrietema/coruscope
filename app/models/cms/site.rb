@@ -67,6 +67,20 @@ class Cms::Site < ActiveRecord::Base
     super
   end
 
+  # retrieves only the path part
+  def path
+    read_attribute(:path).sub(/^[^:]+:/,'').gsub(/^\/+/,'')
+  end
+
+  # retrieves the handle from the site path
+  def handle
+    @handle ||= begin
+      p = read_attribute(:path)
+      h = p[/^([^:])+:/]
+      h.blank? ? read_attribute(:path).split('/').first : h.gsub(':','')
+    end
+  end
+
   def mirrors
     if is_mirrored
       Cms::Site.mirrored

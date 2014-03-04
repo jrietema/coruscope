@@ -19,11 +19,7 @@ module ApplicationHelper
   def cms_site_asset_path(site, relpath='assets')
     relpath = relpath.split('/')
     prefix = relpath.shift
-    File.join('/', prefix, cms_site_handle(site), relpath.join('/'))
-  end
-
-  def cms_site_handle(site)
-    site.path.split('/').first
+    File.join('/', prefix, site.handle, relpath.join('/'))
   end
 
   # this is a helper to retrieve related page's content in layouts/snippets
