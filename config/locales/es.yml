@@ -1,4 +1,5 @@
-en:
+es:
+  language_name: Español
   # -- Models ---------------------------------------------------------------
   attributes:
     label: Label

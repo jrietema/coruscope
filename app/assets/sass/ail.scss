@@ -351,21 +351,39 @@ header #identity {
   div * {
     float: left;
   }
+  .columns {
+    position: relative;
+    padding-top: 8px;
+  }
 }
 header {
+  #languages.nav {
+    position: absolute;
+    left: 83px;
+    top: 4px;
+    width: 600px;
+    ul {
+      padding-left: 0.75em;
+    }
+    ul li {
+      width: auto;
+    }
+  }
   #direct_access {
     position: absolute;
     top: 35px;
     right: 2%;
     width: 320px;
-    li {
-      border-left: 1px solid $font_color_head;
-      padding: 0 0.45em;
-      display: inline;
-    }
-    li:nth-child(1) {
-      border-left: 0;
-    }
+  }
+  #languages li,
+  #direct_access li {
+    border-left: 1px solid $font_color_head;
+    padding: 0 0.45em;
+    display: inline;
+  }
+  #languages li:nth-child(1),
+  #direct_access li:nth-child(1) {
+    border-left: 0;
   }
   a, a:visited {
     color: $font_color_head;
@@ -375,7 +393,7 @@ header {
     text-decoration: none;
   }
   a:hover,
-  li.active a {
+  #direct_access li.active a {
     color: $color_page_bg;
   }
 }

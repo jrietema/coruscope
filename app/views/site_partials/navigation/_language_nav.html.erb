@@ -1,0 +1,19 @@
+<% site_locales = @cms_site.mirrors.map(&:locale) %>
+<% locales = defined?(param_1) ? (param_1.split(/\W+/) & site_locales) : site_locales %>
+<% dom_id = defined?(param_2) ? param_2 : 'languages' %>
+<nav id="<%= dom_id %>" class="nav">
+<% unless locales.size < 2 %>
+  <ul>
+    <% locales.each do |locale| %>
+      <% locale_site = @cms_site.mirrors.select{|m| m.locale == locale}.first %>
+      <% unless locale_site.nil? %>
+        <% mirror_page = locale_site.pages.where(identifier: @cms_page.identifier).first %>
+        <% next if mirror_page.nil? %>
+      <li class="<%= (@cms_site == locale_site) ? 'active' : '' %>">
+        <%= link_to t(:language_name, :locale => locale), page_path(mirror_page) %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+</nav>
