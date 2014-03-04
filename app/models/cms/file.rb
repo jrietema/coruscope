@@ -92,7 +92,7 @@ class Cms::File < ActiveRecord::Base
   private
 
   Paperclip.interpolates :site_id do |file, style|
-    file.instance.site.path.split('/').first || 'sites'
+    file.instance.site.handle || 'sites'
   end
 
 end
