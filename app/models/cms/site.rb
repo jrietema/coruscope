@@ -18,7 +18,7 @@ class Cms::Site < ActiveRecord::Base
            class_name: 'Cms::Group'
   has_many :snippet_groups,
            -> { where(grouped_type: 'Cms::Snippet')},
-           class_name: 'Cms::Snippet'
+           class_name: 'Cms::Group'
 
 
   # -- Callbacks ------------------------------------------------------------
