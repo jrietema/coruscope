@@ -8,7 +8,7 @@ class Cms::ContactsController < Cms::BaseController
     if @cms_form.contact_form.nil?
       # don't render a second-stage form on success and save the contact
       if @contact.save
-        Cms::ContactMailer.contact_mail(@contact).deliver
+        Cms::ContactMailer.contact_mail(@contact, @cms_form.site.mirrors.first.locale).deliver
         render_success
       else
         re_render_form
@@ -56,7 +56,9 @@ class Cms::ContactsController < Cms::BaseController
 
   def render_followup_form
     # redirect to the page containing the form (given by the redirect url)
-    redirect_to "#{@cms_form.redirect_url(@cms_site)}?#{serialize_contact_params}"
+    path = @cms_form.redirect_url(@cms_site)
+    path = File.join(@cms_site.path, path) unless path.start_with?(@cms_site.path, "/#{@cms_site.path}")
+    redirect_to "/#{path.sub(/^\/+/,'')}?#{serialize_contact_params}##{path.split('/').last.concat('-wrapper')}"
   end
 
   def load_contact_form
