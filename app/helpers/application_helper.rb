@@ -16,14 +16,14 @@ module ApplicationHelper
   end
 
   # path to static assets for cms site
-  def cms_site_asset_path(site, relpath='')
-    File.join('/', 'assets/sites', site.handle, relpath.sub(/^\/+/,''))
+  def cms_site_asset_path(relpath='', site_handle='')
+    File.join('/', site_handle, relpath.sub(/^\/+/,''))
   end
 
   # url to static assets for cms site
-  def cms_site_asset_url(site, relpath='')
+  def cms_site_asset_url(relpath='', site_handle)
     url_prefix = request.original_url[/^\w+:\/+[^\/]+/]
-    File.join(url_prefix, cms_site_asset_path(site, relpath).sub(/^\/+/,''))
+    File.join(url_prefix, cms_site_asset_path(relpath, site_handle).sub(/^\/+/,''))
   end
 
   # this is a helper to retrieve related page's content in layouts/snippets
