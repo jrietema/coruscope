@@ -10,3 +10,7 @@
 -# update wysihtml5 to utilize an advanced file dialog with select options
 
 - add translations for field values to cms.base.contact_form for better E-Mails!
+
+- snippet-mirrors: let them copy parent and label
+- make groups work, make file uploads work again!
+- site mirror handling: have sites belong to a client, and access all files/snippets etc via client id

@@ -33,12 +33,12 @@ module Cms::Mirrored
                    m = site.layouts.find_by_identifier(self.identifier_was || self.identifier) || site.layouts.new
                    attr = {
                        :identifier => self.identifier,
+                       :label => self.label,
+                       :app_layout => self.app_layout,
                        :parent_id  => site.layouts.find_by_identifier(self.parent.try(:identifier)).try(:id)
                    }
                    if m.new_record?
                      attr.merge!({
-                                     :app_layout => self.app_layout,
-                                     :label => self.label,
                                      :content => self.content,
                                      :css => self.css,
                                      :js => self.js,
@@ -68,6 +68,7 @@ module Cms::Mirrored
                    m = site.snippets.find_by_identifier(self.identifier_was || self.identifier) || site.snippets.new
                    attr = {
                        :identifier => self.identifier,
+                       :label => self.label,
                        :group_id => site.groups.find_by_label(self.group.try(:label)).try(:id)
                    }
                    if m.new_record?
@@ -82,11 +83,11 @@ module Cms::Mirrored
                    if self.grouped_type == 'Cms::Snippet'
                      m = site.groups.find_by_label_and_grouped_type(self.label_was || self.label, self.grouped_type) || site.groups.new
                      attr = {
-                         :grouped_type => self.grouped_type
+                         :grouped_type => self.grouped_type,
+                         :label => self.label,
                      }
                      if m.new_record?
                        attr.merge!({
-                                       :label => self.label,
                                        :parent_id => site.groups.find_by_label_and_grouped_type(self.parent.try(:label), self.grouped_type).try(:id)
                                    })
                      end
