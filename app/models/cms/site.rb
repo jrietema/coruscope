@@ -116,7 +116,10 @@ class Cms::Site < ActiveRecord::Base
   end
 
   def meta_tags=(meta={})
-    meta = YAML.load(meta) if meta.is_a?(String)
+    if meta.is_a?(String)
+      meta = YAML.load(meta)
+      meta = {} if (meta == false) || meta.nil?
+    end
     meta.keys.each do |key|
       meta.delete(key) if META_EXCLUDES.include?(key[/[^:]+$/].downcase)
     end
