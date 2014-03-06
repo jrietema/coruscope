@@ -13,6 +13,13 @@ class Cms::Site < ActiveRecord::Base
     site.has_many :contact, class_name: 'Cms::Contact'
   end
 
+  has_attached_file :favicon,
+                    :path => ':rails_root/public/assets/sites/:site_handle/favicon.ico',
+                    :url => '/assets/sites/:site_handle/favicon.ico'
+  has_attached_file :identity_image,
+                    :path => ':rails_root/public/assets/sites/:site_handle/images/identity_:site_handle.:extension',
+                    :url => '/assets/sites/:site_handle/images/identity_:site_handle.:extension'
+
   has_many :file_groups,
            -> { where(grouped_type: 'Cms::File') },
            class_name: 'Cms::Group'
@@ -100,6 +107,20 @@ class Cms::Site < ActiveRecord::Base
   # file groups from all mirrors
   def file_group_by_hierarchy_path(path)
     self.mirrors.map{|s| s.groups.files.where(hierarchy_path: path) }.flatten.compact.first
+  end
+
+  META_EXCLUDES = %w(title description image type url)
+
+  def meta_tags
+    YAML.load(read_attribute(:meta_tags) || '')
+  end
+
+  def meta_tags=(meta={})
+    meta = YAML.load(meta) if meta.is_a?(String)
+    meta.keys.each do |key|
+      meta.delete(key) if META_EXCLUDES.include?(key[/[^:]+$/].downcase)
+    end
+    write_attribute(:meta_tags, meta.to_yaml)
   end
 
   def contact_fields
@@ -195,6 +216,10 @@ class Cms::Site < ActiveRecord::Base
     self.pages.where(parent_id: nil, navigation_root_id: nil).each do |page|
       page.update_attribute(:navigation_root_id, page.id)
     end
+  end
+
+  Paperclip.interpolates :site_handle do |attachment,style|
+    attachment.instance.handle
   end
 
 end

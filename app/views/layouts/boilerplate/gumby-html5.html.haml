@@ -17,10 +17,10 @@
 
     // Facebook Metadata - TODO: fill out!
     %meta{property: 'og:title', content: @cms_site.label}
-    %meta{property: 'og:image', itemprop: 'image', content: cms_site_asset_path(@cms_site, "images/#{@cms_site.handle}.png")}
+    %meta{property: 'og:type', content: 'website'}
+    %meta{property: 'og:image', itemprop: 'image', content: cms_site_asset_url(@cms_site, "images/#{@cms_site.handle}_identity.png")}
     %meta{property: 'og:description', content: "AiL - Spanischkurse, Volontariate, Praktika und High School Programme in verschiedensten Regionen Costa Ricas."}
     %meta{property: 'og:url', content: "http://www.#{@cms_site.hostname}"}
-    %meta{property: 'fb:admins', content: ''}
 
     // Twitter Metadata
     %meta{property: 'twitter:card', content: 'summary'}

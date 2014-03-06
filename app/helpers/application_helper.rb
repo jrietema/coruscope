@@ -16,10 +16,14 @@ module ApplicationHelper
   end
 
   # path to static assets for cms site
-  def cms_site_asset_path(site, relpath='assets')
-    relpath = relpath.split('/')
-    prefix = relpath.shift
-    File.join('/', prefix, site.handle, relpath.join('/'))
+  def cms_site_asset_path(site, relpath='')
+    File.join('/', 'assets/sites', site.handle, relpath.sub(/^\/+/,''))
+  end
+
+  # url to static assets for cms site
+  def cms_site_asset_url(site, relpath='')
+    url_prefix = request.original_url[/^\w+:\/+[^\/]+/]
+    File.join(url_prefix, cms_site_asset_path(site, relpath).sub(/^\/+/,''))
   end
 
   # this is a helper to retrieve related page's content in layouts/snippets
@@ -57,6 +61,16 @@ module ApplicationHelper
     checkbox = check_box_tag(name, value, checked) + content_tag(:span) + ' ' + label.to_s
     html = label_tag(name, checkbox, :class => "checkbox#{checked ? ' checked' : ''}")
     html + hidden_field_tag(name, (value.to_i == 0) ? '1' : '0', :id => nil)
+  end
+
+  # a form field that displays an image, or an upload file field alternatively
+  def cms_image_or_upload_field(form_builder, method)
+    klass = form_builder.object.class.name.sub('Cms::','')
+    name = "#{klass.underscore}[#{method}]"
+    file_display = !form_builder.object.send(method).path.blank?
+    file_input = content_tag(:div, content_tag(:div, file_field_tag(name)), class: 'controls', style: (file_display ? 'display: none;' : ''))
+    image = content_tag(:div, image_tag(form_builder.object.send(method).url, onclick: "$('##{name.gsub(/[\[\]]/,'_').sub(/_$/,'').underscore}').parent().parent().show();$(this).hide();"), style: file_display ? '' : 'display: none;')
+    content_tag(:div, (label_tag(name, t(".#{method}"), :class => 'control-label').concat(image).concat(file_input)), class: 'control-group')
   end
 
   def fancytree_pages_hash(pages, branch_id=nil, &labelling)

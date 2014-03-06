@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303121021) do
+ActiveRecord::Schema.define(version: 20140306171333) do
 
   create_table "cms_blocks", force: true do |t|
     t.integer  "page_id",                     null: false
@@ -157,19 +157,28 @@ ActiveRecord::Schema.define(version: 20140303121021) do
   add_index "cms_revisions", ["record_type", "record_id", "created_at"], name: "index_cms_revisions_on_rtype_and_rid_and_created_at", using: :btree
 
   create_table "cms_sites", force: true do |t|
-    t.string  "label",                                                  null: false
-    t.string  "identifier",                                             null: false
-    t.string  "hostname",                                               null: false
-    t.string  "path"
-    t.string  "locale",                                 default: "en",  null: false
-    t.boolean "is_mirrored",                            default: false, null: false
-    t.string  "contact_fields",             limit: 600
-    t.text    "contact_field_translations"
-    t.text    "contact_field_definitions"
-    t.string  "default_addressee"
-    t.boolean "render_site_path",                       default: true
-    t.string  "font"
-    t.string  "font_family"
+    t.string   "label",                                                   null: false
+    t.string   "identifier",                                              null: false
+    t.string   "hostname",                                                null: false
+    t.string   "path"
+    t.string   "locale",                                  default: "en",  null: false
+    t.boolean  "is_mirrored",                             default: false, null: false
+    t.string   "contact_fields",              limit: 600
+    t.text     "contact_field_translations"
+    t.text     "contact_field_definitions"
+    t.string   "default_addressee"
+    t.boolean  "render_site_path",                        default: true
+    t.string   "favicon_file_name"
+    t.string   "favicon_content_type"
+    t.integer  "favicon_file_size"
+    t.datetime "favicon_updated_at"
+    t.string   "identity_image_file_name"
+    t.string   "identity_image_content_type"
+    t.integer  "identity_image_file_size"
+    t.datetime "identity_image_updated_at"
+    t.text     "description"
+    t.string   "keywords"
+    t.text     "meta_tags"
   end
 
   add_index "cms_sites", ["hostname"], name: "index_cms_sites_on_hostname", using: :btree

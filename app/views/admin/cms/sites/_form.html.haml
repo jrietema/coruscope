@@ -1,11 +1,23 @@
 = render 'admin/cms/partials/site_form_before', :object => form
 
 = form.text_field :label, :data => {:slugify => @site.new_record?}
-= form.text_field :identifier, :data => {:slug => true}
-= form.text_field :hostname
-= form.text_field :path
 = form.select :locale, ComfortableMexicanSofa.config.locales.to_a.collect{|l| [l[1], l[0]]}
-= form.check_box :is_mirrored, :label => t('.is_mirrored')
+= form.text_field :keywords
+= form.text_area  :description, class: 'short'
+= cms_image_or_upload_field(form, :identity_image)
+
+= content_for_ajax :meta_pane do
+  = comfy_form_for @site, as: :site, url: {action: @site.new_record? ? :create : :update}, html: {multipart: true}, type: :vertical do |metaform|
+    = metaform.text_field :identifier, :data => {:slug => true}
+    = metaform.check_box :is_mirrored, :label => t('.is_mirrored')
+    = metaform.text_field :hostname
+    = metaform.text_field :path
+    = metaform.text_area :meta_tags
+    = metaform.check_box :render_site_path, :label =>  t('.render_site_path')
+    = cms_image_or_upload_field(metaform, :favicon)
+    #meta-save.box
+      %button.btn.btn-small.btn-primary.pull-right
+        = t('.update')
 
 = render 'admin/cms/partials/site_form_after', :object => form
 
@@ -17,4 +29,4 @@
   = form.submit t(@site.new_record?? '.create' : '.update'), :class => 'btn btn-primary'
   =# TODO: add convenience copying of form input values to mirror site creation
   - unless @site.new_record?
-    = link_to t('create_mirror', :scope => 'admin.cms.sites.edit'), new_admin_cms_site_path, class: 'btn'
+    = link_to t('create_mirror', :scope => 'admin.cms.sites.edit'), new_admin_cms_site_path(mirror_id: @site.id), class: 'btn'

@@ -26,6 +26,12 @@ de:
         path: Pfad
         locale: Sprache
         is_mirrored: Gespiegelt
+        render_site_path: Seitenpfad in Links rendern
+        favicon: Favicon
+        identity_image: Social Media Identitätsbild
+        keywords: Meta Keywords
+        description: Meta Beschreibung
+        meta_tags: 'HTTP Meta Tags [property: content]'
       cms/layout:
         identifier: Identifikator
         label: Layout Name
@@ -224,6 +230,9 @@ de:
           create: Erstelle Web-Site
           update: Web-Site speichern
           is_mirrored: Gespiegelt
+          render_site_path: Seitenpfad in Links rendern
+          favicon: Favicon
+          identity_image: Social Media Identitätsbild
 
       layouts:
         index:
