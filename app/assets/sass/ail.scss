@@ -82,20 +82,155 @@ img.centered {
   clear: both;
 }
 
-.home section {
-  div {
-    font-size: 1.12em;
+/* Responsive Font Scaling */
+@include respond(desktop) {
+  .home section {
+    div {
+      font-size: 1.12em;
+    }
+    .four.columns,
+    .six.columns {
+      font-size: 0.75em;
+      padding: 0 1em;
+    }
   }
-  .four.columns,
-  .six.columns {
-    font-size: 0.75em;
-    padding: 0 1em;
+  section {
+    div.columns {
+      font-size: 0.875em;
+    }
+  }
+  section > h1,
+  section > div > h1,
+  .row > h1,
+  section header h1 {
+    font-size: 2.25em;
+  }
+  .row h3,
+  .wysihtml5-editor h3 {
+    font-size: 1.625em;
+  }
+  section {
+    .slide-caption {
+      font-size: 2em;
+    }
+  }
+  header #identity {
+    hgroup {
+      h1 {
+        font-size: 1.75em;
+      }
+      h2 {
+        font-size: 1em;
+      }
+    }
+  }
+  #teaser-group .teaser a span {
+    font-size: 1.5em;
+    line-height: 1.5em;
+  }
+  #teaser-group .teaser a img {
+    height: 225px;
   }
 }
-section {
-  div.columns {
-    font-size: 0.875em;
+@include respond(tablets) {
+  .home section {
+    div {
+      font-size: 1.12em;
+    }
+    .four.columns,
+    .six.columns {
+      font-size: 0.75em;
+      padding: 0 1em;
+    }
   }
+  section {
+    div.columns {
+      font-size: 0.875em;
+    }
+  }
+  section > h1,
+  section > div > h1,
+  .row > h1,
+  section header h1 {
+    font-size: 2em;
+  }
+  .row h3 {
+    font-size: 1.5em;
+  }
+  section {
+    .slide-caption {
+      font-size: 1.8em;
+    }
+  }
+  header #identity {
+    hgroup {
+      h1 {
+        font-size: 1.75em;
+      }
+      h2 {
+        font-size: 1em;
+      }
+    }
+  }
+  #teaser-group .teaser a span {
+    font-size: 1.33em;
+    line-height: 1.33em;
+  }
+  #teaser-group .teaser a img {
+    min-height: 175px;
+    height: auto;
+  }
+}
+@include respond(all-phones) {
+  .home section {
+    div {
+      font-size: 1.12em;
+    }
+    .four.columns,
+    .six.columns {
+      font-size: 0.75em;
+      padding: 0 1em;
+    }
+  }
+  section {
+    div.columns {
+      font-size: 0.875em;
+    }
+  }
+  section > h1,
+  section > div > h1,
+  .row > h1,
+  section header h1 {
+    font-size: 1.625em;
+  }
+  .row h3 {
+    font-size: 1.625em;
+  }
+  section {
+    .slide-caption {
+      font-size: 1.33em;
+    }
+  }
+  header #identity {
+    hgroup {
+      h1 {
+        font-size: 1.33em;
+      }
+      h2 {
+        font-size: 0.875em;
+      }
+    }
+  }
+  #teaser-group .teaser a span {
+    font-size: 1.15em;
+    line-height: 1.15em;
+  }
+  #teaser-group .teaser a img {
+    height: auto;
+  }
+}
+
+section {
   table tr td,
   table tr th,
   form li.field {
@@ -148,7 +283,6 @@ body.wysihtml5-editor h1 {
   padding-left: 20px;
   padding-right: 20px;
   width: 100%;
-  font-size: 2.25em;
   font-weight: $semibold;
   color: #fff;
   background-color: $color_footer;
@@ -166,10 +300,6 @@ section header > h1,
 .row > h2:first-child,
 .row > h3:first-child {
   margin-top: 1.8em;
-}
-.row h3,
-.wysihtml5-editor h3 {
-  font-size: 1.625em;
 }
 
 body a {
@@ -350,7 +480,16 @@ body > header {
   }
 }
 @include respond(all-phones) {
+  body {
+    padding-top: $header_height + $nav_height - 65px;
+  }
+  body > header {
+    height: $header_height + $nav_height - 55px;
+  }
   body > header #direct_access {
+    display: none;
+  }
+  body > header .breadcrumb-wrapper {
     display: none;
   }
 }
@@ -374,7 +513,6 @@ header #identity {
     z-index: 600;
     h1 {
       width: 100%;
-      font-size: 1.75em;
       color: $color_page_bg;
       font-weight: $semibold;
       /* font-weight: bold; */
@@ -384,7 +522,6 @@ header #identity {
     }
     h2 {
       width: 100%;
-      font-size: 1em;
       font-weight: bold;
       color: #fff;
       padding-top: 0.15em;
@@ -792,7 +929,6 @@ section {
     padding: 0.35em 0;
     vertical-align: middle;
     overflow: hidden;
-    font-size: 2em;
     font-weight: normal;
     color: #fff;
     .fittext {
@@ -907,16 +1043,6 @@ body section:last-child {
   margin-left: 2%;
   margin-right: 2%;
 }
-@include respond(desktop) {
-  #teaser-group .teaser a img {
-    height: 225px;
-  }
-}
-@include respond(portrait-tablets) {
-  #teaser-group .teaser a img {
-    height: auto;
-  }
-}
 #teaser-group .teaser {
   position: relative;
   max-width: 300px;
@@ -940,10 +1066,8 @@ body section:last-child {
       display: block;
       z-index: 500;
       text-align: center;
-      font-size: 1.5em;
       font-weight: $semibold;
       color: #fff;
-      line-height: 1.5em;
       padding: 5px 0;
       background: transparent url('/images/ail/heading_bg.png') repeat top left;
     }
