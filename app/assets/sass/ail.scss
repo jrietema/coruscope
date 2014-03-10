@@ -307,29 +307,71 @@ body > header {
   top: 0;
   left: 0;
   background-color: $color_head;
-  height: $header_height + $nav_height - 5px;
   width: 100%;
   z-index: $page_nav_z + 5;
+  /* apply this min-width to desktops only
   min-width: 1024px;
+  */
 }
-body {
-  padding-top: $header_height + $nav_height + 31px;
+/* desktop and portrait-tablets are mutually exclusive
+  and cover all ranges of devices together */
+@include respond(desktop) {
+  body {
+    padding-top: $header_height + $nav_height + 31px;
+  }
+  body.home {
+    padding-top: $header_height + $nav_height - 5px;
+  }
+  body > header {
+    min-width: 1024px;
+    height: $header_height + $nav_height - 5px;
+  }
 }
-body.home {
-  padding-top: $header_height + $nav_height - 5px;
+@include respond(portrait-tablets) {
+  body {
+    padding-top: $header_height + $nav_height - 29px;
+  }
+  body.home {
+    padding-top: $header_height + $nav_height - 65px;
+  }
+  body > header {
+    height: $header_height + $nav_height - 29px;
+  }
+  body.home > header {
+    height: $header_height + $nav_height - 55px;
+  }
+  body nav#page_nav {
+    display: none;
+  }
 }
+@include respond(tablets) {
+  body > header {
+    min-width: 1024px;
+  }
+}
+@include respond(all-phones) {
+  body > header #direct_access {
+    display: none;
+  }
+}
+
 header #identity {
   float: left;
   height: $header_height - 5px;
   padding: 5px 4% 0;
   overflow-y: hidden;
+  width: 100%;
   img {
     height: 90px;
   }
   hgroup {
+    display: block;
     padding-top: 15px;
     padding-left: 0.75em;
+    width: 70%;
     max-width: 700px;
+    background-color: $color_head;
+    z-index: 600;
     h1 {
       width: 100%;
       font-size: 1.75em;
@@ -341,6 +383,7 @@ header #identity {
       text-align: left;
     }
     h2 {
+      width: 100%;
       font-size: 1em;
       font-weight: bold;
       color: #fff;
@@ -354,6 +397,7 @@ header #identity {
   .columns {
     position: relative;
     padding-top: 8px;
+    width: auto;
   }
 }
 header {
@@ -361,7 +405,8 @@ header {
     position: absolute;
     left: 83px;
     top: 4px;
-    width: 600px;
+    width: 80%;
+    z-index: 5000;
     ul {
       padding-left: 0.75em;
     }
@@ -372,6 +417,7 @@ header {
   #direct_access {
     position: absolute;
     top: 35px;
+    /* top: 4px; same as languages */
     right: 2%;
     width: 320px;
   }
@@ -401,44 +447,13 @@ header {
 /* Top Menu
 *  override Gumby's way of using the height property and restricting overflows
 *  to enable a three-level navigation menu */
+
+/* Generic Styling & Colors */
 #main_nav.navbar {
-  float: left;
-  clear: left;
-  width: 100%;
-  text-align: center;
-  max-width: none !important;
-  padding-left: 5%;
-  height: $nav_height;
-  max-height: $nav_height;
   position: relative;
-  z-index: $page_nav_z + 10;
-  background-color: $color_one;
-  margin: 0;
-  > ul {
-    display: inline-block;
-    width: auto;
-    margin: 0;
-    float: left;
-    height: $nav_height;
-    min-width: 920px;
-    overflow-y: hidden;
-    li.home {
-      margin-left: 12px;
-    }
-    > li {
-      float: left;
-      line-height: $nav_height;
-      > a {
-        height: $nav_height;
-      }
-    }
-  }
   ul li {
     line-height: 1.1em;
-    max-width: 220px;
     > a {
-      border: none 0px;
-      border-radius: none;
       font-size: 1em;
       font-weight: $semibold;
       text-shadow: none;
@@ -456,42 +471,165 @@ header {
     background-color: $color_head !important;
   }
   .dropdown {
-    overflow: visible !important;
-    height: auto !important;
-    display: none;
-    border: none 0px;
-    max-width: 220px;
     background-color: transparent;
     ul {
-      padding: 0;
       li {
         line-height: 1.1em;
       }
     }
     li a {
-      opacity: 0.9;
       background-color: $color_one;
       border-radius: none;
-    }
-    li.active > a, li:hover > a {
-      opacity: 1;
     }
     li.active .dropdown a {
       background-color: $color_one;
     }
     .dropdown {
       display: none;
-      background-color: transparent;
-    }
-    .subnav {
-      overflow: visible !important;
-    }
-    ul li:hover > .dropdown {
-      display: inline-block;
     }
   }
-  ul li:hover > .dropdown {
-    display: block;
+}
+
+/* Normal Nav Styles */
+@include respond(desktop) {
+  #main_nav.navbar {
+    float: left;
+    clear: left;
+    width: 100%;
+    text-align: center;
+    max-width: none !important;
+    padding-left: 5%;
+    height: $nav_height;
+    max-height: $nav_height;
+    position: relative;
+    z-index: $page_nav_z + 10;
+    background-color: $color_one;
+    margin: 0;
+    > ul {
+      display: inline-block;
+      width: auto;
+      margin: 0;
+      float: left;
+      height: $nav_height;
+      min-width: 920px;
+      overflow-y: hidden;
+      li.home {
+        margin-left: 12px;
+      }
+      > li {
+        float: left;
+        line-height: $nav_height;
+        > a {
+          height: $nav_height;
+        }
+      }
+    }
+    ul li {
+      line-height: 1.1em;
+      max-width: 220px;
+      > a {
+        border: none 0px;
+        border-radius: none;
+        font-size: 1em;
+        font-weight: $semibold;
+        text-shadow: none;
+        text-decoration: none;
+        overflow: hidden;
+      }
+    }
+    ul li a, ul li a:hover, ul li a:visited {
+      color: #fff;
+    }
+    ul li.active > a, ul li a:hover, ul li.current > a,
+    .dropdown ul li.active > a, .dropdown ul li a:hover,
+    ul li:hover > a
+    {
+      background-color: $color_head !important;
+    }
+    .dropdown {
+      overflow: visible !important;
+      height: auto !important;
+      display: none;
+      border: none 0px;
+      max-width: 220px;
+      background-color: transparent;
+      ul {
+        padding: 0;
+        li {
+          line-height: 1.1em;
+        }
+      }
+      li a {
+        opacity: 0.9;
+        background-color: $color_one;
+        border-radius: none;
+      }
+      li.active > a, li:hover > a {
+        opacity: 1;
+      }
+      li.active .dropdown a {
+        background-color: $color_one;
+      }
+      .dropdown {
+        display: none;
+        background-color: transparent;
+      }
+      .subnav {
+        overflow: visible !important;
+      }
+      ul li:hover > .dropdown {
+        display: inline-block;
+      }
+    }
+    ul li:hover > .dropdown {
+      display: block;
+    }
+  }
+}
+/* Mobile Nav Styles */
+@include respond(portrait-tablets) {
+  header #main_nav.navbar {
+    background-color: transparent;
+    .toggle {
+      background-color: $color_one;
+      z-index: 9999;
+    }
+    > ul.active {
+      top: 0px;
+      z-index: 9995;
+    }
+    > ul {
+      display: block;
+      overflow-y: auto;
+      height: auto;
+      min-width: none;
+      background-color: $color_one;
+      > li {
+        max-width: none !important;
+      }
+      .home {
+        display: none;
+      }
+    }
+    ul {
+      background-color: $color_one;
+      padding: 0;
+      li {
+        padding: 0;
+        display: block;
+        width: 100%;
+        max-width: none !important;
+      }
+      li .dropdown ul li a {
+        background-color: #8fb3bd;
+      }
+      li.active .dropdown ul {
+        background-color: $color_one;
+      }
+    }
+    ul li:hover .dropdown ul li a {
+      border-color: #fff;
+    }
   }
 }
 
@@ -652,9 +790,18 @@ section {
     text-align: center;
     width: 100%;
     padding: 0.35em 0;
+    vertical-align: middle;
+    overflow: hidden;
     font-size: 2em;
     font-weight: normal;
     color: #fff;
+    .fittext {
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+      /* height: 1.625em; */
+      /* padding-top: 0.35em; */
+    }
   }
 }
 
@@ -760,6 +907,16 @@ body section:last-child {
   margin-left: 2%;
   margin-right: 2%;
 }
+@include respond(desktop) {
+  #teaser-group .teaser a img {
+    height: 225px;
+  }
+}
+@include respond(portrait-tablets) {
+  #teaser-group .teaser a img {
+    height: auto;
+  }
+}
 #teaser-group .teaser {
   position: relative;
   max-width: 300px;
@@ -773,7 +930,6 @@ body section:last-child {
     background-color: #222;
     img {
       width: 100%;
-      height: 225px;
       display: block;
     }
     span {
