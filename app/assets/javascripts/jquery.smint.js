@@ -25,13 +25,17 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			optionLocs = [],
 			lastScrollTop = 0,
 			lastHash = '',
-        // TODO: this is a poor adjustment for verticalOffset differences in the scenario:
-        // body padding, absolute menu pinning and scroll offset
-			menuHeight = $smint.height(); // ((options.menuFixed) ? 2.3*$smint.height() : $smint.height()),
 			curi = 0,
-            verticalOffset = options.verticalOffset || 0,
             origTop = $smint.offset().top;
-			stickyTop = origTop - verticalOffset;
+            verticalOffset = options.verticalOffset || 0;
+
+        var menuHeight = function() {
+            return $smint.height();
+        };
+
+        var stickyTop = function() {
+            return origTop - verticalOffset;
+        };
 
         var removeActive = function() {
             $smintItems.each(function(){
@@ -44,7 +48,7 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			var scrollTop = $(window).scrollTop();
 
 			// if we scroll more than the navigation, change its position to fixed and add class 'fxd', otherwise change it back to absolute and remove the class
-			if (scrollTop > stickyTop) {
+			if (scrollTop > stickyTop()) {
 				//Check if he has scrolled horizontally also.
 				if ($(window).scrollLeft()) {
 					$smint.css({ 'position': 'fixed', 'top': verticalOffset, 'left': -$(window).scrollLeft() }).addClass('fxd');
@@ -138,8 +142,8 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 				hash = $(this).attr("href").substr($(this).attr("href").indexOf('#') + 1);
 			}
 			optionLocs.push({
-				top: sectionTop -  2 * menuHeight,
-				bottom: parseInt(matchingSection.height() * 0.9) + sectionTop - menuHeight, //Added so that if he is scrolling down and has reached 90% of the section.
+				top: sectionTop -  2 * menuHeight(),
+				bottom: parseInt(matchingSection.height() * 0.9) + sectionTop - menuHeight(), //Added so that if he is scrolling down and has reached 90% of the section.
 				id: id,
 				hash: hash
 			});
@@ -157,7 +161,7 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 				//e.preventDefault();
 				
 				// Scroll the page to the desired position!
-				$("html, body").animate({ scrollTop: sectionTop - 2 * menuHeight}, settings.scrollSpeed);
+				$("html, body").animate({ scrollTop: sectionTop - 2 * menuHeight()}, settings.scrollSpeed);
 			})
 		});
 
