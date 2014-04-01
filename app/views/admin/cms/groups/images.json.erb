@@ -2,4 +2,8 @@
     img = image_tag(item.file.url(:mini), alt: nil, class: :fullsize)
     "<span class='image-data' data-type='image' data-caption='#{item.description}' data-url='#{asset_path(item.file.url)}' data-url2='#{asset_path(item.file.url(:resized))}'>#{img} #{item.label}</span>"
 } %>
-<%= fancytree_group_select_hash(@groups, @items, labelling).to_json.html_safe %>
+<%= fancytree_grouped_hash(@groups,
+                                @items,
+                                (params['node'].blank? ? nil : params['node'].to_i),
+                                params['node'].blank?,
+                                &labelling).to_json.html_safe %>

@@ -177,6 +177,14 @@ function enableFancychooser(selector, dataUrl) {
         //{ title: '#{t('admin.cms.base.files')}', href: '#{admin_cms_site_files_path(@site)}'}
         //]
         //}],
+        lazyload: function(event, data) {
+            var node = data.node;
+            data.result = {
+                url: dataUrl,
+                data: {node: node.key},
+                cache: false
+            }
+        }
         /*,
         click: function(event, data) {
             var node = data.node;
