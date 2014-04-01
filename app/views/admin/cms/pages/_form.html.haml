@@ -1,7 +1,4 @@
 // form for Cms::Page objects
-- content_for :right_column do
-  = render :partial => 'admin/cms/files/index'
-
 = render 'admin/cms/partials/page_form_before', :object => form
 
 = form.text_field :label, :data => {:slugify => @page.new_record?}

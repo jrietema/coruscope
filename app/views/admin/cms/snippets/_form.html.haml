@@ -1,6 +1,3 @@
-- content_for :right_column do
-  = render :partial => 'admin/cms/files/index'
-
 = render 'admin/cms/partials/snippet_form_before', :object => form
 
 = form.text_field :label, :data => {:slugify => @snippet.new_record?}
