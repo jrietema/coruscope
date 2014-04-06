@@ -453,7 +453,7 @@ body > header {
     padding-top: $header_height + $nav_height - 5px;
   }
   body > header {
-    min-width: 1024px;
+    min-width: $row-max-width + 84px;
     height: $header_height + $nav_height - 5px;
   }
 }
@@ -476,7 +476,7 @@ body > header {
 }
 @include respond(tablets) {
   body > header {
-    min-width: 1024px;
+    min-width: $tablet-device-width;
   }
 }
 @include respond(all-phones) {
