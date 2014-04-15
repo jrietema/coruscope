@@ -6,6 +6,9 @@
         <li class="home">
           <%= link_to defined?(param_2) ? content_tag(:i, '', :class => param_2) : @cms_site.pages.root.label, page_path(@cms_site.pages.root) %>
         </li>
+        <li class="mobile-only">
+          <%= link_to @cms_site.pages.root.label, page_path(@cms_site.pages.root) %>
+        </li>
       <% end %>
       <% parents = breadcrumbs(@cms_page, :slug) %>
       <% @cms_site.pages.root.children.published.subpage(@cms_site.pages.root).each do |page| %>

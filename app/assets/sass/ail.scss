@@ -82,152 +82,172 @@ img.centered {
   clear: both;
 }
 
+@include respond(desktop) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
 /* Responsive Font Scaling */
 @include respond(desktop) {
-  .home section {
-    div {
-      font-size: 1.12em;
-    }
-    .four.columns,
-    .six.columns {
-      font-size: 0.75em;
-      padding: 0 1em;
-    }
-  }
-  section {
-    div.columns {
-      font-size: 0.875em;
-    }
-  }
-  section > h1,
-  section > div > h1,
-  .row > h1,
-  section header h1 {
-    font-size: 2.25em;
-  }
-  .row h3,
-  .wysihtml5-editor h3 {
-    font-size: 1.625em;
-  }
-  section {
-    .slide-caption {
-      font-size: 2em;
-    }
-  }
-  header #identity {
-    hgroup {
-      h1 {
-        font-size: 1.75em;
-      }
-      h2 {
-        font-size: 1em;
-      }
-    }
-  }
-  #teaser-group .teaser a span {
-    font-size: 1.5em;
-    line-height: 1.5em;
-  }
   #teaser-group .teaser a img {
     height: 225px;
   }
 }
 @include respond(tablets) {
-  .home section {
-    div {
-      font-size: 1.12em;
+  body {
+    font-size: 90%;
+    header #direct_access {
+      top: 4px;
+      width: 240px;
     }
-    .four.columns,
-    .six.columns {
-      font-size: 0.75em;
-      padding: 0 1em;
-    }
-  }
-  section {
-    div.columns {
-      font-size: 0.875em;
-    }
-  }
-  section > h1,
-  section > div > h1,
-  .row > h1,
-  section header h1 {
-    font-size: 2em;
-  }
-  .row h3 {
-    font-size: 1.5em;
-  }
-  section {
-    .slide-caption {
-      font-size: 1.8em;
-    }
-  }
-  header #identity {
-    hgroup {
-      h1 {
-        font-size: 1.75em;
-      }
-      h2 {
-        font-size: 1em;
+    section.slideshow {
+      header {
+        width: 100%;
+        overflow-x: hidden;
+        img {
+          max-width: 120%;
+          margin: 0 -10%;
+        }
       }
     }
-  }
-  #teaser-group .teaser a span {
-    font-size: 1.33em;
-    line-height: 1.33em;
-  }
-  #teaser-group .teaser a img {
-    min-height: 175px;
-    height: auto;
+    #teaser-group .teaser {
+      a img {
+        min-height: 175px;
+        height: auto;
+      }
+      .caption {
+        font-size: 95%;
+        line-height: 1.6em;
+      }
+    }
   }
 }
+/* reduced header/logo on phones */
 @include respond(all-phones) {
-  .home section {
-    div {
-      font-size: 1.12em;
-    }
-    .four.columns,
-    .six.columns {
-      font-size: 0.75em;
-      padding: 0 1em;
-    }
-  }
-  section {
-    div.columns {
-      font-size: 0.875em;
-    }
-  }
-  section > h1,
-  section > div > h1,
-  .row > h1,
-  section header h1 {
-    font-size: 1.625em;
-  }
-  .row h3 {
-    font-size: 1.625em;
-  }
-  section {
-    .slide-caption {
-      font-size: 1.33em;
-    }
-  }
-  header #identity {
-    hgroup {
-      h1 {
-        font-size: 1.33em;
+  body > header {
+    #identity {
+      width: auto;
+      overflow-y: visible;
+      .twelve.columns {
+        width: auto;
+        float: left;
       }
+      .logo img {
+        height: 75px;
+      }
+    }
+  }
+  /* reduce slideshow captions and headings further */
+  body {
+    .row {
       h2 {
-        font-size: 0.875em;
+        font-size: 1.85em;
+      }
+      h3 {
+        font-size: 1.15em;
+      }
+    }
+    section > h1, section > div > h1, .row > h1, section header h1 {
+      font-size: 1.5em;
+    }
+    section.slideshow {
+      font-size: 66%;
+      header {
+        width: 100%;
+        overflow-x: hidden;
+        img {
+          max-width: 130%;
+          margin: 0 -15%;
+        }
       }
     }
   }
-  #teaser-group .teaser a span {
-    font-size: 1.15em;
-    line-height: 1.15em;
+  #teaser-group .teaser {
+    a img {
+      height: auto;
+    }
+    .caption {
+      font-size: 90%;
+    }
   }
-  #teaser-group .teaser a img {
-    height: auto;
+  html body > footer .logo {
+    width: 175px;
   }
+}
+@include respond(landscape-phones) {
+  body {
+    font-size: 75%;
+    header #identity hgroup {
+      font-size: 85%;
+      padding-top: 8px;
+    }
+  }
+}
+@include respond(portrait-phones) {
+  body {
+    font-size: 66%;
+    header #identity {
+      font-size: 85%;
+      padding: 5px 0;
+      hgroup {
+        width: 195px;
+      }
+    }
+    section > h1, section > div > h1, .row > h1, section header h1 {
+      min-width: 265px;
+    }
+  }
+}
+
+.home section {
+  div {
+    font-size: 1.12em;
+  }
+  .four.columns,
+  .six.columns {
+    font-size: 0.75em;
+    padding: 0 1em;
+  }
+}
+section .row {
+  line-height: 1.625em;
+}
+section {
+  div.columns {
+    font-size: 0.875em;
+    line-height: 1.625em;
+  }
+}
+section > h1,
+section > div > h1,
+.row > h1,
+section header h1 {
+  font-size: 2.25em;
+}
+.row h3,
+.wysihtml5-editor h3 {
+  font-size: 1.625em;
+}
+section {
+  .slide-caption {
+    font-size: 2em;
+    line-height: 1.625em;
+  }
+}
+header #identity {
+  hgroup {
+    h1 {
+      font-size: 1.75em;
+    }
+    h2 {
+      font-size: 1em;
+    }
+  }
+}
+#teaser-group .teaser a span {
+  font-size: 1.5em;
+  line-height: 1.5em;
 }
 
 section {
@@ -458,12 +478,14 @@ body > header {
   }
 }
 @include respond(portrait-tablets) {
+  /*
   body {
     padding-top: $header_height + $nav_height - 29px;
   }
   body.home {
     padding-top: $header_height + $nav_height - 65px;
   }
+  */
   body > header {
     height: $header_height + $nav_height - 29px;
   }
@@ -480,11 +502,13 @@ body > header {
   }
 }
 @include respond(all-phones) {
-  body {
-    padding-top: $header_height + $nav_height - 65px;
+  body,
+  body.home {
+    padding-top: $header_height + $nav_height - 80px;
   }
-  body > header {
-    height: $header_height + $nav_height - 55px;
+  body > header,
+  body.home > header {
+    height: $header_height + $nav_height - 70px;
   }
   body > header #direct_access {
     display: none;
@@ -544,6 +568,7 @@ header {
     top: 4px;
     width: 80%;
     z-index: 5000;
+    display: inline-block;
     ul {
       padding-left: 0.75em;
     }
@@ -724,7 +749,7 @@ header {
   }
 }
 /* Mobile Nav Styles */
-@include respond(portrait-tablets) {
+@include respond(all-phones) {
   header #main_nav.navbar {
     background-color: transparent;
     .toggle {
@@ -756,6 +781,17 @@ header {
         display: block;
         width: 100%;
         max-width: none !important;
+        min-height: 42px;
+      }
+      li > a {
+        height: 50px;
+        line-height: 44px;
+      }
+      li.active {
+        min-height: 42px;
+        .dropdown ul li {
+          min-height: 42px;
+        }
       }
       li .dropdown ul li a {
         background-color: #8fb3bd;
