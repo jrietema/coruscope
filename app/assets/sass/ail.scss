@@ -162,6 +162,18 @@ img.centered {
         }
       }
     }
+    section.teaser {
+      header.row {
+        font-size: 66%;
+        width: 100%;
+        overflow-x: hidden;
+        margin-bottom: 0.5em !important;
+        img {
+          max-width: 130%;
+          margin: 0 -15%;
+        }
+      }
+    }
   }
   #teaser-group .teaser {
     a img {
