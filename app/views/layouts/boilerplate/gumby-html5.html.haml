@@ -2,7 +2,7 @@
 %html{lang: @cms_site.locale}
   %head
     %meta{charset: 'utf-8'}
-    %title{itemprop: :name}
+    %title
       = [@cms_site.label, @cms_page.label].compact.join(' - ')
     %meta{name: :description, content: @cms_site.description }
     %meta{name: :keywords, content: @cms_site.keywords }
@@ -17,20 +17,20 @@
     = javascript_include_tag cms_render_js_path(@cms_site.id, @cms_layout.identifier)
 
     // Facebook Metadata
-    %meta{property: 'og:title', content: @cms_site.label}
-    %meta{property: 'og:type', content: 'website'}
+    %meta{name: 'og:title', content: @cms_site.label}
+    %meta{name: 'og:type', content: 'website'}
     - unless @cms_site.identity_image_file_name.blank?
-      %meta{property: 'og:image', itemprop: 'image', content: cms_site_asset_url(@cms_site.identity_image.url)}
-    %meta{property: 'og:description', content: @cms_site.description }
-    %meta{property: 'og:url', content: "http://www.#{@cms_site.hostname}"}
+      %meta{name: 'og:image', content: cms_site_asset_url(@cms_site.identity_image.url)}
+    %meta{name: 'og:description', content: @cms_site.description }
+    %meta{name: 'og:url', content: "http://www.#{@cms_site.hostname}"}
 
     // Twitter Metadata
-    %meta{property: 'twitter:card', content: 'summary'}
-    %meta{property: 'twitter:url', content: "http://www.#{@cms_site.hostname}"}
-    %meta{property: 'twitter:title', content: @cms_site.label}
-    %meta{property: 'twitter:description', content: @cms_site.description }
+    %meta{name: 'twitter:card', content: 'summary'}
+    %meta{name: 'twitter:url', content: "http://www.#{@cms_site.hostname}"}
+    %meta{name: 'twitter:title', content: @cms_site.label}
+    %meta{name: 'twitter:description', content: @cms_site.description }
     - unless @cms_site.identity_image_file_name.blank?
-      %meta{property: 'twitter:image', content: cms_site_asset_url(@cms_site.identity_image.url)}
+      %meta{name: 'twitter:image', content: cms_site_asset_url(@cms_site.identity_image.url)}
 
   %body{class: [@cms_layout.identifier, (@cms_page == @cms_site.pages.root) ? 'home' : 'subsection'].join(' ')}
     = yield
