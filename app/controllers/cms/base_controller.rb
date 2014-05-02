@@ -10,7 +10,7 @@ class Cms::BaseController < ApplicationController
   #   b) utilize the host name and the site path configured for the site
   #
   # This doesn't seem to be the case with some technical direct-access
-  # routes for assets (javascript/css/images), files, and of the
+  # routes for assets (javascript/css/images), files, and the
   # contact form features
   def load_cms_site
     @cms_site ||= if params[:site_id]
