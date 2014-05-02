@@ -14,3 +14,5 @@
 - snippet-mirrors: let them copy parent and label
 - make groups work, make file uploads work again!
 - site mirror handling: have sites belong to a client, and access all files/snippets etc via client id
+
+- in CMS::Snippet content: 'with_page' helper to set a working page object & query it's path, title and content blocks

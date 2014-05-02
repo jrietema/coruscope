@@ -32,6 +32,9 @@ Coruscope::Application.routes.draw do
     end
   end
 
+  # the comfy route for sitemap.xml refers to render_page, resulting in 404
+  get "*cms_path/sitemap.xml", :to => 'cms/content#render_sitemap', defaults: {format: :xml}
+
   comfy_route :cms, :path => '/', :sitemap => true
 
   # The priority is based upon order of creation: first created -> highest priority.
