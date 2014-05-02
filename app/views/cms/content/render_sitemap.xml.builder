@@ -5,7 +5,7 @@ xml.urlset :xmlns => 'http://www.sitemaps.org/schemas/sitemap/0.9' do
     ([site_page] + site_page.mirrors).each do |page|
       next unless page.is_published?
       xml.url do
-        xml.loc 'http:'.concat(page.url)
+        xml.loc ['http://', page.site.hostname, page_path(page)].join
         tree_priority = [1 - (0.1 * ( ( [page.full_path.split("/").count, 1].max - 1 ) ) ), 0.1].max
         revs = page.revisions.size
         priority_modifier = case page.revisions.size
