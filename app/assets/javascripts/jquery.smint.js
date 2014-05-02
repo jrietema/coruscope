@@ -24,9 +24,9 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 			// Set the variables needed
 			optionLocs = [],
 			lastScrollTop = 0,
-			lastHash = '',
-			curi = 0,
-            origTop = $smint.offset().top;
+            origTop = $smint.offset().top,
+            // lock the navigation to fixed?
+            lockToTop = options.lockToTop || true,
             verticalOffset = options.verticalOffset || 0;
 
         var menuHeight = function() {
@@ -57,48 +57,12 @@ If you like Smint, or have suggestions on how it could be improved, send me a tw
 					$smint.css({ 'position': 'fixed', 'top': verticalOffset, 'left': 'auto' }).addClass('fxd');
 				}
 			}
-            // Never change it back
+            // Never change it back if locked (defaults to true)
 			else {
-				$smint.css({ 'position': 'absolute', 'top': origTop, 'left': 'auto' }).removeClass('fxd');
+                if(!lockToTop) {
+                    $smint.css({ 'position': 'absolute', 'top': stickyTop, 'left': 'auto' }).removeClass('fxd');
+                }
 			}
-
-            /* This is borked...
-			if (!scrollingDown) {
-				while (true) {
-					if (optionLocs[curi] && (scrollTop >= (optionLocs[curi].top))) {
-                        removeActive();
-						$('#' + optionLocs[curi].id).parent('li').addClass('active');
-						// The foll. makes the page very slow.
-						//if(optionLocs[curi].hash != null && optionLocs[curi].hash != lastHash) {
-						//	window.location.hash = optionLocs[curi].hash;
-						//	lastHash = optionLocs[curi].hash;
-						//}
-						break;
-					}
-					curi--;
-				}
-			}
-			else {
-				while (true) {
-					if (optionLocs[curi] && (scrollTop < (optionLocs[curi].bottom))) {
-						removeActive();
-						$('#' + optionLocs[curi].id).parent('li').addClass('active');
-						// The foll. makes the page very slow.
-						// if(optionLocs[curi].hash != null && optionLocs[curi].hash != lastHash) {
-						//	window.location.hash = optionLocs[curi].hash;
-						//	lastHash = optionLocs[curi].hash;
-						//}
-						break;
-					}
-					curi++;
-					//Added as failsafe, should not be needed.
-					//if(curi > optionLocs.length) {
-					//	break;
-					//}
-				}
-			}
-			*/
-
 		};
 
 		// run function every time you scroll but not needed to be run for each of the $smintItems
