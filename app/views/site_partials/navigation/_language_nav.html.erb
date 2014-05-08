@@ -10,7 +10,12 @@
         <% mirror_page = locale_site.pages.where(identifier: @cms_page.identifier).published.first || locale_site.pages.root %>
         <% next if mirror_page.nil? %>
       <li class="<%= (@cms_site == locale_site) ? 'active' : '' %>">
-        <%= link_to t(:language_name, :locale => locale), page_path(mirror_page), (locale != @cms_site.locale) ? {rel: 'alternate', hreflang: locale} : {} %>
+        <% if mirror_page == @cms_page
+            mirror_page_path = '#'
+        else
+            mirror_page_path = page_path(mirror_page)
+        end %>
+        <%= link_to t(:language_name, :locale => locale), mirror_page_path, (locale != @cms_site.locale) ? {rel: 'alternate', hreflang: locale} : {} %>
       </li>
       <% end %>
     <% end %>
