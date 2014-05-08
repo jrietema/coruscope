@@ -7,6 +7,8 @@
     %meta{name: :description, content: @cms_site.description }
     %meta{name: :keywords, content: @cms_site.keywords }
 
+    %base{href: "http://#{@cms_site.hostname}/"}
+
     - unless @cms_site.favicon_file_name.blank?
       %link{rel: 'shortcut icon', href: cms_site_asset_path(@cms_site.favicon.url), type: 'image/x-icon'}
     = stylesheet_link_tag :application, @cms_site.handle.to_sym
@@ -22,11 +24,11 @@
     - unless @cms_site.identity_image_file_name.blank?
       %meta{name: 'og:image', content: cms_site_asset_url(@cms_site.identity_image.url)}
     %meta{name: 'og:description', content: @cms_site.description }
-    %meta{name: 'og:url', content: "http://www.#{@cms_site.hostname}"}
+    %meta{name: 'og:url', content: "http://#{@cms_site.hostname}"}
 
     // Twitter Metadata
     %meta{name: 'twitter:card', content: 'summary'}
-    %meta{name: 'twitter:url', content: "http://www.#{@cms_site.hostname}"}
+    %meta{name: 'twitter:url', content: "http://#{@cms_site.hostname}"}
     %meta{name: 'twitter:title', content: @cms_site.label}
     %meta{name: 'twitter:description', content: @cms_site.description }
     - unless @cms_site.identity_image_file_name.blank?
