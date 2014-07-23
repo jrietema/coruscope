@@ -12,7 +12,7 @@ function initPageNav(list, selector, offset) {
        }
        var id = idx++;
        var newLink = document.createElement('a');
-       $(newLink).attr('href', '#section' + id);
+       $(newLink).attr('href', window.location.href.concat('#section' + id));
        $(newLink).attr('id', 'goto-section' + id);
        newLink.innerHTML = name;
        var listItem = document.createElement('li');
