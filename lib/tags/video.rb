@@ -15,8 +15,7 @@ class ComfortableMexicanSofa::Tag::Video
     video_id = params.shift
     width = params.shift
     height = params.shift
-    url = VIDEO_PROVIDERS[provider].to_s.concat(video_id)
-    # return "VIDEO:\nprovider: #{provider}\nvideo ID: #{video_id}\nwidth: #{width}\nheight: #{height}\nurl: #{url}"
+    url = "#{VIDEO_PROVIDERS[provider]}#{video_id}"
     "<iframe#{width.blank? ? '' : " width='#{width}'"}#{height.blank? ? '' : " height='#{height}'"} src='#{url}' frameborder='0' allowfullscreen></iframe>"
   end
   
