@@ -1,6 +1,9 @@
 Coruscope::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # eager load custom tags
+  require 'tags/video'
+
   # Paperclip path to Imagemagick requirements
   Paperclip.options[:command_path] = "/usr/bin/"
 

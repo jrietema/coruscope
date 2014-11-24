@@ -55,7 +55,7 @@ window.CMS.slugify = ->
 window.CMS.wysiwyg = ->
   $('textarea[data-cms-rich-text]').each (i, element) ->
     $(element).wysihtml5
-      html:         true
+      html:         false
       color:        false
       style:        true
       stylesheets:  ['<%= stylesheet_path(:ail) %>']

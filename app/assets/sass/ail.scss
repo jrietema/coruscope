@@ -462,6 +462,10 @@ section .column img.small,
   width: 31.9%;
 }
 
+.row iframe {
+  float: left;
+}
+
 
 /* Header */
 body > header {
