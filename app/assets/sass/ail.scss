@@ -462,8 +462,28 @@ section .column img.small,
   width: 31.9%;
 }
 
-.row iframe {
-  float: left;
+/* iframe default styles */
+.row {
+  iframe {
+    float: left;
+  }
+  .twelve iframe.default {
+    width: 780px;
+    height: 585px;
+    margin-left: 80px;
+  }
+  .ten iframe.default {
+    width: 780px;
+    height: 585px;
+  }
+  .eight iframe.default {
+    width: 620px;
+    height: 465px;
+  }
+  .four iframe.default {
+    width: 300px;
+    height: 225px;
+  }
 }
 
 

@@ -16,7 +16,7 @@ class ComfortableMexicanSofa::Tag::Video
     width = params.shift
     height = params.shift
     url = "#{VIDEO_PROVIDERS[provider]}#{video_id}"
-    "<iframe#{width.blank? ? '' : " width='#{width}'"}#{height.blank? ? '' : " height='#{height}'"} src='#{url}' frameborder='0' allowfullscreen></iframe>"
+    "<iframe#{width.blank? ? " class='default'" : " width='#{width}'"}#{height.blank? ? '' : " height='#{height}'"} src='#{url}' frameborder='0' allowfullscreen></iframe>"
   end
   
 end
